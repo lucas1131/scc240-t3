@@ -2,3 +2,4 @@ build.xml
 nbproject/
 Makefile
 build/
+manifest.mf
