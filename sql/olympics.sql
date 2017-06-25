@@ -44,10 +44,10 @@ DROP TABLE Diagnostico;
 DROP TABLE MetodoTratamento;
 -- DROP TABLE Atendimento;
 -- DROP TABLE Tratamento;
--- DROP TABLE Lesao;
+DROP TABLE Lesao;
 -- DROP TABLE LesaoMedico;
 -- DROP TABLE LesaoAtleta;
--- DROP TABLE TesteDoping;
+DROP TABLE TesteDoping;
 -- DROP TABLE Consulta;
 -- DROP TABLE Sintoma;
 -- DROP TABLE Data;
@@ -57,9 +57,9 @@ SELECT table_name FROM user_tables;
 
 CREATE TABLE Pessoa (
     
-	PRIMARY KEY (Passaporte),
-    
     Passaporte CHAR(8),
+		PRIMARY KEY (Passaporte),
+    
     Nome VARCHAR(30) NOT NULL,
 	Cidade VARCHAR(30) NOT NULL,
 	Estado VARCHAR(30) NOT NULL,
@@ -168,25 +168,26 @@ CREATE TABLE TelefoneMedico (
 -- 	Descricao NOT NULL 
 -- );
 
-CREATE TABLE Nacao (
- 	VARCHAR2(50) NomeNacao,
- 	PRIMARY KEY(NomeNacao),
- 	VARCHAR(16) Continente NOT NULL,
- 	NUMBER NAtletas NOT NULL,
- 	VARCHAR(60) EsportePrincipal,
- 	BLOB Bandeira NOT NULL,
- 	BLOB Hino NOT NULL 
-);
-
+--CREATE TABLE Nacao (
+-- 	NomeNacao VARCHAR2(50),
+-- 	PRIMARY KEY(NomeNacao),
+-- 	VARCHAR(16) Continente NOT NULL,
+-- 	NUMBER NAtletas NOT NULL,
+-- 	VARCHAR(60) EsportePrincipal,
+-- 	BLOB Bandeira NOT NULL,
+-- 	BLOB Hino NOT NULL 
+--);
+DROP TABLE Medico;
 CREATE TABLE Medico (
- 	VARCHAR2(12) (CRM),
- 	PRIMARY KEY (CRM),
 
- 	NUMBER Identidade CHECK (Identidade > 0 AND Identidade < 9) NOT NULL,
- 	VARCHAR2(100) Nome NOT NULL,
- 	VARCHAR2(100) Cidade NOT NULL,
- 	VARCHAR2(100) Estado NOT NULL,
- 	VARCHAR2(100) Pais NOT NULL 
+ 	CRM VARCHAR2(12),
+		PRIMARY KEY (CRM),
+
+ 	Identidade NUMBER(9, 0) NOT NULL,
+ 	Nome VARCHAR2(100) NOT NULL,
+ 	Cidade VARCHAR2(100) NOT NULL,
+ 	Estado VARCHAR2(100) NOT NULL,
+ 	Pais VARCHAR2(100) NOT NULL 
 );
 
 -- CREATE TABLE TestarDoping (
@@ -198,13 +199,13 @@ CREATE TABLE Medico (
 
 CREATE TABLE Diagnostico (
  	PRIMARY KEY NUMBER (IDDiagnostico),
- 	VARCHAR2(4000) DescricaoDiagnostico NOT NULL
+ 	DescricaoDiagnostico VARCHAR2(4000) NOT NULL
 );
 
 CREATE TABLE MetodoTratamento (
  	PRIMARY KEY NUMBER (IDMetodo),
- 	VARCHAR2(4000) DescricaoMetodo NOT NULL,
- 	VARCHAR2(4000) DescricaoEfetividade
+ 	DescricaoMetodo VARCHAR2(4000) NOT NULL,
+ 	DescricaoEfetividade VARCHAR2(4000)
 );
 
 -- CREATE TABLE Atendimento (
@@ -222,7 +223,7 @@ CREATE TABLE MetodoTratamento (
 
 CREATE TABLE Lesao (
  	PRIMARY KEY NUMBER (IDLesao),
- 	VARCHAR2(4000) Descricao NOT NULL 
+ 	Descricao VARCHAR2(4000) NOT NULL 
 );
 
 -- CREATE TABLE LesaoMedico (
@@ -239,8 +240,8 @@ CREATE TABLE Lesao (
 
 CREATE TABLE TesteDoping (
  	PRIMARY KEY NUMBER (IDTeste),
- 	VARCHAR2(4000) Descricao,
- 	NUMBER(1,0) Resultado NOT NULL 
+ 	Descricao VARCHAR2(4000),
+ 	Resultado NUMBER(1, 0) NOT NULL 
 );
 
 -- CREATE TABLE Consulta (
