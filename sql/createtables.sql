@@ -23,34 +23,6 @@
 -- Telefone: Telefones válidos contando código do país, DDD e o número do telefone em si - número inteiro de até 15 dígitos. 
 -- Hino: Arquivo de música do hino - arquivo binário de dados.
 
-DROP TABLE Pessoa;
-DROP TABLE Preparador;
-DROP TABLE Atleta;
-DROP TABLE TelefonePessoa;
-DROP TABLE TelefoneMedico;
--- DROP TABLE RotinaTreino;
--- DROP TABLE DiasTreino;
--- DROP TABLE Preparo;
--- DROP TABLE Recuperacao;
--- DROP TABLE Treino;
--- DROP TABLE PreparoRotina;
--- DROP TABLE RecuperacaoRotina;
--- DROP TABLE TreinoRotina;
--- DROP TABLE Modalidade;
-DROP TABLE Nacao;
-DROP TABLE Medico;
--- DROP TABLE TestarDoping;
-DROP TABLE Diagnostico;
-DROP TABLE MetodoTratamento;
--- DROP TABLE Atendimento;
--- DROP TABLE Tratamento;
-DROP TABLE Lesao;
--- DROP TABLE LesaoMedico;
--- DROP TABLE LesaoAtleta;
-DROP TABLE TesteDoping;
--- DROP TABLE Consulta;
--- DROP TABLE Sintoma;
--- DROP TABLE Data;
 
 -- See all tables
 SELECT table_name FROM user_tables;
@@ -71,7 +43,7 @@ CREATE TABLE Pessoa (
 CREATE TABLE Preparador (
 	
     Pessoa CHAR(8) PRIMARY KEY,
-		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte),
+		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE CASCADE,
 
 	Email VARCHAR(20) CHECK (
 		REGEXP_LIKE(Email, '^[a-zA-Z0-9.\_]+@[a-zA-Z]+(\.[a-z]+)+$')
@@ -79,17 +51,18 @@ CREATE TABLE Preparador (
 	Senha VARCHAR(20) NOT NULL 
 );
 
-
+DROP TABLE Atleta;
 CREATE TABLE Atleta (
 
 	Preparador CHAR(8),
-		FOREIGN KEY (Preparador) REFERENCES Preparador(Pessoa),
-	-- FOREIGN KEY (Modalidade) REFERENCES Modalidade(IDModalidade),
-	-- FOREIGN KEY (Nacao) REFERENCES Nacao(NomeNacao),
+		FOREIGN KEY (Preparador) REFERENCES Preparador(Pessoa) ON DELETE CASCADE,
+	-- FOREIGN KEY (Modalidade) REFERENCES Modalidade(IDModalidade) ON DELETE CASCADE,
+	Nacao VARCHAR2(50),
+		FOREIGN KEY (Nacao) REFERENCES Nacao(NomeNacao) ON DELETE CASCADE,
 
 	Pessoa CHAR(8),
 		PRIMARY KEY(Pessoa),
-		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte),
+		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE CASCADE,
 	
 	Peso NUMBER CHECK (Peso > 0) NOT NULL,
 	Altura NUMBER CHECK (Altura > 0) NOT NULL,
@@ -101,7 +74,7 @@ CREATE TABLE Atleta (
 CREATE TABLE TelefonePessoa (
 
     Pessoa CHAR(8),
-		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte),
+		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE CASCADE,
 
 	PRIMARY KEY(Pessoa, Telefone),
 
@@ -111,7 +84,7 @@ CREATE TABLE TelefonePessoa (
 CREATE TABLE TelefoneMedico (
 
 	Medico VARCHAR2(12),
-		FOREIGN KEY(Medico) REFERENCES Medico(CRM),
+		FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE CASCADE,
 	
 	PRIMARY KEY(Medico, Telefone),
 
@@ -168,16 +141,16 @@ CREATE TABLE TelefoneMedico (
 -- 	Descricao NOT NULL 
 -- );
 
---CREATE TABLE Nacao (
--- 	NomeNacao VARCHAR2(50),
--- 	PRIMARY KEY(NomeNacao),
--- 	VARCHAR(16) Continente NOT NULL,
--- 	NUMBER NAtletas NOT NULL,
--- 	VARCHAR(60) EsportePrincipal,
--- 	BLOB Bandeira NOT NULL,
--- 	BLOB Hino NOT NULL 
---);
-DROP TABLE Medico;
+CREATE TABLE Nacao (
+	NomeNacao VARCHAR2(50),
+	PRIMARY KEY(NomeNacao),
+	Continente VARCHAR(16) NOT NULL,
+	NAtletas NUMBER NOT NULL,
+	EsportePrincipal VARCHAR(60),
+	Bandeira BLOB NOT NULL,
+	Hino BLOB NOT NULL 
+);
+
 CREATE TABLE Medico (
 
  	CRM VARCHAR2(12),
@@ -198,12 +171,12 @@ CREATE TABLE Medico (
 -- );
 
 CREATE TABLE Diagnostico (
- 	PRIMARY KEY NUMBER (IDDiagnostico),
+ 	IDDiagnostico NUMBER PRIMARY KEY,
  	DescricaoDiagnostico VARCHAR2(4000) NOT NULL
 );
 
 CREATE TABLE MetodoTratamento (
- 	PRIMARY KEY NUMBER (IDMetodo),
+    IDMetodo NUMBER PRIMARY KEY,
  	DescricaoMetodo VARCHAR2(4000) NOT NULL,
  	DescricaoEfetividade VARCHAR2(4000)
 );
@@ -222,7 +195,7 @@ CREATE TABLE MetodoTratamento (
 -- );
 
 CREATE TABLE Lesao (
- 	PRIMARY KEY NUMBER (IDLesao),
+ 	IDLesao NUMBER PRIMARY KEY,
  	Descricao VARCHAR2(4000) NOT NULL 
 );
 
@@ -239,22 +212,22 @@ CREATE TABLE Lesao (
 -- );
 
 CREATE TABLE TesteDoping (
- 	PRIMARY KEY NUMBER (IDTeste),
+ 	IDTeste NUMBER PRIMARY KEY,
  	Descricao VARCHAR2(4000),
  	Resultado NUMBER(1, 0) NOT NULL 
 );
 
 CREATE TABLE Consulta (
- 	Date Data,
+ 	Data DATE,
  	Atleta CHAR(8),
  	Medico VARCHAR2(12),
- 	NUMBER Diagnostico,
+ 	Diagnostico NUMBER,
+ 	DescricaoConsulta VARCHAR(4000),
 
- 	PRIMARY KEY(Atleta, Medico, Diagnostico) NOT NULL,
-	FOREIGN KEY(Atleta) REFERENCES Atleta(Passaporte),
- 	FOREIGN KEY(Medico) REFERENCES Medico(CRM),
- 	FOREIGN KEY(Diagnostico) REFERENCES Diagnostico(IDDiagnostico),
- 	DescricaoConsulta VARCHAR(4000)
+ 	PRIMARY KEY(Atleta, Medico, Diagnostico),
+	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE CASCADE,
+	FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE CASCADE,
+	FOREIGN KEY(Diagnostico) REFERENCES Diagnostico(IDDiagnostico) ON DELETE CASCADE
 );
 
 -- CREATE TABLE Sintoma (
@@ -263,3 +236,6 @@ CREATE TABLE Consulta (
 -- 	FOREIGN KEY(MedicoConsulta) REFERENCES Consulta(Medico),
 -- 	FOREIGN KEY(MedicoConsulta) REFERENCES Consulta(Atleta)
 -- );
+
+-- See all tables
+SELECT table_name FROM user_tables;
