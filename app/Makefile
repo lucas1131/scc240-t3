@@ -42,17 +42,16 @@ main:
 	@echo Building $(SRC)
 	@$(CC) -d $(BLDDIR) $(SRC) $(JAVAFLAGS)
 	@cd $(BLDDIR)
-	
-	$(MAKE) clean
-
-	@echo Creating JAR archive...
-	@jar cvf build/$(NAME).jar manifest.mf src/*
+	# @ln -s `pwd`/src/resources `pwd`/build/resources
+	cp $(SRCDIR)/resources/*.fxml $(BLDDIR)/app/
+	@# @echo Creating JAR archive...
+	@# @jar cvf $(BLDDIR)/$(NAME).jar manifest.mf $(BLDDIR)/*
 
 # Run directives
 .PHONY: run
 run:
-	# java -classpath src/app app.$(NAME)
-	java -classpath src/app app.$(NAME)
+	java -classpath $(BLDDIR) app.$(NAME)
+	@# java -jar $(BLDDIR) $(NAME).jar
 
 # Utility directives
 .PHONY: clean
@@ -113,7 +112,7 @@ readme: checkname
 # Check for directory existence and create them if necessary
 checkdirs: 
 	@if [ ! -d $(BLDDIR)/ ]; then mkdir -p $(BLDDIR)/; fi
-# @if [ ! -d $(LIBDIR)/ ]; then mkdir -p $(LIBDIR)/; fi
+	@# @if [ ! -d $(LIBDIR)/ ]; then mkdir -p $(LIBDIR)/; fi
 	@if [ ! -d $(SRCDIR)/ ]; then mkdir -p $(SRCDIR)/; fi
 
 # Check if project has a name
@@ -133,7 +132,7 @@ create: checkname
 	@echo Creating directories...
 	@mkdir $(NAME) 
 	@mkdir $(NAME)/$(SRCDIR)
-	# @mkdir $(NAME)/$(LIBDIR)
+	@# @mkdir $(NAME)/$(LIBDIR)
 	@mkdir $(NAME)/$(BLDDIR)
 
 	cp ./Makefile $(NAME)/
