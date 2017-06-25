@@ -1,0 +1,597 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[top=2.5cm,bottom=2cm,left=2cm,right=2cm]{geometry} 
+\usepackage[brazil]{babel}
+\usepackage{blindtext}
+\usepackage{ragged2e}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{mathtools}
+\setlength\parindent{24pt}
+
+% for counting comma separated words
+\usepackage{expl3}
+\usepackage{xparse}
+
+\ExplSyntaxOn
+% Dont use this
+\NewDocumentCommand \countItemsInDefinedList { m } {
+    \clist_count:N #1
+}
+
+% Use this
+\NewDocumentCommand \countitems { m } {
+    \clist_count:n {#1}
+}
+\ExplSyntaxOff
+
+%capa
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{setspace} % espaçamento
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+
+\newcommand{\university}{Universidade de São Paulo - ICMC}
+\newcommand{\discipline}{SCC0240 - Bases de Dados}
+\newcommand{\data}{$1^o$ semestre / 2017}
+\newcommand{\teacher}{Prof. Robson Leonardo Ferreira Cordeiro}
+\newcommand{\PAE}{PAEs: Gabriel Spadon de Souza, Paulo Henrique de Oliveira}
+\newcommand{\specification}{Prática 3: SQL}
+
+% Create relation
+% #1 - Relation name
+% #2 - Attributes
+\newcommand{\createrelation}[2]{#1(#2) \hspace{0.3cm} N = \countitems{#2}}
+
+% Create domain
+% #1 - Domain name
+% #2 - Attribute
+% #3 - Domain definition
+\newcommand{\createdomain}[3]{
+    $Dom_{#1}$(#2) = {\bf #3}
+
+}
+
+% Primary & Secundary key  & Null attribute- attribute
+\newcommand{\primarykey}[1]{\underline {#1}}
+\newcommand{\secondarykey}[1]{\underline{\underline {#1}}}
+\newcommand{\nullatt}[1]{#1$^*$}
+
+% Super key
+% #1 - super key name
+% #2 - attributes that compose the key
+\newcommand{\superkey}[2]{$SC$(#1) = {#2}}
+
+\newcommand{\members}{
+    \begin{table}[!ht]
+        \centering
+        \begin{tabular}{ll}
+            \large\textsc{Giovanna Oliveira Guimarães} & \large\textsc{Nº USP: 9293693} \\
+            \large\textsc{Lucas Alexandre Soares} & \large\textsc{Nº USP: 9293265} \\
+            \large\textsc{Rafael Augusto Monteiro} & \large\textsc{Nº USP: 9293095} \\
+        \end{tabular}
+    \end{table}{}
+}
+
+\newcommand{\capaicmc}{
+    \begin{center}
+        \begin{center}
+            \begin{table}[!ht]
+                \centering 
+                \begin{tabular}{cl}
+                    \multirow{4}{*}{\includegraphics[height=1.8cm,keepaspectratio=true]{logo-header.png}}
+                    & \university\\
+                    %& \course\\ 
+                    & \discipline\\
+                    & \teacher\\
+                    & \PAE\\
+                \end{tabular}
+            \end{table}
+        \end{center}
+        
+        \vfill
+        
+        {\huge \specification}
+        
+        \vfill
+        
+        \doublespacing
+        \large\textsc{\members}
+        
+        \vfill
+        
+        \large São Carlos - SP \\
+        \large \today \\
+
+        \end{center}
+        
+        \newpage
+}
+
+\begin{document}
+
+% Capa
+\capaicmc
+
+\tableofcontents
+\newpage
+
+% Seta espaçamento entre linhas
+\singlespacing
+
+% começa finalmente 
+% Aqui explica como este documento está estruturado e por que ele está assim, qual o motivo de usarmos este doc
+\section{Estrutura do Documento}
+    Este documento explica as decisões de projeto tomadas durante a construção dos modelos conceitual e lógico. Na Sessão~\ref{sec:merx} corrigimos os problemas identificados na primeira parte do projeto além de justificar as decisões de tal etapa. Na Sessão~\ref{sec:mrel} apresentamos a parte seguinte do projeto e justificamos as decisões tomadas. 
+
+
+\section{Correções da Prática 1: Modelo Conceitual (MER-X)}\label{sec:merx}
+
+\subsection{Critério 1 - Atleta}
+\subsubsection{Atleta}
+    Atleta agora possui uma relação direta com o Preparador, pois o treino é direcionado aos atletas e não às modalidades. Ainda mudamos a relação de Atleta e Modalidade para n:1 permitindo que a modalidade da rotina seja identificada através do atleta. Isto simplifica o modelo e reduz redundância.
+
+\subsubsection{Nação}
+    Na primeira parte do projeto, criamos uma chave artificial para Nação pois entendemos que nomes, tipicamente, não são boas chaves, por motivos de performance, diferenças entre idiomas, encoding e dificuldade de garantir unicidade. Porém, no caso de nome de Nações, não existe repetições de nomes, assim é possível utilizar nome como chave, e o {\it feedback} da primeira parte indicou que é mais simples modelar sem criar atributos extras.
+
+\subsubsection{Modalidade}
+    Desfizemos as relações entre Modalidade e Rotina de Treino e Preparador pois isso gerava redundância. Modalidade apenas se relaciona com Atleta agora.
+
+\subsection{Critério 2 - Histórico Médico Pessoal}
+    Para a representação do histórico médico pessoal abandonamos as entidades que os representavam, pois estas eram redundantes e possuiam inconsistências quanto à sua existência no modelo, e optamos por representá-lo a partir dos itens descritos abaixos:
+
+\subsubsection{Consulta}
+    Uma "Consulta" é uma agregação da relação entre médico e atleta. Dado que cada consulta é realizada por um atleta e um médico em uma determinada data, e que é improvável que a mesma dupla atleta-médico ocorra em uma mesma data, foi utilizada uma chave composta pela chave de atleta, de médico e pela data da consulta como chave identificadora de Consulta.
+
+\subsubsection{Diagnóstico e Métodos de Tratamento}
+    Como descrito no enunciado da parte 1, cada consulta deve emitir apenas um diagnóstico. Ainda, um mesmo diagnóstico é aplicável em diferentes consultas. Logo, foi utilizada a cardinalidade 1:N entre consulta e diagnóstico. \par 
+    Cada diagnóstico possui vários métodos de tratamento. Ainda, um mesmo método de tratamento pode ser utilizado para diferentes diagnósticos (por exemplo, repouso poderia tratar diagnósticos de febre e cefaleia). Logo, foi utilizada a cardinalidade 1:N entre diagnóstico e Método de tratamento. \par
+    Como tanto Diagnóstico quanto Método de tratamento devem possuir um identificador, foi decidido o uso de uma chave ID artificial, dado à dificuldade de definir um identificador derivado das relações de diagnóstico e tratamento com outros CE's presentes no modelo.
+
+\subsection{Critério 3 - Histórico Médico Olímpico}
+\subsubsection{Lesão}
+    Decidimos representar as lesões como uma entidade relacionada com atleta e médico, dessa forma uma mesma entrada de lesão pode, tendo sido registrada apenas uma vez na base de dados, ser compartilhada entre múltiplos atletas, evitando redundância.
+
+\subsubsection{Teste de Doping}
+    ID não identifica um tipo de teste específico, mas sim um o par "Médico" e "Atleta", que participa de uma relação “Testa”. Data não foi utilizada como chave (da mesma forma como foi feito na agregação “Consulta"), pois entendemos que diversos exames diferentes podem ser realizados em um mesmo dia.
+
+\subsection{Critério 4 - Treino}
+\subsubsection{Preparador}
+      Por orientação do professor e do estagiário PAE, notamos que utilizar uma chave diferente (CPF) apenas para preparadores brasileiros, sendo que eles podem ser identificados pelo passaporte, é uma complicação desnecessária. A fim de simplificar, fizemos uma generalização com Preparador e Atleta para abstrair a chave e os atributos comuns a pessoas.  
+
+\subsubsection{Rotina de Treino}
+
+    A Rotina agora está representada como uma entidade fraca de Preparador, uma vez que não há sentido em sua existência sem que um preparador a tenha feito. Para que uma dada rotina pudesse ser identificada dentre as demais feitas por um mesmo preparador, foi criado um ID artificial, visto que nenhum dos atributos já existentes - duração e dias de treino -era capaz de identificar univocamente uma rotina de treino. \par
+    Foi estabelecida uma participação total em seu relacionamento com atleta, já que, para que uma rotina exista, ao menos um atleta deve treiná-la obrigatoriamente. \par
+    Um note foi utilizado para explicar a restrição sobre a ocorrência de duas rotinas em um mesmo dia, tendo em vista que a criação de uma entidade para representar um dia da semana, ainda que tornasse a restrição explícita no modelo, não faria sentido (a entidade "Dia" ficaria somente com seu atributo chave). \par
+    Os campos que descreviam o preparo do treino, a recuperação do treino e o treino em si foram substituídos por entidades. Assim, evita-se que um mesmo tipo de preparo, recuperação ou treino tenha que ser adicionado novamente na base de dados caso seja utilizado por mais de uma rotina de treino. 
+
+
+\section{Prática 2: Projeto Lógico Normalizado}\label{sec:mrel}
+
+\subsection{Esquema de Relações Inicial}
+    
+    Aqui é apresentado o esquema de relações logo após o mapeamento do MER-X para o Modelo Relacional, sem pensar em aplicar as normalizações.
+    
+    Nota: utilizamos a notação {\bf (fk)} para indicar que o atributo é uma chave estrangeira. O nome da chave estrangeira será sempre o nome da relação que ela se refere.
+    
+    \singlespacing
+
+    % Atleta e Preparador
+    \subsubsection{Atleta, Preparador e Pessoa}
+    Possibilidades:
+    \begin{enumerate}
+    \item Mapear o $C_{EG}$ pessoa em uma tabela e as entidades $C_{EE}$ atleta e preparador em tabelas separadas \\
+    \textbf{Vantagens:} \begin{enumerate}
+        \item Permite apenas uma tabela "TelefonePessoa" ao invés de tabelas "TelefoneAtleta" e "TelefonePreparador"
+        \end{enumerate}
+    \textbf{Desvantagens:} \begin{enumerate}
+        \item Necessita junções de tabelas para acessar todos os campos de um atleta ou preparador
+        \item Não garante especialização total, necessitando de restrições no modelo físico
+    mapear apenas as $C_{EE}$ atleta e preparador.
+        \end{enumerate}
+    \textbf{Vantagens:} \begin{enumerate}
+        \item Garante especialização total.
+        \end{enumerate}
+    \textbf{Desvantagens:} \begin{enumerate}
+        \item Requer tabelas "TelefonePessoa" e "TelefoneAtleta" para mapear campo multivalorado "Telefones"
+        \end{enumerate}
+    \end{enumerate}
+    A alternativa escolhida foi mapear Pessoa, Atleta e Preparador.
+    
+    \doublespacing
+    
+    \createrelation{{\bf Pessoa}}{\primarykey{Passaporte}, Cidade, Estado, \secondarykey{Pais}, Sexo, DataNascimento (fk)}
+    
+    \createrelation{{\bf Preparador}}{\primarykey{Pessoa} (fk), \secondarykey{E-mail}, Senha}
+    
+    \createrelation{{\bf Atleta}}{\primarykey{Pessoa} (fk), Peso, Altura, Regularidade, NPunicoes, \secondarykey{Preparador} (fk), \secondarykey{Modalidade} (fk), \secondarykey{Nacao} (fk)}
+
+    % Telefone multivalorado
+    \singlespacing
+    \subsubsection{Telefones}
+    Possibilidades:
+    \begin{enumerate}
+    \item Mapear TelefonePessoa e TelefoneMedico em tabelas\\
+    \textbf{Vantagens:} \begin{enumerate}
+        \item Permite que vários telefones diferentes sejam armazenados
+        \end{enumerate}
+    \textbf{Desvantagens:} \begin{enumerate}
+        \item Requer acesso à tabelas separadas
+        \end{enumerate}
+    \item Adicionar campos "Telefone1, Telefone2, ..." nas relações Médico e Pessoa.\\
+    \textbf{Vantagens:} \begin{enumerate}
+        \item Não requer tabelas adicionais
+        \end{enumerate}
+    \textbf{Desvantagens:} \begin{enumerate}
+        \item Permite número limitado de telefones
+        \item Permite muitos campos com valores \textit{NULL}.
+        \end{enumerate}
+    \end{enumerate}
+    A alternativa escolhida foi mapear Telefones em tabelas separadas.
+    \doublespacing
+    
+    \createrelation{{\bf TelefonePessoa}}{\primarykey{Pessoa} (fk), \primarykey{Telefone} (fk)}
+    
+    \createrelation{{\bf TelefoneMedico}}{\primarykey{Medico} (fk), \primarykey{Telefone} (fk)}
+
+    % RotinaTreino
+    \singlespacing
+    \subsubsection{Rotina de Treino}
+    Somente o campo "Dias de Treino" possui duas possibilidades de mapeamento:
+    \begin{enumerate}
+    \item Mapear Dias de Treino em uma tabela separada\\
+    \textbf{Vantagens:} \begin{enumerate}
+        \item Permite que vários dias de treino diferentes sejam armazenados
+        \end{enumerate}
+    \textbf{Desvantagens:} \begin{enumerate}
+        \item Requer acesso à tabelas separadas
+        \end{enumerate}
+    \item Adicionar campos "DiaTreino1, DiaTreino2..." na relaçãoRotinaTreino.\\
+    \textbf{Vantagens:} \begin{enumerate}
+        \item Não requer tabelas adicionais
+        \end{enumerate}
+    \textbf{Desvantagens:} \begin{enumerate}
+        \item Permite número limitado de dias de treino
+        \item Permite muitos campos com valores \textit{NULL}.
+        \end{enumerate}
+    \end{enumerate}
+    A alternativa escolhida foi mapear dias de treino em tabelas separadas. \\
+    \doublespacing
+ 
+    \createrelation{{\bf RotinaTreino}}{\primarykey{IDRotina}, \primarykey{Preparador} (fk), Duracao}
+
+    \createrelation{{\bf PreparadorRotina}}{\primarykey{RotinaTreino} (fk), \primarykey{Preparador} (fk)}
+
+    \createrelation{{\bf DiasTreino}}{\primarykey{Rotina} (fk), \primarykey{DiaSemana}}
+    
+    \createrelation{{\bf Preparo}}{\primarykey{IDPreparo}, DescricaoPreparo}
+    
+    \createrelation{{\bf Recuperacao}}{\primarykey{IDRecuperacao}, DescricaoFisioterapia}
+    
+    \createrelation{{\bf Treino}}{\primarykey{IDTreino}, DescricaoTreino}
+
+    % Relações N:N de Rotina de Treino
+    \createrelation{{\bf PreparoRotina}}{\primarykey{RotinaTreino} (fk), \primarykey{Preparo} (fk)}
+    
+    \createrelation{{\bf RecuperacaoRotina}}{\primarykey{RotinaTreino} (fk), \primarykey{Recuperacao} (fk)}
+
+    \createrelation{{\bf TreinoRotina}}{\primarykey{RotinaTreino} (fk), \primarykey{Treino} (fk)}
+    
+    % Nacao e Modalidade
+    \singlespacing
+    \subsubsection{Nação e Modalidade}
+    Possibilidades:
+    \begin{enumerate}
+    \item Mapear a relação entre \\
+    \textbf{Vantagens:} \begin{enumerate}
+        \item Permite que vários dias de treino diferentes sejam armazenados
+        \end{enumerate}
+    \textbf{Desvantagens:} \begin{enumerate}
+        \item Requer acesso à tabelas separadas
+        \end{enumerate}
+    \item Adicionar campos "DiaTreino1, DiaTreino2..." na relaçãoRotinaTreino.\\
+    \textbf{Vantagens:} \begin{enumerate}
+        \item Não requer tabelas adicionais
+        \end{enumerate}
+    \textbf{Desvantagens:} \begin{enumerate}
+        \item Permite número limitado de dias de treino
+        \item Permite muitos campos com valores \textit{NULL}.
+        \end{enumerate}
+    \end{enumerate}
+    A alternativa escolhida foi mapear dias de treino em tabelas separadas.
+    \doublespacing
+    \createrelation{{\bf Modalidade}}{\primarykey{IDModalidade}, \secondarykey{Nome}, Descricao} 
+    
+    \createrelation{{\bf Nacao}}{\primarykey{NomeNacao}, \secondarykey{Continente}, NAtletas, \nullatt{EsportePrincipal}, Bandeira, Hino}
+    
+    % Medico e Historico Medico
+    \createrelation{{\bf Medico}}{\primarykey{CRM}, \secondarykey{Identidade}, \secondarykey{Nome}, Cidade, Estado, \secondarykey{Pais}}
+    
+    \createrelation{{\bf TestarDoping}}{\primarykey{Medico} (fk), \primarykey{Atleta} (fk), \primarykey{TesteDoping} (fk)}
+    
+    \createrelation{{\bf Diagnostico}}{\primarykey{IDDiagnostico}, DescricaoDiagnostico, MetodoTratamento (fk)}
+    
+    \createrelation{{\bf MetodoTratamento}}{\primarykey{IDMetodo}, DescricaoMetodo, \nullatt{DescricaoEfetividade}} 
+
+    % Relacoes entre Medico e Atleta
+    \createrelation{{\bf Atendimento}}{\primarykey{Medico} (fk), \primarykey{Atleta} (fk), \primarykey{DataConsulta} (fk), \primarykey{MedicoConsulta} (fk), \primarykey{AtletaConsulta} (fk)} 
+    
+    \createrelation{{\bf Tratamento}}{\primarykey{Diagnostico} (fk), \primarykey{MetodoTratamento} (fk)}
+
+    \createrelation{{\bf Lesao}}{\primarykey{IDLesao}, Descricao}
+
+    \createrelation{{\bf LesaoMedico}}{\primarykey{Lesao} (fk), \primarykey{Medico} (fk)}
+
+    \createrelation{{\bf LesaoAtleta}}{\primarykey{Lesao} (fk), \primarykey{Atleta} (fk)}
+
+    % Agregacoes geradas das relacoes Medica e Atleta
+    \createrelation{{\bf TesteDoping}}{\primarykey{IDTeste}, \secondarykey{Data} (fk), \nullatt{Descricao}, \secondarykey{Resultado}} 
+    
+    \createrelation{{\bf Consulta}}{\primarykey{Data} (fk), \primarykey{Atleta} (fk), \primarykey{Medico} (fk), \nullatt{DescricaoConsulta}, Diagnostico (fk)} 
+    
+    % Multivalorado Consulta
+    \createrelation{{\bf Sintoma}}{\primarykey{DataConsulta} (fk), \primarykey{MedicoConsulta} (fk), \primarykey{AtletaConsulta} (fk), \primarykey{Sintoma}}
+
+    % Multivalorado Consulta
+    \createrelation{{\bf Data}}{\primarykey{Dia}, \primarykey{Mes}, \primarykey{Ano}}
+
+    \singlespacing
+
+\subsection{Primeira Forma Normal}
+
+    Não houve necessidade de alterar nada no esquema de relacionamentos pois após o mapeamento, elas já estavam na primeira forma normal.
+    
+\subsection{Segunda Forma Normal}
+
+    Não houve necessidade de alterar nada no esquema de relacionamentos pois após o mapeamento, elas já estavam na segunda forma normal.
+    
+\subsection{Terceira Forma Normal}
+
+    Não houve necessidade de alterar nada no esquema de relacionamentos pois após o mapeamento, elas já estavam na terceira forma normal.
+
+\subsection{Forma de Boyce-Codd}
+
+    Não houve necessidade de alterar nada no esquema de relacionamentos pois após o mapeamento, elas já estavam na forma normal de Boyce-Codd.
+    
+\subsection{Quarta Forma Normal}
+
+    Não houve necessidade de alterar nada no esquema de relacionamentos pois após o mapeamento, elas já estavam na quarta forma normal.
+    
+\subsection{Esquema de Relações Final}
+
+    Não houveram alterações, o mapeamento foi perfeito.
+
+\subsection{Especificações dos Domínios}
+
+    {\bf Ano}: Número inteiro positivo \\
+    {\bf Bandeira}: Arquivo de imagem da bandeira - arquivo binário de dados. \\
+    {\bf Cidade}: Nome de uma cidade para descrição de um endereço - {\it string} de até 128 caractéres. \\
+    {\bf Continente}: Possíveis continentes para as Nações (América do Norte, América do Sul, Europa, Ásia, África e Oceania) - {\it string} de até 16 caractéres. \\
+    {\bf CRM}: Código identificador de um médico - {\it string} composta de uma parte apenas numérica (de 4 a 10 dígitos) seguidos de uma barra e a sigla do estado de emissão. \\
+    {\bf Dia}: Número inteiro entre 1 e 31 \\
+    {\bf Descricao}: Descrição detalhada de algo - texto.\\
+    {\bf DiaSemana}: Nome dos dias da semana (Segunda-feira, Terça-feira, Quarta-feira, Quinta-feira, Sexta-feira, Sábado e Domingo) - {\it string} de até 13 caractéres. \\
+    {\bf E-mail}: {\it String} única - deve seguir uma formatação padrão de e-mail como por exemplo ``s/$\wedge$[a-zA-Z0-9.\_]+@[a-zA-Z]+(\textbackslash.[a-z]+)+\$//''. \\
+    {\bf Estado}: Nome de um estado para descrição de um endereço - {\it string} de até 128 caractéres. \\
+    {\bf Identidade}: Número de identidade (único) de um médico - número inteiro de 9 dígitos. \\
+    {\bf ID}: Número único identificador de uma classe ou objeto dentro do sistema - número inteiro. \\
+    {\bf Inteiro}: Número inteiro. \\
+    {\bf Nome}: {\it String} de 60 caracteres representando nome de algo ou alguém. \\
+    {\bf Pais}: Nome do país para descrição de um endereço - {\it string} de até 128 caractéres. \\
+    {\bf Passaporte}: Números de passaportes válidos no mundo - {\it string} de 8 caractéres contendo apenas letras e número. \\
+    {\bf Mes}: Número inteiro entre 1 e 12 \\
+    {\bf NumeroPositivo}: Número real maior do que 0. \\
+    {\bf Regularidade}: Booleano que indica se o atleta está ou não regular. \\
+    {\bf Resultado} : Resultado do teste de doping, apenas positivo ou negativo - valor {\it booleano}. \\
+    {\bf Senha}: {\it string} de 6 a 30 caratéres contendo pelo menos uma letra maiúscula, uma minúscula, um número e um caractére especial. \\
+    {\bf Sexo}: Caractére M ou F indicando o sexo da pessoa. \\
+    {\bf Telefone}: Telefones válidos contando código do país, DDD e o número do telefone em si - número inteiro de até 15 dígitos. \\
+    {\bf Hino}: Arquivo de música do hino - arquivo binário de dados.\\
+
+
+    \singlespacing
+\subsubsection{Pessoa}
+        \createdomain{Pessoa}{Passaporte}{\bf Passaporte}
+        \createdomain{Pessoa}{Cidade}{\bf Cidade}
+        \createdomain{Pessoa}{Estado}{\bf Estado}
+        \createdomain{Pessoa}{Pais}{\bf Pais}
+        \createdomain{Pessoa}{Sexo}{\bf Sexo}
+        \createdomain{Pessoa}{DataNascimento}{\bf Data}
+
+    \subsubsection{Preparador}
+        \createdomain{Preparador}{Pessoa (fk)}{\bf Passaporte}
+        \createdomain{Preparador}{E-mail}{\bf E-mail}
+        \createdomain{Preparador}{Senha}{\bf Senha}
+
+    \subsubsection{Atleta}
+        \createdomain{Atleta}{Pessoa (fk)}{\bf Passaporte}
+        \createdomain{Atleta}{Peso}{\bf NumeroPositivo}
+        \createdomain{Atleta}{Altura}{\bf NumeroPositivo}
+        \createdomain{Atleta}{Regularidade}{\bf Regularidade}
+        \createdomain{Atleta}{NPunicoes}{\bf Inteiro}
+        \createdomain{Atleta}{Preparador (fk)}{\bf Passaporte}
+        \createdomain{Atleta}{Modalidade (fk)}{\bf ID}
+        \createdomain{Atleta}{Nacao (fk)}{\bf Nome}
+
+    \subsubsection{TelefonePessoa}
+        \createdomain{TelefonePessoa}{Pessoa (fk)}{\bf Passaporte}
+        \createdomain{TelefonePessoa}{Telefone (fk)}{\bf Telefone}
+
+    \subsubsection{TelefoneMedico}
+        \createdomain{TelefoneMedico}{Medico (fk)}{\bf CRM}
+        \createdomain{TelefoneMedico}{Telefone (fk)}{\bf Telefone}
+
+    \subsubsection{RotinaTreino}
+        \createdomain{RotinaTreino}{IDRotina}{\bf ID}
+        \createdomain{RotinaTreino}{Preparador (fk)}{\bf Passaporte}
+        \createdomain{RotinaTreino}{Duracao}{\bf Inteiro}
+
+    \subsubsection{PreparadorRotina}
+        \createdomain{PreparadorRotina}{RotinaTreino (fk)}{\bf ID}
+        \createdomain{PreparadorRotina}{Preparador (fk)}{\bf Passaporte}
+
+    \subsubsection{DiasTreino}
+        \createdomain{DiasTreino}{Rotina (fk)}{\bf ID}
+        \createdomain{DiasTreino}{DiaSemana}{\bf DiaSemana}
+
+    \subsubsection{Preparo}
+        \createdomain{Preparo}{IDPreparo}{\bf ID}
+        \createdomain{Preparo}{DescricaoPreparo}{\bf Descricao}
+
+    \subsubsection{Recuperacao}
+        \createdomain{Recuperacao}{IDRecuperacao}{\bf ID}
+        \createdomain{Recuperacao}{DescricaoRecuperacao}{\bf Descricao}
+
+    \subsubsection{Treino}
+        \createdomain{Treino}{IDTreino}{\bf ID}
+        \createdomain{Treino}{DescricaoTreino}{\bf Descricao}
+
+    \subsubsection{PreparoRotina}
+        \createdomain{PreparoRotina}{RotinaTreino (fk)}{\bf ID}
+        \createdomain{PreparoRotina}{Preparo (fk)}{\bf Descricao}
+
+    \subsubsection{RecuperacaoRotina}
+        \createdomain{RecuperacaoRotina}{RotinaTreino (fk)}{\bf ID}
+        \createdomain{RecuperacaoRotina}{Recuperacao (fk)}{\bf Descricao}
+
+    \subsubsection{TreinoRotina}
+        \createdomain{TreinoRotina}{RotinaTreino (fk)}{\bf ID}
+        \createdomain{TreinoRotina}{Treino (fk)}{\bf Descricao}
+
+    \subsubsection{Modalidade}
+        \createdomain{Modalidade}{IDModalidade}{\bf ID}
+        \createdomain{Modalidade}{Nome}{\bf Nome}
+        \createdomain{Modalidade}{Descricao}{\bf Descricao}
+
+    \subsubsection{Nacao}
+        \createdomain{Nacao}{NomeNacao}{\bf Nome}
+        \createdomain{Nacao}{Continente}{\bf Continente}
+        \createdomain{Nacao}{NAtletas}{\bf Inteiro}
+        \createdomain{Nacao}{EsportePrincipal}{\bf Descricao}
+        \createdomain{Nacao}{Bandeira}{\bf Bandeira}
+        \createdomain{Nacao}{Hino}{\bf Descricao}
+
+    \subsubsection{Medico}
+        \createdomain{Medico}{CRM}{\bf CRM}
+        \createdomain{Medico}{Identidade}{\bf Identidade}
+        \createdomain{Medico}{Nome}{\bf Nome}
+        \createdomain{Medico}{Cidade}{\bf Cidade}
+        \createdomain{Medico}{Estado}{\bf Estado}
+        \createdomain{Medico}{Pais}{\bf Pais}
+
+    \subsubsection{TestarDoping}
+        \createdomain{TestarDoping}{Medico (fk)}{\bf CRM}
+        \createdomain{TestarDoping}{Atleta (fk)}{\bf Passaporte}
+        \createdomain{TestarDoping}{TesteDoping (fk)}{\bf ID}
+
+    \subsubsection{Diagnostico}
+        \createdomain{Diagnostico}{IDDiagnostico}{\bf ID}
+        \createdomain{Diagnostico}{DescricaoDiagnostico}{\bf Descricao}
+        \createdomain{Diagnostico}{MetodoTratamento (fk)}{\bf ID}
+
+    \subsubsection{MetodoTratamento}
+        \createdomain{MetodoTratamento}{IDMetodo}{\bf ID}
+        \createdomain{MetodoTratamento}{DescricaoMetodo}{\bf Descricao}
+        \createdomain{MetodoTratamento}{DescricaoEfetividade}{\bf Descricao}
+
+    \subsubsection{Atendimento}
+        \createdomain{Atendimento}{Medico (fk)}{\bf CRM}
+        \createdomain{Atendimento}{Atleta (fk)}{\bf Passaporte}
+        \createdomain{Atendimento}{DataConsulta (fk)}{\bf Data}
+        \createdomain{Atendimento}{MedicoConsulta (fk)}{\bf CRM}
+        \createdomain{Atendimento}{AtletaConsulta (fk)}{\bf Passaporte}
+
+    \subsubsection{Tratamento}
+        \createdomain{Tratamento}{Diagnostico (fk)}{\bf ID}
+        \createdomain{Tratamento}{MetodoTratamento (fk)}{\bf ID}
+
+    \subsubsection{Lesao}
+        \createdomain{Lesao}{IDLesao}{\bf ID}
+        \createdomain{Lesao}{Descricao}{\bf Descricao}
+
+    \subsubsection{LesaoMedico}
+        \createdomain{LesaoMedico}{Lesao (fk)}{\bf ID}
+        \createdomain{LesaoMedico}{Medico (fk)}{\bf CRM}
+
+    \subsubsection{LesaoAtleta}
+        \createdomain{LesaoAtleta}{Lesao (fk)}{\bf ID}
+        \createdomain{LesaoAtleta}{Atleta (fk)}{\bf Passaporte}
+
+    \subsubsection{TesteDoping}
+        \createdomain{TesteDoping}{IDTeste}{\bf ID}
+        \createdomain{TesteDoping}{Data (fk)}{\bf Data}
+        \createdomain{TesteDoping}{Descricao}{\bf Descricao}
+        \createdomain{TesteDoping}{Resultado}{\bf Resultado}
+
+    \subsubsection{Consulta}
+        \createdomain{Consulta}{Data (fk)}{\bf Data}
+        \createdomain{Consulta}{Atleta (fk)}{\bf Passaporte}
+        \createdomain{Consulta}{Medico (fk)}{\bf CRM}
+        \createdomain{Consulta}{DataConsulta (fk)}{\bf DescricaoData}
+        \createdomain{Consulta}{MedicoConsulta}{\bf DescricaoCRM}
+        \createdomain{Consulta}{AtletaConsulta}{\bf DescricaoPassaporte}
+        \createdomain{Consulta}{Diagnostico (fk)}{\bf ID}
+
+    \subsubsection{Sintoma}
+        \createdomain{Sintoma}{DataConsulta (fk)}{\bf Data}
+        \createdomain{Sintoma}{MedicoConsulta (fk)}{\bf CRM}
+        \createdomain{Sintoma}{AtletaConsulta (fk)}{\bf Passaporte}
+        \createdomain{Sintoma}{Sintoma}{\bf Descricao}
+
+    \subsubsection{Data}
+        \createdomain{Data}{Dia}{\bf Dia}
+        \createdomain{Data}{Mes}{\bf Mes}
+        \createdomain{Data}{Ano}{\bf Ano}
+
+\newpage
+
+\subsection{Dependências Funcionais}
+
+\singlespacing
+Passaporte $\Longrightarrow$ \{Cidade, Estado, Pais, Sexo, DataNascimento\}\par
+Pais $\Longrightarrow$ \{Passaporte\} \par
+Pessoa $\Longrightarrow$ \{E-mail, Senha\} \par
+E-mail $\Longrightarrow$ \{Pessoa\} \par
+Pessoa $\Longrightarrow$ \{TelefonePessoa\} \par
+Medico $\Longrightarrow$ \{TelefoneMedico\} \par
+\{IDRotina, Preparador\} $\Longrightarrow$ \{Duração\} \par
+RotinaTreino $\Longrightarrow$ \{Preparador\} \par
+DiaSemana $\Longrightarrow$ \{Rotina\} \par
+IDPreparo $\Longrightarrow$ \{DescricaoPreparo\} \par
+IDRecuperacao $\Longrightarrow$ \{DescricaoRecuperacao\} \par
+IDTreino $\Longrightarrow$ \{DescricaoTreino\} \par
+RotinaTreino $\Longrightarrow$ \{Preparo\} \par
+RotinaTreino $\Longrightarrow$ \{Recuperacao\} \par
+RotinaTreino $\Longrightarrow$ \{Treino\} \par
+RotinaTreino $\Longrightarrow$ \{Treino\} \par
+
+NomeNacao $\Longrightarrow$ \{Continente, NAtletas, Espeorte Principal, Bandeira, Hino\} \par
+
+Continente $\Longrightarrow$ \{NomeNacao\} \par
+
+{Medico, Atleta} $\Longrightarrow$ \{TesteDoping\} \par
+
+IDDiagnostico $\Longrightarrow$ \{DescricaoDiagnostico, MetodoTratamento\} \par
+
+IDMetodo $\Longrightarrow$ \{DescricaoMetodo, DescricaoEfetividade\} \par
+
+\{Medico, Atleta\} $\Longrightarrow$ \{DataConsulta, MedicoConsulta, AtletaConsulta\} \par
+
+Diagnostico $\Longrightarrow$ \{MetodoTratamento\} \par
+Medico $\Longrightarrow$ \{Lesao\} \par
+Atleta $\Longrightarrow$ \{Lesao\} \par
+
+IDTeste $\Longrightarrow$ \{Data, Descricao, Resultado\} \par
+Data $\Longrightarrow$ \{IDTeste\} \par
+Resultado $\Longrightarrow$ \{IDTeste\} \par
+
+\{Data, Atleta, Medico\} $\Longrightarrow$ \{DescricaoConsulta, Diagnostico\} \par
+
+\{MedicoConsulta, AtletaConsulta, DataConsulta\} $\Longrightarrow$ \{Sintoma\} \par
+
+\end{document}
