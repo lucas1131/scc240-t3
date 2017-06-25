@@ -16,5 +16,3 @@ Use `CFLAGS+=flags` to add compiler flags
 Set `CC=compiler` to change compiler  
 Set `NAME=name` to set project name  
 Set `USER_LIBS=libraries` to set user-defined libraries  
-
-If using Makefile to compile the project, remember do add main class to manifest.mf before running.
