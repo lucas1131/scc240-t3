@@ -42,15 +42,15 @@ main:
 	@echo Building $(SRC)
 	@$(CC) -d $(BLDDIR) $(SRC) $(JAVAFLAGS)
 	@cd $(BLDDIR)
-	# @ln -s `pwd`/src/resources `pwd`/build/resources
-	cp $(SRCDIR)/resources/*.fxml $(BLDDIR)/app/
+	@ln -s `pwd`/src/appInterface/fxml `pwd`/build/appInterface/fxml
+	# cp $(SRCDIR)/resources/*.fxml $(BLDDIR)/app/
 	@# @echo Creating JAR archive...
 	@# @jar cvf $(BLDDIR)/$(NAME).jar manifest.mf $(BLDDIR)/*
 
 # Run directives
 .PHONY: run
 run:
-	java -classpath $(BLDDIR) app.$(NAME)
+	java -classpath $(BLDDIR) appInterface.$(NAME)
 	@# java -jar $(BLDDIR) $(NAME).jar
 
 # Utility directives
