@@ -208,7 +208,7 @@ CREATE TABLE MetodoTratamento (
  	DescricaoEfetividade VARCHAR2(4000)
 );
 
--- CREATE TABLE Atendimento (
+--CREATE TABLE Atendimento (
 -- 	PRIMARY KEY(MedicoConsulta, AtletaConsulta, DataConsulta),
 -- 	FOREIGN KEY(MedicoConsulta) REFERENCES Consulta(Medico),
 -- 	FOREIGN KEY(AtletaConsulta) REFERENCES Consulta(Atleta),
@@ -244,16 +244,18 @@ CREATE TABLE TesteDoping (
  	Resultado NUMBER(1, 0) NOT NULL 
 );
 
--- CREATE TABLE Consulta (
--- 	FOREIGN KEY(Data) NOT NULL,
--- 	FOREIGN KEY(Data) REFERENCES Data(Dia, Mes, Ano),
--- 	PRIMARY KEY(Atleta, Medico, Diagnostico),
--- 	FOREIGN KEY(Atleta) REFERENCES Atleta(Passaporte),
--- 	FOREIGN KEY(Medico) REFERENCES Medico(CRM),
--- 	DescricaoConsulta,
--- 	Diagnostico NOT NULL,
--- 	FOREIGN KEY(Diagnostico) REFERENCES Diagnostico(IDDiagnostico)
--- );
+CREATE TABLE Consulta (
+ 	Date Data,
+ 	Atleta CHAR(8),
+ 	Medico VARCHAR2(12),
+ 	NUMBER Diagnostico,
+
+ 	PRIMARY KEY(Atleta, Medico, Diagnostico) NOT NULL,
+	FOREIGN KEY(Atleta) REFERENCES Atleta(Passaporte),
+ 	FOREIGN KEY(Medico) REFERENCES Medico(CRM),
+ 	FOREIGN KEY(Diagnostico) REFERENCES Diagnostico(IDDiagnostico),
+ 	DescricaoConsulta VARCHAR(4000)
+);
 
 -- CREATE TABLE Sintoma (
 -- 	PRIMARY KEY(DataConsulta, MedicoConsulta, AtletaConsulta, Sintoma),
