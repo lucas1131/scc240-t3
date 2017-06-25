@@ -26,8 +26,8 @@
 DROP TABLE Pessoa;
 DROP TABLE Preparador;
 DROP TABLE Atleta;
--- DROP TABLE TelefonePessoa;
--- DROP TABLE TelefoneMedico;
+DROP TABLE TelefonePessoa;
+DROP TABLE TelefoneMedico;
 -- DROP TABLE RotinaTreino;
 -- DROP TABLE DiasTreino;
 -- DROP TABLE Preparo;
@@ -52,11 +52,15 @@ DROP TABLE Atleta;
 -- DROP TABLE Sintoma;
 -- DROP TABLE Data;
 
+-- See all tables
+SELECT table_name FROM user_tables;
+
 CREATE TABLE Pessoa (
     
 	PRIMARY KEY (Passaporte),
-
+    
     Passaporte CHAR(8),
+    Nome VARCHAR(30) NOT NULL,
 	Cidade VARCHAR(30) NOT NULL,
 	Estado VARCHAR(30) NOT NULL,
 	Pais VARCHAR(30) NOT NULL,
@@ -66,9 +70,8 @@ CREATE TABLE Pessoa (
 
 CREATE TABLE Preparador (
 	
-	FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte),
-	
-	PRIMARY KEY (Pessoa),
+    Pessoa CHAR(8) PRIMARY KEY,
+		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte),
 
 	Email VARCHAR(20) CHECK (
 		REGEXP_LIKE(Email, '^[a-zA-Z0-9.\_]+@[a-zA-Z]+(\.[a-z]+)+$')
@@ -79,30 +82,41 @@ CREATE TABLE Preparador (
 
 CREATE TABLE Atleta (
 
-	FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte),
-	FOREIGN KEY (Preparador) REFERENCES Preparador(Pessoa),
+	Preparador CHAR(8),
+		FOREIGN KEY (Preparador) REFERENCES Preparador(Pessoa),
 	-- FOREIGN KEY (Modalidade) REFERENCES Modalidade(IDModalidade),
 	-- FOREIGN KEY (Nacao) REFERENCES Nacao(NomeNacao),
-	
-	PRIMARY KEY(Pessoa),
+
+	Pessoa CHAR(8),
+		PRIMARY KEY(Pessoa),
+		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte),
 	
 	Peso NUMBER CHECK (Peso > 0) NOT NULL,
-	Altura NUMBER CHECK (Peso > 0) NOT NULL,
-	Regularidade NOT NULL,
-	NPunicoes NOT NULL
+	Altura NUMBER CHECK (Altura > 0) NOT NULL,
+	Regularidade NUMBER(1, 0) NOT NULL,
+	NPunicoes NUMBER CHECK (NPunicoes >= 0) NOT NULL
 	
 );
 
--- CREATE TABLE TelefonePessoa (
--- 	PRIMARY KEY(Pessoa, Telefone),
--- 	FOREIGN KEY(Pessoa) REFERENCES Pessoa(Passaporte)
--- );
+CREATE TABLE TelefonePessoa (
 
--- CREATE TABLE TelefoneMedico (
--- 	PRIMARY KEY(Medico, Telefone),
--- 	FOREIGN KEY(Medico) REFERENCES Medico(CRM),
--- 	FOREIGN KEY(Telefone) REFERENCES Telefone(Pessoa, Telefone) 
--- );
+    Pessoa CHAR(8),
+		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte),
+
+	PRIMARY KEY(Pessoa, Telefone),
+
+	Telefone NUMBER CHECK (Telefone > 0)	
+);
+
+CREATE TABLE TelefoneMedico (
+
+	Medico VARCHAR2(12),
+		FOREIGN KEY(Medico) REFERENCES Medico(CRM),
+	
+	PRIMARY KEY(Medico, Telefone),
+
+	Telefone NUMBER CHECK (Telefone > 0)
+);
 
 -- CREATE TABLE RotinaTreino (
 -- 	PRIMARY KEY(IDRotina, Preparador),
