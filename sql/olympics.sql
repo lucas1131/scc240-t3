@@ -37,11 +37,11 @@ DROP TABLE Atleta;
 -- DROP TABLE RecuperacaoRotina;
 -- DROP TABLE TreinoRotina;
 -- DROP TABLE Modalidade;
--- DROP TABLE Nacao;
--- DROP TABLE Medico;
+DROP TABLE Nacao;
+DROP TABLE Medico;
 -- DROP TABLE TestarDoping;
--- DROP TABLE Diagnostico;
--- DROP TABLE MetodoTratamento;
+DROP TABLE Diagnostico;
+DROP TABLE MetodoTratamento;
 -- DROP TABLE Atendimento;
 -- DROP TABLE Tratamento;
 -- DROP TABLE Lesao;
@@ -154,41 +154,44 @@ CREATE TABLE Atleta (
 -- 	Descricao NOT NULL 
 -- );
 
--- CREATE TABLE Nacao (
--- 	PRIMARY KEY(NomeNacao),
--- 	Continente NOT NULL,
--- 	NAtletas NOT NULL,
--- 	EsportePrincipal,
--- 	Bandeira NOT NULL,
--- 	Hino NOT NULL 
--- );
+CREATE TABLE Nacao (
+ 	VARCHAR2(50) NomeNacao,
+ 	PRIMARY KEY(NomeNacao),
+ 	VARCHAR(16) Continente NOT NULL,
+ 	NUMBER NAtletas NOT NULL,
+ 	VARCHAR(60) EsportePrincipal,
+ 	BLOB Bandeira NOT NULL,
+ 	BLOB Hino NOT NULL 
+);
 
--- CREATE TABLE Medico (
--- 	PRIMARY KEY(CRM),
--- 	Identidade NOT NULL,
--- 	Nome NOT NULL,
--- 	Cidade NOT NULL,
--- 	Estado NOT NULL,
--- 	Pais NOT NULL 
--- );
+CREATE TABLE Medico (
+ 	VARCHAR2(12) (CRM),
+ 	PRIMARY KEY (CRM),
+
+ 	NUMBER Identidade CHECK (Identidade > 0 AND Identidade < 9) NOT NULL,
+ 	VARCHAR2(100) Nome NOT NULL,
+ 	VARCHAR2(100) Cidade NOT NULL,
+ 	VARCHAR2(100) Estado NOT NULL,
+ 	VARCHAR2(100) Pais NOT NULL 
+);
 
 -- CREATE TABLE TestarDoping (
 -- 	PRIMARY KEY(Medico, Atleta, TesteDoping),
 -- 	FOREIGN KEY(Medico) REFERENCES Medico(CRM),
 -- 	FOREIGN KEY(Atleta) REFERENCES Atleta(Passaporte),
--- 	FOREIGN KEY(TesteDoping) REFERENCES TesteDoping(IDTeste)
+-- 	FOREIGN KEY(Teste Doping) REFERENCES TesteDoping(IDTeste)
 -- );
 
--- CREATE TABLE Diagnostico (
--- 	PRIMARY KEY(IDDiagnostico),
--- 	DescricaoDiagnostico NOT NULL
--- );
+CREATE TABLE Diagnostico (
+ 	PRIMARY KEY NUMBER (IDDiagnostico),
+ 	VARCHAR2(4000) DescricaoDiagnostico NOT NULL
+);
 
--- CREATE TABLE MetodoTratamento (
--- 	PRIMARY KEY(IDMetodo),
--- 	DescricaoMetodo NOT NULL,
--- 	DescricaoEfetividade 
--- );
+CREATE TABLE MetodoTratamento (
+ 	PRIMARY KEY NUMBER (IDMetodo),
+ 	VARCHAR2(4000) DescricaoMetodo NOT NULL,
+ 	VARCHAR2(4000) DescricaoEfetividade
+);
 
 -- CREATE TABLE Atendimento (
 -- 	PRIMARY KEY(MedicoConsulta, AtletaConsulta, DataConsulta),
@@ -203,10 +206,10 @@ CREATE TABLE Atleta (
 -- 	FOREIGN KEY(MetodoTratamento) REFERENCES MetodoTratamento(IDMetodo) 
 -- );
 
--- CREATE TABLE Lesao (
--- 	PRIMARY KEY(IDLesao),
--- 	Descricao NOT NULL 
--- );
+CREATE TABLE Lesao (
+ 	PRIMARY KEY NUMBER (IDLesao),
+ 	VARCHAR2(4000) Descricao NOT NULL 
+);
 
 -- CREATE TABLE LesaoMedico (
 -- 	PRIMARY KEY(Lesao, Medico),
@@ -220,13 +223,11 @@ CREATE TABLE Atleta (
 -- 	FOREIGN KEY(Atleta) REFERENCES Atleta(Passaporte)
 -- );
 
--- CREATE TABLE TesteDoping (
--- 	PRIMARY KEY(IDTeste),
--- 	FOREIGN KEY(Data) NOT NULL,
--- 	FOREIGN KEY(Data) REFERENCES Data(Dia, Mes, Ano),
--- 	Descricao,
--- 	Resultado NOT NULL 
--- );
+CREATE TABLE TesteDoping (
+ 	PRIMARY KEY NUMBER (IDTeste),
+ 	VARCHAR2(4000) Descricao,
+ 	NUMBER(1,0) Resultado NOT NULL 
+);
 
 -- CREATE TABLE Consulta (
 -- 	FOREIGN KEY(Data) NOT NULL,
