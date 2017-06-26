@@ -31,9 +31,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import oracle.jdbc.pool.OracleDataSource;
 
-
-
-
 public class MainWindowController {
     
     public List<Diagnostic> diagnostics = new ArrayList();

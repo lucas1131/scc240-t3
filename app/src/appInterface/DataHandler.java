@@ -14,11 +14,11 @@ import oracle.jdbc.pool.OracleDataSource;
  *
  * @author jureg
  */
-class DataHandler{
+public class DataHandler{
 
-    String jdbcUrl = "jdbc:oracle:thin:9293095/a@grad.icmc.usp.br:15215:orcl";
-    String userid = "9293095";
-    String password = "a";
+    private final static String JDBCURL = "jdbc:oracle:thin:9293095/a@grad.icmc.usp.br:15215:orcl";
+    private final static String USER = "9293265";
+    private final static String PASSWORD = "a";
     Connection conn;
 
     public DataHandler(){
@@ -29,14 +29,38 @@ class DataHandler{
 
         ds = new OracleDataSource();
 
-        ds.setURL(jdbcUrl);
+        ds.setURL(JDBCURL);
         try {
             System.out.println("Attempting cnnection!");
-            this.conn = ds.getConnection(userid,password);
+            this.conn = ds.getConnection(USER, PASSWORD);
         } catch (SQLException ex) {
             System.out.println("Erro!");
+
         }
         
         Statement stmt = conn.createStatement();
+    }
+
+    public static void printSQLException(SQLException ex) {
+
+        for (Throwable e : ex) {
+            if (e instanceof SQLException) {
+
+                e.printStackTrace(System.err);
+                System.err.println("SQLState: " +
+                    ((SQLException)e).getSQLState());
+
+                System.err.println("Error Code: " +
+                    ((SQLException)e).getErrorCode());
+
+                System.err.println("Message: " + e.getMessage());
+
+                Throwable t = ex.getCause();
+                while(t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+            }
+        }
     }
 }

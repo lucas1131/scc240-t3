@@ -5,7 +5,7 @@ MAIN_CLASS_NAME:=$(NAME)
 
 
 # Directories
-# LIBDIR=lib
+LIBDIR=lib
 BLDDIR=build
 SRCDIR=src
 
@@ -24,13 +24,14 @@ SRC=$(shell find -name "*.java")
 
 CC=javac
 CFLAGS=
+CLASSPATH=.:$(BLDDIR):ojdbc8.jar
 
 USER_LIBS=
 DEFAULT_LIBS=
 LIBS=$(USER_LIBS) $(DEFAULT_LIBS)
 
 ifdef debug
-	CFLAGS += -Xlint
+	CFLAGS += -Xlint:unchecked
 endif
 
 # GIT_STAT:=$(shell echo -e "GET http://github.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1; echo $$?)
@@ -39,18 +40,17 @@ all: checkname checkdirs clean main
 
 .PHONY: main
 main: 
-	@echo Building $(SRC)
-	@$(CC) -d $(BLDDIR) $(SRC) $(JAVAFLAGS)
+	@# @echo Building $(SRC)
+	$(CC) -classpath $(CLASSPATH) -d $(BLDDIR) $(SRC) $(CFLAGS) 
 	@cd $(BLDDIR)
 	@ln -s `pwd`/src/appInterface/fxml `pwd`/build/appInterface/fxml
-	# cp $(SRCDIR)/resources/*.fxml $(BLDDIR)/app/
 	@# @echo Creating JAR archive...
 	@# @jar cvf $(BLDDIR)/$(NAME).jar manifest.mf $(BLDDIR)/*
 
 # Run directives
 .PHONY: run
 run:
-	java -classpath $(BLDDIR) appInterface.$(NAME)
+	java -classpath $(CLASSPATH) appInterface.$(NAME)
 	@# java -jar $(BLDDIR) $(NAME).jar
 
 # Utility directives
@@ -112,7 +112,7 @@ readme: checkname
 # Check for directory existence and create them if necessary
 checkdirs: 
 	@if [ ! -d $(BLDDIR)/ ]; then mkdir -p $(BLDDIR)/; fi
-	@# @if [ ! -d $(LIBDIR)/ ]; then mkdir -p $(LIBDIR)/; fi
+	@if [ ! -d $(LIBDIR)/ ]; then mkdir -p $(LIBDIR)/; fi
 	@if [ ! -d $(SRCDIR)/ ]; then mkdir -p $(SRCDIR)/; fi
 
 # Check if project has a name
@@ -132,7 +132,7 @@ create: checkname
 	@echo Creating directories...
 	@mkdir $(NAME) 
 	@mkdir $(NAME)/$(SRCDIR)
-	@# @mkdir $(NAME)/$(LIBDIR)
+	@mkdir $(NAME)/$(LIBDIR)
 	@mkdir $(NAME)/$(BLDDIR)
 
 	cp ./Makefile $(NAME)/
