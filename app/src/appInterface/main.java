@@ -17,11 +17,14 @@ import javafx.stage.Stage;
  */
 public class main extends Application {
     
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/MainWindow.fxml"));
         
         Scene scene = new Scene(root);
+        
+        setUserAgentStylesheet(STYLESHEET_MODENA);
         
         stage.setScene(scene);
         stage.show();
