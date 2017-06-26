@@ -25,6 +25,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Diagnostic;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oracle.jdbc.pool.OracleDataSource;
+
 
 
 
@@ -135,9 +141,9 @@ public class MainWindowController {
     @FXML
     void editSelectedRow() throws IOException{
         
-        if(diagnostics.size() <= 0) return;
-        
         Diagnostic current = tableView.getSelectionModel().getSelectedItem();
+        
+        if(current == null) return;
         
         Parent root;
         
@@ -158,7 +164,7 @@ public class MainWindowController {
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
-    void initialize() throws IOException {
+    void initialize() throws IOException, SQLException {
         
         this.diagnostics = new ArrayList<>();
         
@@ -167,6 +173,7 @@ public class MainWindowController {
         
         //gerar dados para as tabelas
         getDiagnostics();
+
         
     }
 }
