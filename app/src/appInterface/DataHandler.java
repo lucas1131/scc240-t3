@@ -19,12 +19,12 @@ public class DataHandler{
     private final static String JDBCURL = "jdbc:oracle:thin:9293095/a@grad.icmc.usp.br:15215:orcl";
     private final static String USER = "9293265";
     private final static String PASSWORD = "a";
-    Connection conn;
+    public Connection conn;
 
     public DataHandler(){
     }
 
-    public Connection getDBConnection() throws SQLException{
+    public void getDBConnection() throws SQLException{
         OracleDataSource ds;
 
         ds = new OracleDataSource();
@@ -36,14 +36,12 @@ public class DataHandler{
 
             System.out.println("Connection succeded.");
 
-            return this.conn;
-
         } catch (SQLException e) {
             
             System.out.println("Failed to connect.");
             printSQLException(e);
             
-            return null;
+            throw e;
         }
     }
 

@@ -35,12 +35,11 @@ public class main extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws Exception {
         // Test.stabilishConnection();
         
         DataHandler dh = new DataHandler();
-        Connection conn = dh.getDBConnection();
-        Statement stmt = conn.createStatement();
+        dh.getDBConnection();
                 
         launch(args);
     }
