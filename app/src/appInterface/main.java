@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import connect.*;
+
 /**
  *
  * @author jureg
@@ -31,6 +33,7 @@ public class main extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Test.stabilishConnection();
         launch(args);
     }
     
