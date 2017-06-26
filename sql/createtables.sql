@@ -189,18 +189,21 @@ CREATE TABLE TestarDoping (
 	FOREIGN KEY(TesteDoping) REFERENCES TesteDoping(IDTeste) ON DELETE CASCADE
 );
 
-CREATE TABLE Diagnostico (
- 	IDDiagnostico NUMBER PRIMARY KEY,
- 	DescricaoDiagnostico VARCHAR2(4000) NOT NULL
-);
-
 CREATE TABLE MetodoTratamento (
     IDMetodo NUMBER PRIMARY KEY,
  	DescricaoMetodo VARCHAR2(4000) NOT NULL,
  	DescricaoEfetividade VARCHAR2(4000)
 );
 
-DROP TABLE Consulta;
+--DROP TABLE Diagnostico;
+CREATE TABLE Diagnostico (
+ 	IDDiagnostico NUMBER PRIMARY KEY,
+ 	DescricaoDiagnostico VARCHAR2(4000) NOT NULL,
+ 	MetodoTratamento NUMBER,
+		FOREIGN KEY(MetodoTratamento) 
+		REFERENCES MetodoTratamento(IDMetodo) ON DELETE CASCADE
+);
+
 CREATE TABLE Consulta (
  	Data DATE,
  	Atleta CHAR(8),

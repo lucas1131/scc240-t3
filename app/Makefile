@@ -50,7 +50,7 @@ main:
 # Run directives
 .PHONY: run
 run:
-	java -classpath $(BLDDIR) appInterface.$(NAME)
+	java -classpath $(BLDDIR);/usr/lib/jvm/java-8-openjdk/jre/lib/ appInterface.$(NAME)
 	@# java -jar $(BLDDIR) $(NAME).jar
 
 # Utility directives
