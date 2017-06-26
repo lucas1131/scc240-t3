@@ -16,9 +16,15 @@ INSERT INTO Pessoa VALUES (
 );
 */
 
-INSERT INTO Pessoa VALUES ('123cdx56', 'Airo', 'Guarulhos', 'São Paulo', 'Brasil', 'M', '13-DEC-1996');
-INSERT INTO Pessoa VALUES ('321xdc65', 'Gi', 'Ribeirão Preto', 'São Paulo', 'Brasil', 'F', '28-DEC-1996');
-INSERT INTO Pessoa VALUES ('70r74100', 'Jurg', 'São Paulo', 'São Paulo', 'Brasil', 'M', '13-DEC-1996');
+/* Pessoas Preparadores */
+INSERT INTO Pessoa VALUES ('123cdxPP', 'Airo preparador', 'Guarulhos', 'São Paulo', 'Brasil', 'M', '13-DEC-1996');
+INSERT INTO Pessoa VALUES ('321xdcPP', 'Gi preparador', 'Ribeirão Preto', 'São Paulo', 'Brasil', 'F', '28-DEC-1996');
+INSERT INTO Pessoa VALUES ('70r741PP', 'Jurg preparador', 'São Paulo', 'São Paulo', 'Brasil', 'M', '13-DEC-1996');
+
+/* Pessoas Atletas */
+INSERT INTO Pessoa VALUES ('123cdxAA', 'Airo atleta', 'Guarulhos', 'São Paulo', 'Brasil', 'M', '13-DEC-1996');
+INSERT INTO Pessoa VALUES ('321xdcAA', 'Gi atleta', 'Ribeirão Preto', 'São Paulo', 'Brasil', 'F', '28-DEC-1996');
+INSERT INTO Pessoa VALUES ('70r741AA', 'Jurg atleta', 'São Paulo', 'São Paulo', 'Brasil', 'M', '13-DEC-1996');
 
 /*
 INSERT INTO Preparador VALUES (	
@@ -32,6 +38,10 @@ INSERT INTO Preparador VALUES (
 );
 */
 
+INSERT INTO Preparador VALUES ('Airo preparador', 'lucassoares1793@gmail.com', '123456789aA!');
+INSERT INTO Preparador VALUES ('Gi preparador', 'xofanna@gimail.com', '123456789aA@');
+INSERT INTO Preparador VALUES ('Jurg preparador', 'tortao@jureg.jurg', '123456789aA#');
+
 /*
 INSERT INTO Modalidade VALUES (	IDModalidade NUMBER,
 	PRIMARY KEY(IDModalidade),
@@ -39,6 +49,10 @@ INSERT INTO Modalidade VALUES (	IDModalidade NUMBER,
 	Descricao VARCHAR2(4000) NOT NULL 
 );
 */
+
+INSERT INTO Modalidade VALUES (1, 'Arremeço de peso', 'TODO');
+INSERT INTO Modalidade VALUES (2, 'Natação', 'TODO');
+INSERT INTO Modalidade VALUES (3, 'Salto triplo', 'TODO');
 
 /*
 INSERT INTO Nacao VALUES (	NomeNacao VARCHAR2(50),
