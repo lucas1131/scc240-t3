@@ -11,9 +11,9 @@ SRCDIR=src
 
 # If the first argument is "run"
 ifeq (run, $(firstword $(MAKECMDGOALS)))
-  # use the rest as arguments for "run"
+  # Use the rest as arguments for "run"
   RUN_ARGS := $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
-  # ...and turn them into do-nothing targets
+  # And turn them into do-nothing targets
   $(eval $(RUN_ARGS):;@:)
 endif
 
@@ -24,7 +24,8 @@ SRC=$(shell find -name "*.java")
 
 CC=javac
 CFLAGS=
-CLASSPATH=.:$(BLDDIR):ojdbc8.jar
+
+CLASSPATH=.:$(BLDDIR):$(BLDDIR)/*:$(LIBDIR)/*
 
 USER_LIBS=
 DEFAULT_LIBS=
@@ -45,7 +46,7 @@ main:
 	@cd $(BLDDIR)
 	@ln -s `pwd`/src/appInterface/fxml `pwd`/build/appInterface/fxml
 	@# @echo Creating JAR archive...
-	@# @jar cvf $(BLDDIR)/$(NAME).jar manifest.mf $(BLDDIR)/*
+	# @jar cvf $(BLDDIR)/$(NAME).jar manifest.mf $(BLDDIR)/*
 
 # Run directives
 .PHONY: run
