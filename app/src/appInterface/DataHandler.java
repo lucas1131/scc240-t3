@@ -24,25 +24,30 @@ public class DataHandler{
     public DataHandler(){
     }
 
-    public void getDBConnection() throws SQLException{
+    public Connection getDBConnection() throws SQLException{
         OracleDataSource ds;
 
         ds = new OracleDataSource();
-
         ds.setURL(JDBCURL);
+
         try {
             System.out.println("Attempting cnnection!");
             this.conn = ds.getConnection(USER, PASSWORD);
-        } catch (SQLException ex) {
-            System.out.println("Erro!");
 
+            System.out.println("Connection succeded.");
+
+            return this.conn;
+
+        } catch (SQLException e) {
+            
+            System.out.println("Failed to connect.");
+            printSQLException(e);
+            
+            return null;
         }
-        
-        Statement stmt = conn.createStatement();
     }
 
     public static void printSQLException(SQLException ex) {
-
         for (Throwable e : ex) {
             if (e instanceof SQLException) {
 

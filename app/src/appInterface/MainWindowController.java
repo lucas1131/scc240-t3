@@ -87,15 +87,15 @@ public class MainWindowController {
         observableDiagnostics = FXCollections.observableArrayList(diagnostics);
         
         DiagnosticIdCol.setCellValueFactory(
-                new PropertyValueFactory< >("id")
+                new PropertyValueFactory<>("id")
         );
         
         DiagnosticDescCol.setCellValueFactory(
-                new PropertyValueFactory< >("desc")
+                new PropertyValueFactory<>("desc")
         );
         
         TreatmentIdCol.setCellValueFactory(
-                new PropertyValueFactory< >("fk")
+                new PropertyValueFactory<>("fk")
         );
         
         tableView.setItems(observableDiagnostics);
