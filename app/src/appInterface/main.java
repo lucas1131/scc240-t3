@@ -35,10 +35,11 @@ public class main extends Application {
      */
     public static void main(String[] args) throws SQLException {
         
-        dataHandler dh;
-        dh = new dataHandler();
+        DataHandler dh;
+        dh = new DataHandler();
         
         dh.getDBConnection();
+        
         
         launch(args);
     }
