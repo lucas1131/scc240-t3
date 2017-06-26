@@ -43,6 +43,7 @@ public class main extends Application {
         
         dh.getDBConnection();
         
+        
         launch(args);
     }
 }
