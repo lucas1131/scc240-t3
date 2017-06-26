@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2017.5.17)  24 JUN 2017 18:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2017.5.17)  25 JUN 2017 16:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -912,31 +912,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 263--265
  []
 
 [7]
-Overfull \hbox (25.19821pt too wide) in paragraph at lines 306--309
+Overfull \hbox (25.19821pt too wide) in paragraph at lines 304--307
 \OT1/cmr/m/n/12 A al-ter-na-tiva es-co-lhida foi ma-pear dias de treino em ta-b
 e-las se-pa-ra-das. \OT1/cmr/bx/n/12 Modalidade\OT1/cmr/m/n/12 ($[]$,
  []
 
 
-Overfull \hbox (32.38492pt too wide) in paragraph at lines 322--323
+Overfull \hbox (32.38492pt too wide) in paragraph at lines 320--321
 []\OT1/cmr/bx/n/12 Atendimento\OT1/cmr/m/n/12 ($[]$ (fk), $[]$ (fk), $[]$ (fk),
  $[]$ (fk), $[]$
  []
 
 [8]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 379.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 377.
 
  (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 379.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 377.
 
-Underfull \hbox (badness 10000) in paragraph at lines 371--395
+Underfull \hbox (badness 10000) in paragraph at lines 369--393
 
  []
 
-[9] [10] [11] [12] [13] [14] [15] (./mrel.aux) ) 
+[9] [10] [11] [12] [13] [14] (./mrel.aux) ) 
 Here is how much of TeX's memory you used:
  11901 strings out of 493013
  212944 string characters out of 6139317
@@ -945,23 +945,23 @@ Here is how much of TeX's memory you used:
  10882 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,13n,26p,10339b,413s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/iron/.texlive/texmf-var
-/fonts/pk/ljfour/public/cm/cmsy10.720pk> </home/iron/.texlive/texmf-var/fonts/p
-k/ljfour/public/cm/cmsy8.600pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/
-public/cm/cmmi8.600pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm
-/cmmi12.600pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmti12.
-600pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.720pk> <
-/home/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.600pk> </home/ir
-on/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.864pk> </home/iron/.texl
-ive/texmf-var/fonts/pk/ljfour/public/cm/cmr12.720pk> </home/iron/.texlive/texmf
--var/fonts/pk/ljfour/public/cm/cmcsc10.600pk> </home/iron/.texlive/texmf-var/fo
-nts/pk/ljfour/public/cm/cmcsc10.864pk> </home/iron/.texlive/texmf-var/fonts/pk/
-ljfour/public/cm/cmr17.864pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/
-dpi600/cmr12.pk>
-Output written on mrel.pdf (15 pages, 163340 bytes).
+ </home/iron/.texlive/texmf-var/font
+s/pk/ljfour/public/cm/cmsy10.720pk> </home/iron/.texlive/texmf-var/fonts/pk/ljf
+our/public/cm/cmsy8.600pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/publi
+c/cm/cmmi8.600pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmmi
+12.600pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmti12.600pk
+> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.720pk> </home
+/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.600pk> </home/iron/.t
+exlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.864pk> </home/iron/.texlive/t
+exmf-var/fonts/pk/ljfour/public/cm/cmr12.720pk> </home/iron/.texlive/texmf-var/
+fonts/pk/ljfour/public/cm/cmcsc10.600pk> </home/iron/.texlive/texmf-var/fonts/p
+k/ljfour/public/cm/cmcsc10.864pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfou
+r/public/cm/cmr17.864pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi60
+0/cmr12.pk>
+Output written on mrel.pdf (14 pages, 163017 bytes).
 PDF statistics:
- 455 PDF objects out of 1000 (max. 8388607)
- 87 compressed objects within 1 object stream
+ 452 PDF objects out of 1000 (max. 8388607)
+ 85 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

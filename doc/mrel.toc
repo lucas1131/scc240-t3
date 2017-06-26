@@ -47,7 +47,7 @@
 \contentsline {subsubsection}{\numberline {3.8.18}TestarDoping}{12}
 \contentsline {subsubsection}{\numberline {3.8.19}Diagnostico}{12}
 \contentsline {subsubsection}{\numberline {3.8.20}MetodoTratamento}{12}
-\contentsline {subsubsection}{\numberline {3.8.21}Atendimento}{13}
+\contentsline {subsubsection}{\numberline {3.8.21}Atendimento}{12}
 \contentsline {subsubsection}{\numberline {3.8.22}Tratamento}{13}
 \contentsline {subsubsection}{\numberline {3.8.23}Lesao}{13}
 \contentsline {subsubsection}{\numberline {3.8.24}LesaoMedico}{13}
@@ -55,5 +55,5 @@
 \contentsline {subsubsection}{\numberline {3.8.26}TesteDoping}{13}
 \contentsline {subsubsection}{\numberline {3.8.27}Consulta}{13}
 \contentsline {subsubsection}{\numberline {3.8.28}Sintoma}{13}
-\contentsline {subsubsection}{\numberline {3.8.29}Data}{14}
-\contentsline {subsection}{\numberline {3.9}Depend\IeC {\^e}ncias Funcionais}{15}
+\contentsline {subsubsection}{\numberline {3.8.29}Data}{13}
+\contentsline {subsection}{\numberline {3.9}Depend\IeC {\^e}ncias Funcionais}{14}

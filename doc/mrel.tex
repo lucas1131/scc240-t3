@@ -207,7 +207,7 @@
     
     \createrelation{{\bf Pessoa}}{\primarykey{Passaporte}, Cidade, Estado, \secondarykey{Pais}, Sexo, DataNascimento (fk)}
     
-    \createrelation{{\bf Preparador}}{\primarykey{Pessoa} (fk), \secondarykey{E-mail}, Senha}
+    \createrelation{{\bf Preparador}}{\primarykey{Pessoa} (fk), \secondarykey{Email}, Senha}
     
     \createrelation{{\bf Atleta}}{\primarykey{Pessoa} (fk), Peso, Altura, Regularidade, NPunicoes, \secondarykey{Preparador} (fk), \secondarykey{Modalidade} (fk), \secondarykey{Nacao} (fk)}
 
@@ -264,8 +264,6 @@
     \doublespacing
  
     \createrelation{{\bf RotinaTreino}}{\primarykey{IDRotina}, \primarykey{Preparador} (fk), Duracao}
-
-    \createrelation{{\bf PreparadorRotina}}{\primarykey{RotinaTreino} (fk), \primarykey{Preparador} (fk)}
 
     \createrelation{{\bf DiasTreino}}{\primarykey{Rotina} (fk), \primarykey{DiaSemana}}
     
@@ -376,7 +374,7 @@
     {\bf Dia}: Número inteiro entre 1 e 31 \\
     {\bf Descricao}: Descrição detalhada de algo - texto.\\
     {\bf DiaSemana}: Nome dos dias da semana (Segunda-feira, Terça-feira, Quarta-feira, Quinta-feira, Sexta-feira, Sábado e Domingo) - {\it string} de até 13 caractéres. \\
-    {\bf E-mail}: {\it String} única - deve seguir uma formatação padrão de e-mail como por exemplo ``s/$\wedge$[a-zA-Z0-9.\_]+@[a-zA-Z]+(\textbackslash.[a-z]+)+\$//''. \\
+    {\bf Email}: {\it String} única - deve seguir uma formatação padrão de e-mail como por exemplo ``s/$\wedge$[a-zA-Z0-9.\_]+@[a-zA-Z]+(\textbackslash.[a-z]+)+\$//''. \\
     {\bf Estado}: Nome de um estado para descrição de um endereço - {\it string} de até 128 caractéres. \\
     {\bf Identidade}: Número de identidade (único) de um médico - número inteiro de 9 dígitos. \\
     {\bf ID}: Número único identificador de uma classe ou objeto dentro do sistema - número inteiro. \\
@@ -405,7 +403,7 @@
 
     \subsubsection{Preparador}
         \createdomain{Preparador}{Pessoa (fk)}{\bf Passaporte}
-        \createdomain{Preparador}{E-mail}{\bf E-mail}
+        \createdomain{Preparador}{Email}{\bf Email}
         \createdomain{Preparador}{Senha}{\bf Senha}
 
     \subsubsection{Atleta}
@@ -492,7 +490,6 @@
     \subsubsection{Diagnostico}
         \createdomain{Diagnostico}{IDDiagnostico}{\bf ID}
         \createdomain{Diagnostico}{DescricaoDiagnostico}{\bf Descricao}
-        \createdomain{Diagnostico}{MetodoTratamento (fk)}{\bf ID}
 
     \subsubsection{MetodoTratamento}
         \createdomain{MetodoTratamento}{IDMetodo}{\bf ID}
@@ -555,8 +552,8 @@
 \singlespacing
 Passaporte $\Longrightarrow$ \{Cidade, Estado, Pais, Sexo, DataNascimento\}\par
 Pais $\Longrightarrow$ \{Passaporte\} \par
-Pessoa $\Longrightarrow$ \{E-mail, Senha\} \par
-E-mail $\Longrightarrow$ \{Pessoa\} \par
+Pessoa $\Longrightarrow$ \{Email, Senha\} \par
+Email $\Longrightarrow$ \{Pessoa\} \par
 Pessoa $\Longrightarrow$ \{TelefonePessoa\} \par
 Medico $\Longrightarrow$ \{TelefoneMedico\} \par
 \{IDRotina, Preparador\} $\Longrightarrow$ \{Duração\} \par
