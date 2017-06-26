@@ -33,7 +33,7 @@ import oracle.jdbc.pool.OracleDataSource;
 
 public class MainWindowController {
     
-    public List<Diagnostic> diagnostics = new ArrayList();
+    public List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
     public ObservableList<Diagnostic> observableDiagnostics;
     
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -124,7 +124,7 @@ public class MainWindowController {
         stage.setScene(new Scene(root));
         
         EditWindowController editController = editLoader.<EditWindowController>getController();
-        editController.setValues(null,this, observableDiagnostics);
+        editController.setValues(null, this, observableDiagnostics);
         
         stage.show();
     }
@@ -155,7 +155,7 @@ public class MainWindowController {
 
         
         EditWindowController editController = editLoader.<EditWindowController>getController();
-        editController.setValues(current,this);
+        editController.setValues(current, this);
         
         stage.show();
     }
