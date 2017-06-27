@@ -181,9 +181,9 @@ INSERT INTO Preparo VALUES (	IDPreparo NUMBER,
 );
 */
 
-INSERT INTO Preparo VALUES (1, 'TODO');
-INSERT INTO Preparo VALUES (2, 'TODO');
-INSERT INTO Preparo VALUES (3, 'TODO');
+INSERT INTO Preparo VALUES (1, 'O atleta realiza cerca de 10m de alongamento e 30m de corrida para aquecimento antes de qualquer treino.');
+INSERT INTO Preparo VALUES (2, 'O atleta realiza cerca de 15m de alongamento e 20m de corrida para aquecimento antes de qualquer treino.');
+INSERT INTO Preparo VALUES (3, 'O atleta realiza cerca de 20m de alongamento e 40m de corrida para aquecimento antes de qualquer treino.');
 
 /*
 INSERT INTO Recuperacao VALUES (	IDRecuperacao NUMBER,
@@ -192,9 +192,9 @@ INSERT INTO Recuperacao VALUES (	IDRecuperacao NUMBER,
 );
 */
 
-INSERT INTO Recuperacao VALUES (1, 'TODO');
-INSERT INTO Recuperacao VALUES (2, 'TODO');
-INSERT INTO Recuperacao VALUES (3, 'TODO');
+INSERT INTO Recuperacao VALUES (1, 'O Atleta realizou 10 sessões de fisioterapia');
+INSERT INTO Recuperacao VALUES (2, 'O Atleta realizou 15 sessões com o psicólogo');
+INSERT INTO Recuperacao VALUES (3, 'O Atleta permaneceu afastado, em repouso, por um período de um mês');
 
 /*
 INSERT INTO Treino VALUES (	IDTreino NUMBER,
@@ -330,9 +330,9 @@ INSERT INTO Consulta VALUES (	Data DATE,
 );
 */
 
-INSERT INTO Consulta VALUES ('123456789aaa', '123cdxPP', 1, 'TODO');
-INSERT INTO Consulta VALUES ('987654321bbb', '321xdcPP', 2, 'TODO');
-INSERT INTO Consulta VALUES ('123987456ccc', '70r741PP', 3, 'TODO');
+INSERT INTO Consulta VALUES ('123456789aaa', '123cdxAA', 1, 'O Atleta de passaporte 123cdxPP foi atendido pelo médico de CRM 123456789aaa. Quadro não urgente');
+INSERT INTO Consulta VALUES ('987654321bbb', '321xdcAA', 2, 'O Atleta de passaporte 321xdcPP foi atendido pelo médico de CRM 987654321bbb. Quadro urgente');
+INSERT INTO Consulta VALUES ('123987456ccc', '70r741AA', 3, 'O Atleta de passaporte 321xdcPP foi atendido pelo médico de CRM 123987456ccc. Quadro não urgente');
 
 /*
 INSERT INTO Atendimento VALUES (
@@ -347,9 +347,9 @@ INSERT INTO Atendimento VALUES (
 );
 */
 
-INSERT INTO Atendimento VALUES ('123cdxPP', '123456789aaa', '08-AUG-2017');
-INSERT INTO Atendimento VALUES ('321xdcPP', '987654321bbb', '12-AUG-2017');
-INSERT INTO Atendimento VALUES ('70r741PP', '123987456ccc', '30-JUL-2017');
+INSERT INTO Atendimento VALUES ('123cdxAA', '123456789aaa', '08-AUG-2017');
+INSERT INTO Atendimento VALUES ('321xdcAA', '987654321bbb', '12-AUG-2017');
+INSERT INTO Atendimento VALUES ('70r741AA', '123987456ccc', '30-JUL-2O17');
 
 /*
 INSERT INTO Tratamento VALUES (
