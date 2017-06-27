@@ -26,5 +26,3 @@ DROP TABLE Diagnostico;
 DROP TABLE MetodoTratamento;
 DROP TABLE Pessoa;
 
--- See all tables
-SELECT table_name FROM user_tables;
