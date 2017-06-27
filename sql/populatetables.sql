@@ -38,9 +38,9 @@ INSERT INTO Preparador VALUES (
 );
 */
 
-INSERT INTO Preparador VALUES ('Airo preparador', 'lucassoares1793@gmail.com', '123456789aA!');
-INSERT INTO Preparador VALUES ('Gi preparador', 'xofanna@gimail.com', '123456789aA@');
-INSERT INTO Preparador VALUES ('Jurg preparador', 'tortao@jureg.jurg', '123456789aA#');
+INSERT INTO Preparador VALUES ('123cdxPP', 'lucassoares1793@gmail.com', '123456789aA!');
+INSERT INTO Preparador VALUES ('321xdcPP', 'xofanna@gimail.com', '123456789aA@');
+INSERT INTO Preparador VALUES ('70r741PP', 'tortao@jureg.jurg', '123456789aA#');
 
 /*
 INSERT INTO Modalidade VALUES (	IDModalidade NUMBER,
@@ -65,9 +65,9 @@ INSERT INTO Nacao VALUES (	NomeNacao VARCHAR2(50),
 );
 */
 
-INSERT INTO Nacao VALUES ('Brasil', 'America do Sul', 50, 'Futebol', NULL, NULL);
+INSERT INTO Nacao VALUES ('Brasil', 'America do Sul', 50, NULL, NULL, NULL);
 INSERT INTO Nacao VALUES ('Alemanha', 'Europa', 60, 'Futebol', NULL, NULL);
-INSERT INTO Nacao VALUES ('Estados Unidos', 'America do Norte', 75, NULL, NULL);
+INSERT INTO Nacao VALUES ('Estados Unidos', 'America do Norte', 75, 'Basquete', NULL, NULL);
 
 /*
 INSERT INTO Atleta VALUES (
@@ -91,9 +91,9 @@ INSERT INTO Atleta VALUES (
 );
 */
 
-INSERT INTO Atleta VALUES ('123cdxPP', 1, 'Brasil', '123cdxAA', 100.0, 2.00, 1, 0);
-INSERT INTO Atleta VALUES ('321xdcPP', 1, 'Alemanha', '321xdcAA', 80.0, 1.80, 1, 1);
-INSERT INTO Atleta VALUES ('70r741PP', 1, 'Estados Unidos', '70r741AA', 120.0, 1.70, 1, 0);	
+INSERT INTO Atleta VALUES ('321xdcPP', 1, 'Brasil', '123cdxAA', 100.0, 2.00, 1, 0);
+INSERT INTO Atleta VALUES ('70r741PP', 2, 'Alemanha', '321xdcAA', 80.0, 1.80, 1, 1);
+INSERT INTO Atleta VALUES ('123cdxPP', 3, 'Estados Unidos', '70r741AA', 120.0, 1.70, 1, 0);	
 
 /*
 INSERT INTO TelefonePessoa VALUES (
@@ -127,8 +127,8 @@ INSERT INTO Medico VALUES (
 */
 
 INSERT INTO Medico VALUES ('123456789aaa', 396440216, 'Airo medico', 'Guarulhos', 'São Paulo', 'Brasil');
-INSERT INTO Medico VALUES ('987654321bbb', 825500244, 'Gi preparador', 'Ribeirão Preto', 'São Paulo', 'Brasil');
-INSERT INTO Medico VALUES ('123987456ccc', 111222355, 'Jurg preparador', 'São Paulo', 'São Paulo', 'Brasil');
+INSERT INTO Medico VALUES ('987654321bbb', 825500244, 'Gi medico', 'Ribeirão Preto', 'São Paulo', 'Brasil');
+INSERT INTO Medico VALUES ('123987456ccc', 111222355, 'Jurg medico', 'São Paulo', 'São Paulo', 'Brasil');
 
 /*
 INSERT INTO TelefoneMedico VALUES (
@@ -170,9 +170,9 @@ INSERT INTO DiasTreino VALUES (	RotinaTreino NUMBER,
 );
 */
 
-INSERT INTO DiasTreino VALUES ('Sunday', 1, '123cdxPP');
-INSERT INTO DiasTreino VALUES ('Monday', 2, '321xdcPP');
-INSERT INTO DiasTreino VALUES ('Friday', 3, '70r741PP');
+INSERT INTO DiasTreino VALUES (1, '123cdxPP', 'Sunday');
+INSERT INTO DiasTreino VALUES (2, '321xdcPP', 'Monday');
+INSERT INTO DiasTreino VALUES (3, '70r741PP', 'Friday');
 
 /*
 INSERT INTO Preparo VALUES (	IDPreparo NUMBER,
@@ -258,9 +258,9 @@ INSERT INTO TreinoRotina VALUES (
 );
 */
 
-INSERT INTO RecuperacaoRotina VALUES (1, '123cdxPP', 1);
-INSERT INTO RecuperacaoRotina VALUES (2, '321xdcPP', 2);
-INSERT INTO RecuperacaoRotina VALUES (3, '70r741PP', 3);
+INSERT INTO TreinoRotina VALUES (1, '123cdxPP', 1);
+INSERT INTO TreinoRotina VALUES (2, '321xdcPP', 2);
+INSERT INTO TreinoRotina VALUES (3, '70r741PP', 3);
 
 /*
 INSERT INTO TesteDoping VALUES (	IDTeste NUMBER PRIMARY KEY,
@@ -287,9 +287,9 @@ INSERT INTO TestarDoping VALUES (
 );
 */
 
-INSERT INTO TestarDoping VALUES ('123456789aaa', '123cdxPP', 1);
-INSERT INTO TestarDoping VALUES ('987654321bbb', '321xdcPP', 2);
-INSERT INTO TestarDoping VALUES ('123987456ccc', '70r741PP', 3);
+INSERT INTO TestarDoping VALUES ('123456789aaa', '123cdxAA', 1);
+INSERT INTO TestarDoping VALUES ('987654321bbb', '321xdcAA', 2);
+INSERT INTO TestarDoping VALUES ('123987456ccc', '70r741AA', 3);
 
 /*
 INSERT INTO MetodoTratamento VALUES (	IDMetodo NUMBER PRIMARY KEY,
@@ -305,19 +305,17 @@ INSERT INTO MetodoTratamento VALUES (3, 'Placebo', 'Inútil');
 /*
 INSERT INTO Diagnostico VALUES (
 	IDDiagnostico NUMBER PRIMARY KEY,
-		DescricaoDiagnostico VARCHAR2(4000) NOT NULL,
-	MetodoTratamento NUMBER,
-		FOREIGN KEY(MetodoTratamento) 
-		REFERENCES MetodoTratamento(IDMetodo) ON DELETE CASCADE
+	DescricaoDiagnostico VARCHAR2(4000) NOT NULL,
 );
 */
 
-INSERT INTO Diagnostico VALUES (1, 1);
-INSERT INTO Diagnostico VALUES (2, 2);
-INSERT INTO Diagnostico VALUES (3, 3);
+INSERT INTO Diagnostico VALUES (1, 'TODO');
+INSERT INTO Diagnostico VALUES (2, 'TODO');
+INSERT INTO Diagnostico VALUES (3, 'TODO');
 
 /*
 INSERT INTO Consulta VALUES (	Data DATE,
+	Data DATE,
 	Atleta CHAR(8),
 	Medico VARCHAR2(12),
 	Diagnostico NUMBER,
@@ -330,9 +328,9 @@ INSERT INTO Consulta VALUES (	Data DATE,
 );
 */
 
-INSERT INTO Consulta VALUES ('123456789aaa', '123cdxPP', 1, 'TODO');
-INSERT INTO Consulta VALUES ('987654321bbb', '321xdcPP', 2, 'TODO');
-INSERT INTO Consulta VALUES ('123987456ccc', '70r741PP', 3, 'TODO');
+INSERT INTO Consulta VALUES ('08-AUG-2017', '123cdxAA', '123456789aaa', 1, 'TODO');
+INSERT INTO Consulta VALUES ('12-AUG-2017', '321xdcAA', '987654321bbb', 2, 'TODO');
+INSERT INTO Consulta VALUES ('30-JUL-2017', '70r741AA', '123987456ccc', 3, 'TODO');
 
 /*
 INSERT INTO Atendimento VALUES (
@@ -347,9 +345,9 @@ INSERT INTO Atendimento VALUES (
 );
 */
 
-INSERT INTO Atendimento VALUES ('123cdxPP', '123456789aaa', '08-AUG-2017');
-INSERT INTO Atendimento VALUES ('321xdcPP', '987654321bbb', '12-AUG-2017');
-INSERT INTO Atendimento VALUES ('70r741PP', '123987456ccc', '30-JUL-2017');
+INSERT INTO Atendimento VALUES ('123cdxAA', '123456789aaa', '08-AUG-2017');
+INSERT INTO Atendimento VALUES ('321xdcAA', '987654321bbb', '12-AUG-2017');
+INSERT INTO Atendimento VALUES ('70r741AA', '123987456ccc', '30-JUL-2017');
 
 /*
 INSERT INTO Tratamento VALUES (
@@ -363,9 +361,9 @@ INSERT INTO Tratamento VALUES (
 );
 */
 
-INSERT INTO MetodoTratamento VALUES (1, );
-INSERT INTO MetodoTratamento VALUES (1, );
-INSERT INTO MetodoTratamento VALUES (1, );
+INSERT INTO Tratamento VALUES (1, 1);
+INSERT INTO Tratamento VALUES (2, 2);
+INSERT INTO Tratamento VALUES (3, 3);
 
 /*
 INSERT INTO Lesao VALUES (	IDLesao NUMBER PRIMARY KEY,
@@ -412,9 +410,9 @@ INSERT INTO Sintoma VALUES (
 );
 */
 
-INSERT INTO Atendimento VALUES ('123cdxPP', '123456789aaa', '08-AUG-2017');
-INSERT INTO Atendimento VALUES ('321xdcPP', '987654321bbb', '12-AUG-2017');
-INSERT INTO Atendimento VALUES ('70r741PP', '123987456ccc', '30-JUL-2017');
+INSERT INTO Sintomas VALUES ('08-AUG-2017', '123456789aaa', '123cdxPP', 'TODO');
+INSERT INTO Sintomas VALUES ('12-AUG-2017', '987654321bbb', '321xdcPP', 'TODO');
+INSERT INTO Sintomas VALUES ('30-JUL-2017', '123987456ccc', '70r741PP', 'TODO');
 
 -- See all tables
 -- SELECT table_name FROM user_tables;

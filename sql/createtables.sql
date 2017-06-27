@@ -16,10 +16,10 @@ CREATE TABLE Preparador (
 	Pessoa CHAR(8) PRIMARY KEY,
 		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE CASCADE,
 
-	Email VARCHAR(20) CHECK (
+	Email VARCHAR(50) CHECK (
 		REGEXP_LIKE(Email, '^[a-zA-Z0-9.\_]+@[a-zA-Z]+(\.[a-z]+)+$')
 	) NOT NULL,
-	Senha VARCHAR(20) NOT NULL 
+	Senha VARCHAR(30) NOT NULL 
 );
 
 CREATE TABLE Modalidade (
@@ -197,10 +197,7 @@ CREATE TABLE MetodoTratamento (
 
 CREATE TABLE Diagnostico (
 	IDDiagnostico NUMBER PRIMARY KEY,
-	DescricaoDiagnostico VARCHAR2(4000) NOT NULL,
-	MetodoTratamento NUMBER,
-		FOREIGN KEY(MetodoTratamento) 
-		REFERENCES MetodoTratamento(IDMetodo) ON DELETE CASCADE
+	DescricaoDiagnostico VARCHAR2(4000) NOT NULL
 );
 
 CREATE TABLE Consulta (
