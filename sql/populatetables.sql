@@ -171,9 +171,9 @@ INSERT INTO DiasTreino VALUES (	RotinaTreino NUMBER,
 );
 */
 
-INSERT INTO DiasTreino VALUES (Sunday, 1, '123cdxPP');
-INSERT INTO DiasTreino VALUES (Monday, 2, '321xdcPP');
-INSERT INTO DiasTreino VALUES (Friday, 3, '70r741PP');
+INSERT INTO DiasTreino VALUES ('Sunday', 1, '123cdxPP');
+INSERT INTO DiasTreino VALUES ('Monday', 2, '321xdcPP');
+INSERT INTO DiasTreino VALUES ('Friday', 3, '70r741PP');
 
 /*
 INSERT INTO Preparo VALUES (	IDPreparo NUMBER,
@@ -204,9 +204,9 @@ INSERT INTO Treino VALUES (	IDTreino NUMBER,
 );
 */
 
-INSERT INTO Treino VALUES (1, 'TODO');
-INSERT INTO Treino VALUES (2, 'TODO');
-INSERT INTO Treino VALUES (3, 'TODO');
+INSERT INTO Treino VALUES (1, 'Musculação');
+INSERT INTO Treino VALUES (2, 'Agachamento');
+INSERT INTO Treino VALUES (3, 'Flexoes');
 
 /*
 INSERT INTO PreparoRotina VALUES (	
@@ -257,9 +257,9 @@ INSERT INTO TesteDoping VALUES (	IDTeste NUMBER PRIMARY KEY,
 );
 */
 
-INSERT INTO TesteDoping VALUES (1, 'TODO', 0);
-INSERT INTO TesteDoping VALUES (2, 'TODO', 1);
-INSERT INTO TesteDoping VALUES (3, 'TODO', 1);
+INSERT INTO TesteDoping VALUES (1, 'Exame de sangue', 0);
+INSERT INTO TesteDoping VALUES (2, 'Exame de urina', 0);
+INSERT INTO TesteDoping VALUES (3, 'Exame de sangue e urina', 0);
 
 /*
 INSERT INTO TestarDoping VALUES (
@@ -281,6 +281,10 @@ INSERT INTO MetodoTratamento VALUES (	IDMetodo NUMBER PRIMARY KEY,
 	DescricaoEfetividade VARCHAR2(4000)
 );
 */
+
+INSERT INTO MetodoTratamento VALUES (1, 'Ingerir medicação receitada', 'Muito efetivo');
+INSERT INTO MetodoTratamento VALUES (2, 'Repouso', 'Pouco Efetivo');
+INSERT INTO MetodoTratamento VALUES (3, 'Placebo', 'Inútil');
 
 /*
 INSERT INTO Diagnostico VALUES (	IDDiagnostico NUMBER PRIMARY KEY,
@@ -329,6 +333,10 @@ INSERT INTO Tratamento VALUES (
 	FOREIGN KEY(MetodoTratamento) REFERENCES MetodoTratamento(IDMetodo) ON DELETE CASCADE
 );
 */
+
+INSERT INTO MetodoTratamento VALUES (1, );
+INSERT INTO MetodoTratamento VALUES (1, );
+INSERT INTO MetodoTratamento VALUES (1, );
 
 /*
 INSERT INTO Lesao VALUES (	IDLesao NUMBER PRIMARY KEY,
