@@ -126,9 +126,9 @@ INSERT INTO Medico VALUES (
 );
 */
 
-INSERT INTO Medico VALUES ('123456789aaa', 396440216, 'Airo medico', 'Guarulhos', 'São Paulo', 'Brasil');
-INSERT INTO Medico VALUES ('987654321bbb', 825500244, 'Gi preparador', 'Ribeirão Preto', 'São Paulo', 'Brasil');
-INSERT INTO Medico VALUES ('123987456ccc', 111222355, 'Jurg preparador', 'São Paulo', 'São Paulo', 'Brasil');
+INSERT INTO Medico VALUES ('123456789aaa', 396440216, 'Airo Médico', 'Guarulhos', 'São Paulo', 'Brasil');
+INSERT INTO Medico VALUES ('987654321bbb', 825500244, 'Gi Médico', 'Ribeirão Preto', 'São Paulo', 'Brasil');
+INSERT INTO Medico VALUES ('123987456ccc', 111222355, 'Jurg Médico', 'São Paulo', 'São Paulo', 'Brasil');
 
 /*
 INSERT INTO TelefoneMedico VALUES (
@@ -205,7 +205,7 @@ INSERT INTO Treino VALUES (	IDTreino NUMBER,
 
 INSERT INTO Treino VALUES (1, 'Musculação');
 INSERT INTO Treino VALUES (2, 'Agachamento');
-INSERT INTO Treino VALUES (3, 'Flexoes');
+INSERT INTO Treino VALUES (3, 'Flexões');
 
 /*
 INSERT INTO PreparoRotina VALUES (	
@@ -363,15 +363,19 @@ INSERT INTO Tratamento VALUES (
 );
 */
 
-INSERT INTO MetodoTratamento VALUES (1, );
-INSERT INTO MetodoTratamento VALUES (1, );
-INSERT INTO MetodoTratamento VALUES (1, );
+INSERT INTO MetodoTratamento VALUES (1, 1);
+INSERT INTO MetodoTratamento VALUES (2, 2);
+INSERT INTO MetodoTratamento VALUES (3, 3);
 
 /*
 INSERT INTO Lesao VALUES (	IDLesao NUMBER PRIMARY KEY,
 	Descricao VARCHAR2(4000) NOT NULL 
 );
 */
+
+INSERT INTO Lesao VALUES (1, 'Fratura no fêmur');
+INSERT INTO Lesao VALUES (2, 'Rompimento do tendão');
+INSERT INTO Lesao VALUES (3, 'Fratura no pé');
 
 /*
 INSERT INTO LesaoMedico VALUES (	
@@ -385,6 +389,10 @@ INSERT INTO LesaoMedico VALUES (
 );
 */
 
+INSERT INTO LesaoMedico VALUES (1, '123456789aaa');
+INSERT INTO LesaoMedico VALUES (2, '987654321bbb');
+INSERT INTO LesaoMedico VALUES (3, '123987456ccc');
+
 /*
 INSERT INTO LesaoAtleta VALUES (
 	Lesao NUMBER, 
@@ -396,6 +404,10 @@ INSERT INTO LesaoAtleta VALUES (
 	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE CASCADE
 );
 */
+
+INSERT INTO LesaoAtleta VALUES (1, '123cdxAA');
+INSERT INTO LesaoAtleta VALUES (2, '321xdcAA');
+INSERT INTO LesaoAtleta VALUES (3, '70r741AA');
 
 /*
 INSERT INTO Sintoma VALUES (
