@@ -50,9 +50,9 @@ INSERT INTO Modalidade VALUES (	IDModalidade NUMBER,
 );
 */
 
-INSERT INTO Modalidade VALUES (1, 'Arremeço de peso', 'TODO');
-INSERT INTO Modalidade VALUES (2, 'Natação', 'TODO');
-INSERT INTO Modalidade VALUES (3, 'Salto triplo', 'TODO');
+INSERT INTO Modalidade VALUES (1, 'Arremeço de peso', 'O objetivo é arremessar o mais longe possível uma bola de metal maciço. Para os homens, o peso tem 7,260 kg; para as mulheres, 4 kg. No arremesso, o atleta mantém o braço flexionado, apoiando o peso junto ao pescoço. Deve permanecer dentro de um círculo com 2,1 metros de diâmetro.');
+INSERT INTO Modalidade VALUES (2, '100 Metros Borboleta', '100 Metros Borboleta é a modalidade de velocidade do estilo mariposa da natação.');
+INSERT INTO Modalidade VALUES (3, 'Salto triplo', 'O Triplo Salto é uma combinação de três saltos sucessivos que terminam com a queda numa caixa de areia. A prova inicia-se com uma corrida de impulso. ');
 
 /*
 INSERT INTO Nacao VALUES (	NomeNacao VARCHAR2(50),
@@ -60,10 +60,14 @@ INSERT INTO Nacao VALUES (	NomeNacao VARCHAR2(50),
 	Continente VARCHAR(16) NOT NULL,
 	NAtletas NUMBER NOT NULL,
 	EsportePrincipal VARCHAR(60),
-	Bandeira BLOB NOT NULL,
-	Hino BLOB NOT NULL 
+	Bandeira BLOB,
+	Hino BLOB
 );
 */
+
+INSERT INTO Nacao VALUES ('Brasil', 'America do Sul', 50, 'Futebol', NULL, NULL);
+INSERT INTO Nacao VALUES ('Alemanha', 'Europa', 60, 'Futebol', NULL, NULL);
+INSERT INTO Nacao VALUES ('Estados Unidos', 'America do Norte', 75, NULL, NULL);
 
 /*
 INSERT INTO Atleta VALUES (
@@ -88,6 +92,10 @@ INSERT INTO Atleta VALUES (
 );
 */
 
+INSERT INTO Atleta VALUES ('123cdxPP', 1, Brasil, '123cdxAA', 100.0, 2.00, 1, 0);
+INSERT INTO Atleta VALUES ('321xdcPP', 1, Alemanha, '321xdcAA', 80.0, 1.80, 1, 0);
+INSERT INTO Atleta VALUES ('70r741PP', 1, Estados Unidos, '70r741AA', 120.0, 1.70, 1, 0);
+
 /*
 INSERT INTO TelefonePessoa VALUES (
 	Pessoa CHAR(8),
@@ -98,7 +106,6 @@ INSERT INTO TelefonePessoa VALUES (
 	Telefone NUMBER CHECK (Telefone > 0)	
 );
 */
-
 /*
 INSERT INTO Medico VALUES (
 	CRM VARCHAR2(12),
@@ -132,6 +139,10 @@ INSERT INTO RotinaTreino VALUES (	IDRotina NUMBER,
 );
 */
 
+INSERT INTO RotinaTreino VALUES (1, '123cdxPP');
+INSERT INTO RotinaTreino VALUES (2, '321xdcPP');
+INSERT INTO RotinaTreino VALUES (3, '70r741PP');
+
 /*
 INSERT INTO DiasTreino VALUES (	RotinaTreino NUMBER,
 	Preparador CHAR(8),
@@ -144,6 +155,10 @@ INSERT INTO DiasTreino VALUES (	RotinaTreino NUMBER,
 		REFERENCES RotinaTreino(IDRotina, Preparador) ON DELETE CASCADE
 );
 */
+
+INSERT INTO DiasTreino VALUES (Sunday, 1, '123cdxPP');
+INSERT INTO DiasTreino VALUES (Monday, 2, '321xdcPP');
+INSERT INTO DiasTreino VALUES (Friday, 3, '70r741PP');
 
 /*
 INSERT INTO Preparo VALUES (	IDPreparo NUMBER,
