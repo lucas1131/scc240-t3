@@ -46,7 +46,7 @@ main:
 	@cd $(BLDDIR)
 	@ln -s `pwd`/src/appInterface/fxml `pwd`/build/appInterface/fxml
 	@# @echo Creating JAR archive...
-	# @jar cvf $(BLDDIR)/$(NAME).jar manifest.mf $(BLDDIR)/*
+	@# @jar cvf $(BLDDIR)/$(NAME).jar manifest.mf $(BLDDIR)/*
 
 # Run directives
 .PHONY: run
