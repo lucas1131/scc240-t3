@@ -65,6 +65,16 @@ INSERT INTO Nacao VALUES (	NomeNacao VARCHAR2(50),
 );
 */
 
+INSERT INTO Nacao VALUES (	
+	NomeNacao VARCHAR2(50),
+	PRIMARY KEY(NomeNacao),
+	Continente VARCHAR(16) NOT NULL,
+	NAtletas NUMBER NOT NULL,
+	EsportePrincipal VARCHAR(60),
+	Bandeira BLOB NOT NULL,
+	Hino BLOB NOT NULL 
+);
+
 /*
 INSERT INTO Atleta VALUES (
 	Preparador CHAR(8),
@@ -99,6 +109,13 @@ INSERT INTO TelefonePessoa VALUES (
 );
 */
 
+INSERT INTO TelefonePessoa VALUES ('123cdxPP', 33334444);
+INSERT INTO TelefonePessoa VALUES ('321xdcPP', 12345678);
+INSERT INTO TelefonePessoa VALUES ('70r741PP', 87654321);
+INSERT INTO TelefonePessoa VALUES ('123cdxAA', 12312312);
+INSERT INTO TelefonePessoa VALUES ('321xdcAA', 66666666);
+INSERT INTO TelefonePessoa VALUES ('70r741AA', 25252525);
+
 /*
 INSERT INTO Medico VALUES (
 	CRM VARCHAR2(12),
@@ -112,6 +129,10 @@ INSERT INTO Medico VALUES (
 );
 */
 
+INSERT INTO Medico VALUES ('123456789aaa', 396440216, 'Airo medico', 'Guarulhos', 'São Paulo', 'Brasil');
+INSERT INTO Medico VALUES ('987654321bbb', 825500244, 'Gi preparador', 'Ribeirão Preto', 'São Paulo', 'Brasil');
+INSERT INTO Medico VALUES ('123987456ccc', 111222355, 'Jurg preparador', 'São Paulo', 'São Paulo', 'Brasil');
+
 /*
 INSERT INTO TelefoneMedico VALUES (
 	Medico VARCHAR2(12),
@@ -122,6 +143,10 @@ INSERT INTO TelefoneMedico VALUES (
 	Telefone NUMBER CHECK (Telefone > 0)
 );
 */
+
+INSERT INTO TelefoneMedico VALUES ('123456789aaa', 44443333);
+INSERT INTO TelefoneMedico VALUES ('987654321bbb', 22224444);
+INSERT INTO TelefoneMedico VALUES ('123987456ccc', 12121212);
 
 /*
 INSERT INTO RotinaTreino VALUES (	IDRotina NUMBER,
@@ -134,7 +159,6 @@ INSERT INTO RotinaTreino VALUES (	IDRotina NUMBER,
 
 /*
 INSERT INTO DiasTreino VALUES (	RotinaTreino NUMBER,
-	Preparador CHAR(8),
 	DiaSemana VARCHAR2(10) CHECK (
 		DiaSemana IN ('Sunday', 'Monday', 'Tuesday', 'Wednessday', 
 					'Thursday', 'Friday', 'Saturnday')
@@ -152,6 +176,10 @@ INSERT INTO Preparo VALUES (	IDPreparo NUMBER,
 );
 */
 
+INSERT INTO Preparo VALUES (1, 'TODO');
+INSERT INTO Preparo VALUES (2, 'TODO');
+INSERT INTO Preparo VALUES (3, 'TODO');
+
 /*
 INSERT INTO Recuperacao VALUES (	IDRecuperacao NUMBER,
 	PRIMARY KEY(IDRecuperacao),
@@ -159,12 +187,20 @@ INSERT INTO Recuperacao VALUES (	IDRecuperacao NUMBER,
 );
 */
 
+INSERT INTO Recuperacao VALUES (1, 'TODO');
+INSERT INTO Recuperacao VALUES (2, 'TODO');
+INSERT INTO Recuperacao VALUES (3, 'TODO');
+
 /*
 INSERT INTO Treino VALUES (	IDTreino NUMBER,
 	PRIMARY KEY(IDTreino),
 	DescricaoTreino VARCHAR2(4000) NOT NULL 
 );
 */
+
+INSERT INTO Treino VALUES (1, 'TODO');
+INSERT INTO Treino VALUES (2, 'TODO');
+INSERT INTO Treino VALUES (3, 'TODO');
 
 /*
 INSERT INTO PreparoRotina VALUES (	
@@ -214,6 +250,10 @@ INSERT INTO TesteDoping VALUES (	IDTeste NUMBER PRIMARY KEY,
 	Resultado NUMBER(1, 0) NOT NULL 
 );
 */
+
+INSERT INTO TesteDoping VALUES (1, 'TODO', 0);
+INSERT INTO TesteDoping VALUES (2, 'TODO', 1);
+INSERT INTO TesteDoping VALUES (3, 'TODO', 1);
 
 /*
 INSERT INTO TestarDoping VALUES (
