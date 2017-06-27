@@ -35,8 +35,8 @@ CREATE TABLE Nacao (
 	Continente VARCHAR(16) NOT NULL,
 	NAtletas NUMBER NOT NULL,
 	EsportePrincipal VARCHAR(60),
-	Bandeira BLOB NOT NULL,
-	Hino BLOB NOT NULL 
+	Bandeira BLOB,
+	Hino BLOB
 );
 
 CREATE TABLE Atleta (
