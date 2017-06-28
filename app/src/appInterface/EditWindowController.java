@@ -18,8 +18,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.Stage;
+import model.DataHandler;
 import model.Diagnostic;
 import model.Treatment;
 
@@ -34,6 +38,7 @@ public class EditWindowController implements Initializable {
     private ArrayList<Treatment> fks;
     private Diagnostic current;
     private ObservableList<Diagnostic> diags;
+    private DataHandler dh;
     MainWindowController mainWindow;
     
     @FXML
@@ -72,22 +77,30 @@ public class EditWindowController implements Initializable {
     @FXML
     private Label treatmentId;
     
-    public void getFks(){
+    public void getFks() throws SQLException{
+        
+        ResultSet rset = dh.getTreatments();
         
         fks = new ArrayList<>();
         
         int i = 0;
-        for(i = 0; i < 10; i++){
-            fks.add(new Treatment(i,"Tratamento do item " + i,"Recuperação do item " + i));
+        while(rset.next()){
+            fks.add(new Treatment(rset.getInt("IdMetodo"), rset.getString("DescricaoMetodo"), rset.getString("DescricaoEfetividade")));
         }
     }
     
-    public void setValues(Diagnostic d, MainWindowController m, ObservableList<Diagnostic> diagnostics){
+    public void setValues(Diagnostic d, MainWindowController m, ObservableList<Diagnostic> diagnostics, DataHandler dh) throws SQLException{
+        this.dh = dh;
+        this.setValues(d,m,diagnostics);
+    }
+    
+    public void setValues(Diagnostic d, MainWindowController m, ObservableList<Diagnostic> diagnostics) throws SQLException{
         this.diags = diagnostics;
         this.setValues(d,m);
     }
     
-    public void setValues(Diagnostic d, MainWindowController m){
+    public void setValues(Diagnostic d, MainWindowController m) throws SQLException{
+        
         this.current = d;
         if(this.current == null){
             inserting = true;
@@ -101,9 +114,9 @@ public class EditWindowController implements Initializable {
         idTextBox.setText("" + current.getId());
         descTextBox.setText(current.getDesc());
         
+        getFks();
         ArrayList<String> tmp = new ArrayList<>();
         
-        System.out.println(fks);
         for(int i = 0; i < fks.size();  i++){
             tmp.add(i,fks.get(i).toString());
         }
@@ -116,9 +129,8 @@ public class EditWindowController implements Initializable {
         
     
     public void closeWindow(){
-        mainWindow.updateTableView();
+        mainWindow.updateTable();
         Stage stage = (Stage)discartChanges.getScene().getWindow();
-        System.out.println(stage);
         stage.close();
     }
     
@@ -128,7 +140,9 @@ public class EditWindowController implements Initializable {
     }
 
     @FXML
-    public void save(ActionEvent event) {
+    public void save(ActionEvent event) throws SQLException {
+        
+        int oldId = Integer.parseInt(idTextBox.getText());
         
         
         current.setId(Integer.parseInt(idTextBox.getText()));
@@ -136,8 +150,13 @@ public class EditWindowController implements Initializable {
         current.setFk(Integer.parseInt(comboFk.getValue()));
         
         if(inserting){
-            diags.add(current);
+            System.out.println("Inserting " + current.getId() + " " + current.getDesc());
+            dh.insertDiagnostic(current.getId(), current.getFk(), current.getDesc());
+        } else {
+            
         }
+        
+        
         
         closeWindow();
     }
@@ -145,11 +164,14 @@ public class EditWindowController implements Initializable {
     @FXML
     void updateTreatmentGridValues(ActionEvent event) {
         int id = Integer.parseInt(comboFk.getValue());
-        System.out.println(id);
         
-        treatmentId.setText(fks.get(id).toString());
-        treatmentDesc.setText(fks.get(id).getDesc());
-        recoveryDesc.setText(fks.get(id).getRecv());
+        int i = 0;
+        for(i = 0; i < fks.size(); i++){
+            if(fks.get(i).getId() == id) break;
+        }
+        treatmentId.setText(fks.get(i).toString());
+        treatmentDesc.setText(fks.get(i).getDesc());
+        recoveryDesc.setText(fks.get(i).getRecv());
     }
 
     /**
@@ -158,8 +180,6 @@ public class EditWindowController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        getFks();
-        
     }    
     
 }

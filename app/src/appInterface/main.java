@@ -5,9 +5,7 @@
  */
 package appInterface;
 
-import java.sql.SQLException;
-import java.sql.Connection;
-import java.sql.Statement;
+import model.DataHandler;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -37,8 +35,10 @@ public class main extends Application {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
+
         // Test.stabilishConnection();
         
         // DataHandler dh = new DataHandler();
