@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.*;
+import org.apache.pdfbox.pdmodel.font.*;
 
 /**
  *
@@ -41,23 +42,22 @@ public class main extends Application {
 
         // Test.stabilishConnection();
         
-        // DataHandler dh = new DataHandler();
-        // dh.getDBConnection();
+        DataHandler dh = new DataHandler();
+        dh.getDBConnection();
                 
         createPdf("reports/teste.pdf", "Teste doc.");
-        // launch(args);
+        launch(args);
     }
 
     public static void createPdf(String path, String text) throws Exception {
         
         PDDocument doc = new PDDocument();
         PDPage pg = new PDPage();
-        PDFont font = PDTrueTypeFont.loadTTF(document, "Arial.ttf");
         doc.addPage(pg);
 
         PDPageContentStream contentStream = new PDPageContentStream(doc, pg);
 
-        contentStream.setFont(font, 18);
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 18);
 
         contentStream.beginText();
         contentStream.newLineAtOffset(25, 700);
