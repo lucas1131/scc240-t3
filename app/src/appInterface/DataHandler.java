@@ -12,7 +12,9 @@ import oracle.jdbc.pool.OracleDataSource;
 
 /**
  *
- * @author jureg
+ * @author Rafael Augusto Monteiro - 9293095
+ * @author Giovanna Oliveira Guimarães - 9293693
+ * @author Lucas Alexandre Soares - 9293265
  */
 public class DataHandler{
 
