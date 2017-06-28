@@ -35,9 +35,6 @@ public class DataHandler{
         try {
             System.out.println("Attempting cnnection!");
             this.conn = ds.getConnection(USER, PASSWORD);
-
-            System.out.println("Connection succeded.");
-
         } catch (SQLException e) {
             
             System.out.println("Failed to connect.");
