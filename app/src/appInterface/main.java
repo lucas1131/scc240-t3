@@ -15,6 +15,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import org.apache.pdfbox.pdmodel.*;
+import org.apache.pdfbox.*;
+
 /**
  *
  * @author jureg
@@ -38,9 +41,33 @@ public class main extends Application {
     public static void main(String[] args) throws Exception {
         // Test.stabilishConnection();
         
-        DataHandler dh = new DataHandler();
-        dh.getDBConnection();
+        // DataHandler dh = new DataHandler();
+        // dh.getDBConnection();
                 
-        launch(args);
+        createPdf("reports/teste.pdf", "Teste doc.");
+        // launch(args);
+    }
+
+    public static void createPdf(String path, String text) throws Exception {
+        
+        PDDocument doc = new PDDocument();
+        PDPage pg = new PDPage();
+        PDFont font = PDTrueTypeFont.loadTTF(document, "Arial.ttf");
+        doc.addPage(pg);
+
+        PDPageContentStream contentStream = new PDPageContentStream(doc, pg);
+
+        contentStream.setFont(font, 18);
+
+        contentStream.beginText();
+        contentStream.newLineAtOffset(25, 700);
+
+        contentStream.showText(text);
+
+        contentStream.endText();
+        contentStream.close();
+
+        doc.save(path);
+        doc.close();
     }
 }

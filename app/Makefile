@@ -25,7 +25,7 @@ SRC=$(shell find -name "*.java")
 CC=javac
 CFLAGS=
 
-CLASSPATH=.:$(BLDDIR):$(BLDDIR)/*:$(LIBDIR)/*
+CLASSPATH=.:$(BLDDIR):$(BLDDIR)/*:$(LIBDIR)/*:/usr/share/pdfbox/pdfbox.jar
 
 USER_LIBS=
 DEFAULT_LIBS=
@@ -86,6 +86,10 @@ git-show:
 
 sense:
 	$(error Doesnt make sense)
+
+dorifto:
+	cat DEJAVU
+	$(error todo)
 
 .PHONY: readme
 readme: checkname
