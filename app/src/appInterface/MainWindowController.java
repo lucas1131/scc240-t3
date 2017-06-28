@@ -4,14 +4,13 @@
 
 package appInterface;
 
+import model.DataHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,16 +24,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Diagnostic;
-import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import oracle.jdbc.pool.OracleDataSource;
 
 public class MainWindowController {
     
-    public List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
+    public List<Diagnostic> diagnostics = new ArrayList<>();
     public ObservableList<Diagnostic> observableDiagnostics;
+    private DataHandler dh;
     
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -65,7 +64,6 @@ public class MainWindowController {
 
     @FXML
     private Button updateRegistryButton;
-
     
     @FXML
     private AnchorPane mainPane;
@@ -74,11 +72,22 @@ public class MainWindowController {
         tableView.refresh();
     }
     
-    
     public void getDiagnostics(){
         
-        //get stuff
-        observableDiagnostics.add(new Diagnostic(10,10,"Teste"));
+        ResultSet rset = null;
+        try {
+            rset = dh.getDiagnostics();
+        } catch (SQLException ex) {
+            return;
+        }
+        
+        try {
+            while(rset.next()){
+                observableDiagnostics.add(new Diagnostic(rset.getInt("IDDiagnostico"),rset.getInt("MetodoTratamento"),rset.getString("DescricaoDiagnostico")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
@@ -110,7 +119,7 @@ public class MainWindowController {
     }
     
     @FXML
-    void insertInTable() throws IOException {
+    void insertInTable() throws IOException, SQLException {
         
         Parent root;
         
@@ -124,19 +133,22 @@ public class MainWindowController {
         stage.setScene(new Scene(root));
         
         EditWindowController editController = editLoader.<EditWindowController>getController();
-        editController.setValues(null, this, observableDiagnostics);
+        editController.setValues(null, this, observableDiagnostics, dh);
         
         stage.show();
     }
     
     @FXML
-    void removeTableSelection(){
+    void removeTableSelection() throws SQLException{
         Diagnostic current = tableView.getSelectionModel().getSelectedItem();
+        
+        dh.deleteDiagnostic(current.getId());
+        
         observableDiagnostics.remove(current);
     }
     
     @FXML
-    void editSelectedRow() throws IOException{
+    void editSelectedRow() throws IOException, SQLException{
         
         Diagnostic current = tableView.getSelectionModel().getSelectedItem();
         
@@ -155,7 +167,7 @@ public class MainWindowController {
 
         
         EditWindowController editController = editLoader.<EditWindowController>getController();
-        editController.setValues(current, this);
+        editController.setValues(current, this, null,  dh);
         
         stage.show();
     }
@@ -164,6 +176,9 @@ public class MainWindowController {
     void initialize() throws IOException, SQLException {
         
         this.diagnostics = new ArrayList<>();
+        
+        dh = new DataHandler();
+        dh.getDBConnection();
         
         //prepara a tabela para exibir os dados de observableDiagnostics
         prepareTableView();
