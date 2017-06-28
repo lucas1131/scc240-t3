@@ -39,7 +39,7 @@ CREATE TABLE Pessoa (
 
 CREATE TABLE Preparador (
 	Pessoa CHAR(8) PRIMARY KEY,
-		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE CASCADE,
+		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE SET NULL,
 	Email VARCHAR(50) CHECK (
 		REGEXP_LIKE(Email, '^[a-zA-Z0-9.\_]+@[a-zA-Z]+(\.[a-z]+)+$')
 	) NOT NULL,
@@ -65,14 +65,14 @@ CREATE TABLE Nacao (
 
 CREATE TABLE Atleta (
 	Preparador CHAR(8),
-		FOREIGN KEY (Preparador) REFERENCES Preparador(Pessoa) ON DELETE CASCADE,
+		FOREIGN KEY (Preparador) REFERENCES Preparador(Pessoa) ON DELETE SET NULL,
 	Modalidade NUMBER,
-		FOREIGN KEY (Modalidade) REFERENCES Modalidade(IDModalidade) ON DELETE CASCADE,
+		FOREIGN KEY (Modalidade) REFERENCES Modalidade(IDModalidade) ON DELETE SET NULL,
 	Nacao VARCHAR2(50),
-		FOREIGN KEY (Nacao) REFERENCES Nacao(NomeNacao) ON DELETE CASCADE,
+		FOREIGN KEY (Nacao) REFERENCES Nacao(NomeNacao) ON DELETE SET NULL,
 	Pessoa CHAR(8),
 		PRIMARY KEY(Pessoa),
-		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE CASCADE,
+		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE SET NULL,
 	Peso NUMBER CHECK (Peso > 0) NOT NULL,
 	Altura NUMBER CHECK (Altura > 0) NOT NULL,
 	Regularidade NUMBER(1, 0) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE Atleta (
 
 CREATE TABLE TelefonePessoa (
 	Pessoa CHAR(8),
-		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE CASCADE,
+		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE SET NULL,
 	PRIMARY KEY(Pessoa, Telefone),
 	Telefone NUMBER CHECK (Telefone > 0)	
 );
@@ -98,7 +98,7 @@ CREATE TABLE Medico (
 
 CREATE TABLE TelefoneMedico (
 	Medico VARCHAR2(12),
-		FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE CASCADE,
+		FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE SET NULL,
 	PRIMARY KEY(Medico, Telefone),
 	Telefone NUMBER CHECK (Telefone > 0)
 );
@@ -107,7 +107,7 @@ CREATE TABLE RotinaTreino (
 	IDRotina NUMBER,
 	Preparador CHAR(8),
 	PRIMARY KEY(IDRotina, Preparador),
-	FOREIGN KEY(Preparador) REFERENCES Preparador(Pessoa) ON DELETE CASCADE,
+	FOREIGN KEY(Preparador) REFERENCES Preparador(Pessoa) ON DELETE SET NULL,
 	Duracao NUMBER CHECK (Duracao > 0) NOT NULL 
 );
 
@@ -120,7 +120,7 @@ CREATE TABLE DiasTreino (
 	),
 	PRIMARY KEY(RotinaTreino, DiaSemana),
 	FOREIGN KEY(RotinaTreino, Preparador) 
-		REFERENCES RotinaTreino(IDRotina, Preparador) ON DELETE CASCADE
+		REFERENCES RotinaTreino(IDRotina, Preparador) ON DELETE SET NULL
 );
 
 CREATE TABLE Preparo (
@@ -150,8 +150,8 @@ CREATE TABLE PreparoRotina (
 	PRIMARY KEY(RotinaTreino, Preparo),
 	FOREIGN KEY(RotinaTreino, Preparador) 
 		REFERENCES RotinaTreino(IDRotina, Preparador) 
-		ON DELETE CASCADE,
-	FOREIGN KEY(Preparo) REFERENCES Preparo(IDPreparo) ON DELETE CASCADE
+		ON DELETE SET NULL,
+	FOREIGN KEY(Preparo) REFERENCES Preparo(IDPreparo) ON DELETE SET NULL
 );
 
 CREATE TABLE RecuperacaoRotina (
@@ -163,8 +163,8 @@ CREATE TABLE RecuperacaoRotina (
 	PRIMARY KEY(RotinaTreino, Recuperacao),
 	FOREIGN KEY(RotinaTreino, Preparador) 
 		REFERENCES RotinaTreino(IDRotina, Preparador) 
-		ON DELETE CASCADE,
-	FOREIGN KEY(Recuperacao) REFERENCES Recuperacao(IDRecuperacao) ON DELETE CASCADE
+		ON DELETE SET NULL,
+	FOREIGN KEY(Recuperacao) REFERENCES Recuperacao(IDRecuperacao) ON DELETE SET NULL
 );
 
 CREATE TABLE TreinoRotina (
@@ -176,8 +176,8 @@ CREATE TABLE TreinoRotina (
 	PRIMARY KEY(RotinaTreino, Treino),
 	FOREIGN KEY(RotinaTreino, Preparador) 
 		REFERENCES RotinaTreino(IDRotina, Preparador) 
-		ON DELETE CASCADE,
-	FOREIGN KEY(Treino) REFERENCES Treino(IDTreino) ON DELETE CASCADE
+		ON DELETE SET NULL,
+	FOREIGN KEY(Treino) REFERENCES Treino(IDTreino) ON DELETE SET NULL
 );
 
 CREATE TABLE TesteDoping (
@@ -191,9 +191,9 @@ CREATE TABLE TestarDoping (
 	Atleta CHAR(8), 
 	TesteDoping NUMBER,
 	PRIMARY KEY(Medico, Atleta, TesteDoping),
-	FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE CASCADE,
-	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE CASCADE,
-	FOREIGN KEY(TesteDoping) REFERENCES TesteDoping(IDTeste) ON DELETE CASCADE
+	FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE SET NULL,
+	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE SET NULL,
+	FOREIGN KEY(TesteDoping) REFERENCES TesteDoping(IDTeste) ON DELETE SET NULL
 );
 
 CREATE TABLE MetodoTratamento (
@@ -214,8 +214,8 @@ CREATE TABLE Consulta (
 	Diagnostico NUMBER,
 	DescricaoConsulta VARCHAR(4000),
 	PRIMARY KEY(Atleta, Medico, Data),
-	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE CASCADE,
-	FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE CASCADE,
+	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE SET NULL,
+	FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE SET NULL,
 	FOREIGN KEY(Diagnostico) REFERENCES Diagnostico(IDDiagnostico) ON DELETE SET NULL
 );
 
@@ -226,15 +226,15 @@ CREATE TABLE Atendimento (
 	PRIMARY KEY(AtletaConsulta, MedicoConsulta, DataConsulta),
 	FOREIGN KEY(AtletaConsulta, MedicoConsulta, DataConsulta) 
 		REFERENCES Consulta(Atleta, Medico, Data)
-		ON DELETE CASCADE
+		ON DELETE SET NULL
 );
 
 CREATE TABLE Tratamento (
 	Diagnostico NUMBER,
 	MetodoTratamento NUMBER,
 	PRIMARY KEY(Diagnostico, MetodoTratamento),
-	FOREIGN KEY(Diagnostico) REFERENCES Diagnostico(IDDiagnostico) ON DELETE CASCADE, 
-	FOREIGN KEY(MetodoTratamento) REFERENCES MetodoTratamento(IDMetodo) ON DELETE CASCADE
+	FOREIGN KEY(Diagnostico) REFERENCES Diagnostico(IDDiagnostico) ON DELETE SET NULL, 
+	FOREIGN KEY(MetodoTratamento) REFERENCES MetodoTratamento(IDMetodo) ON DELETE SET NULL
 );
 
 CREATE TABLE Lesao (
@@ -255,8 +255,8 @@ CREATE TABLE LesaoAtleta (
 	Lesao NUMBER, 
 	Atleta CHAR(8),
 	PRIMARY KEY(Lesao, Atleta),
-	FOREIGN KEY(Lesao) REFERENCES Lesao(IDLesao) ON DELETE CASCADE,
-	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE CASCADE
+	FOREIGN KEY(Lesao) REFERENCES Lesao(IDLesao) ON DELETE SET NULL,
+	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE SET NULL
 );
 
 CREATE TABLE Sintoma (
@@ -267,25 +267,31 @@ CREATE TABLE Sintoma (
 	PRIMARY KEY(DataConsulta, MedicoConsulta, AtletaConsulta),
 	FOREIGN KEY(DataConsulta, MedicoConsulta, AtletaConsulta) 
 		REFERENCES Consulta(Data, Medico, Atleta) 
-		ON DELETE CASCADE
+		ON DELETE SET NULL
 );
 
 -- See all tables
 -- SELECT table_name FROM user_tables;
 
+
+
 INSERT INTO Pessoa VALUES ('123cdxPP', 'Airo preparador', 'Guarulhos', 'São Paulo', 'Brasil', 'M', '13-DEC-1996');
 INSERT INTO Pessoa VALUES ('321xdcPP', 'Gi preparador', 'Ribeirão Preto', 'São Paulo', 'Brasil', 'F', '28-DEC-1996');
-INSERT INTO Pessoa VALUES ('70r741PP', 'Jurg preparador', 'São Paulo', 'São Paulo', 'Brasil', 'M', '13-DEC-1996');
+INSERT INTO Pessoa VALUES ('70r741PP', 'Jurg preparador', 'São Paulo', 'São Paulo', 'Brasil', 'M', '26-NOV-1995');
 INSERT INTO Pessoa VALUES ('123cdxAA', 'Airo atleta', 'Guarulhos', 'São Paulo', 'Brasil', 'M', '13-DEC-1996');
 INSERT INTO Pessoa VALUES ('321xdcAA', 'Gi atleta', 'Ribeirão Preto', 'São Paulo', 'Brasil', 'F', '28-DEC-1996');
-INSERT INTO Pessoa VALUES ('70r741AA', 'Jurg atleta', 'São Paulo', 'São Paulo', 'Brasil', 'M', '13-DEC-1996');
+INSERT INTO Pessoa VALUES ('70r741AA', 'Jurg atleta', 'São Paulo', 'São Paulo', 'Brasil', 'M', '26-NOV-1995');
+INSERT INTO Pessoa VALUES ('623cdxAA', 'Airo2 atleta', 'Guarulhos', 'São Paulo', 'Brasil', 'M', '13-DEC-1996');
+INSERT INTO Pessoa VALUES ('621xdcAA', 'Gi2 atleta', 'Ribeirão Preto', 'São Paulo', 'Brasil', 'F', '28-DEC-1996');
+INSERT INTO Pessoa VALUES ('60r741AA', 'Jurg2 atleta', 'São Paulo', 'São Paulo', 'Brasil', 'M', '26-NOV-1995');
 
 INSERT INTO Preparador VALUES ('123cdxPP', 'lucassoares1793@gmail.com', '123456789aA!');
 INSERT INTO Preparador VALUES ('321xdcPP', 'xofanna@gimail.com', '123456789aA@');
 INSERT INTO Preparador VALUES ('70r741PP', 'tortao@jureg.jurg', '123456789aA#');
+
 INSERT INTO Modalidade VALUES (1, 'Arremeço de peso', 'O objetivo é arremessar o mais longe possível uma bola de metal maciço. Para os homens, o peso tem 7,260 kg; para as mulheres, 4 kg. No arremesso, o atleta mantém o braço flexionado, apoiando o peso junto ao pescoço. Deve permanecer dentro de um círculo com 2,1 metros de diâmetro.');
 INSERT INTO Modalidade VALUES (2, '100 Metros Borboleta', '100 Metros Borboleta é a modalidade de velocidade do estilo mariposa da natação.');
-INSERT INTO Modalidade VALUES (3, 'Salto triplo', 'O Triplo Salto é uma combinação de três saltos sucessivos que terminam com a queda numa caixa de areia. A prova inicia-se com uma corrida de impulso. ');
+INSERT INTO Modalidade VALUES (3, 'Salto triplo', 'O Salto Triplo é uma combinação de três saltos sucessivos que terminam com a queda numa caixa de areia. A prova inicia-se com uma corrida de impulso. ');
 
 INSERT INTO Nacao VALUES ('Brasil', 'America do Sul', 50, NULL, NULL, NULL);
 INSERT INTO Nacao VALUES ('Alemanha', 'Europa', 60, 'Futebol', NULL, NULL);
@@ -294,6 +300,9 @@ INSERT INTO Nacao VALUES ('Estados Unidos', 'America do Norte', 75, 'Basquete', 
 INSERT INTO Atleta VALUES ('321xdcPP', 1, 'Brasil', '123cdxAA', 100.0, 2.00, 1, 0);
 INSERT INTO Atleta VALUES ('70r741PP', 2, 'Alemanha', '321xdcAA', 80.0, 1.80, 1, 1);
 INSERT INTO Atleta VALUES ('123cdxPP', 3, 'Estados Unidos', '70r741AA', 120.0, 1.70, 1, 0);	
+INSERT INTO Atleta VALUES ('321xdcPP', 1, 'Brasil', '623cdxAA', 100.0, 2.00, 1, 0);
+INSERT INTO Atleta VALUES ('70r741PP', 2, 'Alemanha', '621xdcAA', 80.0, 1.80, 0, 1);
+INSERT INTO Atleta VALUES ('123cdxPP', 3, 'Estados Unidos', '60r741AA', 120.0, 1.70, 1, 0);	
 
 INSERT INTO TelefonePessoa VALUES ('123cdxPP', 33334444);
 INSERT INTO TelefonePessoa VALUES ('321xdcPP', 12345678);
@@ -301,6 +310,9 @@ INSERT INTO TelefonePessoa VALUES ('70r741PP', 87654321);
 INSERT INTO TelefonePessoa VALUES ('123cdxAA', 12312312);
 INSERT INTO TelefonePessoa VALUES ('321xdcAA', 66666666);
 INSERT INTO TelefonePessoa VALUES ('70r741AA', 25252525);
+INSERT INTO TelefonePessoa VALUES ('623cdxAA', 00312312);
+INSERT INTO TelefonePessoa VALUES ('621xdcAA', 00666666);
+INSERT INTO TelefonePessoa VALUES ('60r741AA', 00252525);
 
 INSERT INTO Medico VALUES ('123456789aaa', 396440216, 'Airo medico', 'Guarulhos', 'São Paulo', 'Brasil');
 INSERT INTO Medico VALUES ('987654321bbb', 825500244, 'Gi medico', 'Ribeirão Preto', 'São Paulo', 'Brasil');
@@ -344,7 +356,7 @@ INSERT INTO TreinoRotina VALUES (3, '70r741PP', 3);
 
 INSERT INTO TesteDoping VALUES (1, 'Exame de sangue', 0);
 INSERT INTO TesteDoping VALUES (2, 'Exame de urina', 0);
-INSERT INTO TesteDoping VALUES (3, 'Exame de sangue e urina', 0);
+INSERT INTO TesteDoping VALUES (3, 'Exame de sangue e urina', 1);
 
 INSERT INTO TestarDoping VALUES ('123456789aaa', '123cdxAA', 1);
 INSERT INTO TestarDoping VALUES ('987654321bbb', '321xdcAA', 2);
@@ -357,14 +369,38 @@ INSERT INTO MetodoTratamento VALUES (3, 'Placebo', 'Inútil');
 INSERT INTO Diagnostico VALUES (1, 'TODO');
 INSERT INTO Diagnostico VALUES (2, 'TODO');
 INSERT INTO Diagnostico VALUES (3, 'TODO');
+INSERT INTO Diagnostico VALUES (4, 'TODO');
+INSERT INTO Diagnostico VALUES (5, 'TODO');
+INSERT INTO Diagnostico VALUES (6, 'TODO');
+INSERT INTO Diagnostico VALUES (7, 'TODO');
+INSERT INTO Diagnostico VALUES (8, 'TODO');
+INSERT INTO Diagnostico VALUES (9, 'TODO');
+INSERT INTO Diagnostico VALUES (10, 'TODO');
+INSERT INTO Diagnostico VALUES (11, 'TODO');
 
-INSERT INTO Consulta VALUES ('08-AUG-2017', '123cdxAA', '123456789aaa', 1, 'O Atleta de passaporte 123cdxPP foi atendido pelo médico de CRM 123456789aaa. Quadro não urgente');
-INSERT INTO Consulta VALUES ('12-AUG-2017', '321xdcAA', '987654321bbb', 2, 'O Atleta de passaporte 321xdcPP foi atendido pelo médico de CRM 987654321bbb. Quadro urgente');
-INSERT INTO Consulta VALUES ('30-JUL-2017', '70r741AA', '123987456ccc', 3, 'O Atleta de passaporte 321xdcPP foi atendido pelo médico de CRM 123987456ccc. Quadro não urgente');
+INSERT INTO Consulta VALUES ('08-AUG-2017', '123cdxAA', '123456789aaa', 1, 'Quadro não urgente');
+INSERT INTO Consulta VALUES ('13-AUG-2017', '123cdxAA', '123456789aaa', 2, 'Quadro não urgente');
+INSERT INTO Consulta VALUES ('20-AUG-2017', '123cdxAA', '123456789aaa', 3, 'Quadro não urgente');
+INSERT INTO Consulta VALUES ('21-AUG-2017', '123cdxAA', '987654321bbb', 4, 'Quadro não urgente');
+INSERT INTO Consulta VALUES ('12-AUG-2017', '321xdcAA', '987654321bbb', 5, 'Quadro urgente');
+INSERT INTO Consulta VALUES ('22-AUG-2017', '321xdcAA', '987654321bbb', 6, 'Quadro urgente');
+INSERT INTO Consulta VALUES ('30-JUL-2017', '70r741AA', '123987456ccc', 7, 'Quadro não urgente');
+INSERT INTO Consulta VALUES ('18-AUG-2017', '623cdxAA', '123456789aaa', 8, 'Quadro não urgente');
+INSERT INTO Consulta VALUES ('20-AUG-2017', '623cdxAA', '123987456ccc', 9, 'Quadro não urgente');
+INSERT INTO Consulta VALUES ('13-AUG-2017', '621xdcAA', '987654321bbb', 10, 'Quadro urgente');
+INSERT INTO Consulta VALUES ('29-JUL-2017', '60r741AA', '123987456ccc', 11, 'Quadro não urgente');
 
 INSERT INTO Atendimento VALUES ('123cdxAA', '123456789aaa', '08-AUG-2017');
+INSERT INTO Atendimento VALUES ('123cdxAA', '123456789aaa', '13-AUG-2017');
+INSERT INTO Atendimento VALUES ('123cdxAA', '123456789aaa', '20-AUG-2017');
+INSERT INTO Atendimento VALUES ('123cdxAA', '987654321bbb', '21-AUG-2017');
 INSERT INTO Atendimento VALUES ('321xdcAA', '987654321bbb', '12-AUG-2017');
+INSERT INTO Atendimento VALUES ('321xdcAA', '987654321bbb', '22-AUG-2017');
 INSERT INTO Atendimento VALUES ('70r741AA', '123987456ccc', '30-JUL-2017');
+INSERT INTO Atendimento VALUES ('623cdxAA', '123456789aaa', '18-AUG-2017');
+INSERT INTO Atendimento VALUES ('623cdxAA', '123987456ccc', '20-AUG-2017');
+INSERT INTO Atendimento VALUES ('621xdcAA', '987654321bbb', '13-AUG-2017');
+INSERT INTO Atendimento VALUES ('60r741AA', '123987456ccc', '29-JUL-2017');
 
 INSERT INTO Tratamento VALUES (1, 1);
 INSERT INTO Tratamento VALUES (2, 2);
@@ -382,8 +418,18 @@ INSERT INTO LesaoAtleta VALUES (1, '123cdxAA');
 INSERT INTO LesaoAtleta VALUES (2, '321xdcAA');
 INSERT INTO LesaoAtleta VALUES (3, '70r741AA');
 
-INSERT INTO Sintoma VALUES ('08-AUG-2017', '123456789aaa', '123cdxAA', 'TODO');
-INSERT INTO Sintoma VALUES ('12-AUG-2017', '987654321bbb', '321xdcAA', 'TODO');
-INSERT INTO Sintoma VALUES ('30-JUL-2017', '123987456ccc', '70r741AA', 'TODO');
+INSERT INTO Sintoma VALUES ('08-AUG-2017', '123456789aaa', '123cdxAA', 'Tosse');
+INSERT INTO Sintoma VALUES ('08-AUG-2017', '123456789aaa', '123cdxAA', 'Febre');
+INSERT INTO Sintoma VALUES ('30-JUL-2017', '123987456ccc', '70r741AA', 'Dor no corpo');
+INSERT INTO Sintoma VALUES ('08-AUG-2017', '123456789aaa', '123cdxAA', 'Dor de Cabeça');
+INSERT INTO Sintoma VALUES ('20-AUG-2017', '123456789aaa', '123cdxAA', 'Nenhum');
+INSERT INTO Sintoma VALUES ('21-AUG-2017', '987654321bbb', '123cdxAA', 'Doença X');
+INSERT INTO Sintoma VALUES ('12-AUG-2017', '987654321bbb', '321xdcAA', 'Inflamação');
+INSERT INTO Sintoma VALUES ('22-AUG-2017', '987654321bbb', '321xdcAA', 'Doença Y');
+INSERT INTO Sintoma VALUES ('30-JUL-2017', '123987456ccc', '70r741AA', 'Doença X');
+INSERT INTO Sintoma VALUES ('18-AUG-2017', '123456789aaa', '623cdxAA', 'Doença X');
+INSERT INTO Sintoma VALUES ('20-AUG-2017', '123987456ccc', '623cdxAA', 'Doença X');
+INSERT INTO Sintoma VALUES ('13-AUG-2017', '987654321bbb', '621xdcAA', 'Doença Y');
+INSERT INTO Sintoma VALUES ('29-JUL-2017', '123987456ccc', '60r741AA', 'Doença X');
 
 COMMIT;
