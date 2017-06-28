@@ -18,8 +18,9 @@ import org.apache.pdfbox.*;
 import org.apache.pdfbox.pdmodel.font.*;
 
 /**
- *
- * @author jureg
+ * @author Rafael Augusto Monteiro - 9293095
+ * @author Giovanna Oliveira Guimarães - 9293693
+ * @author Lucas Alexandre Soares - 9293265
  */
 public class main extends Application {
     
@@ -57,7 +58,7 @@ public class main extends Application {
 
         PDPageContentStream contentStream = new PDPageContentStream(doc, pg);
 
-        contentStream.setFont(PDType1Font.TIMES_ROMAN, 18);
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
 
         contentStream.beginText();
         contentStream.newLineAtOffset(25, 700);

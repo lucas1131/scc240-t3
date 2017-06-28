@@ -29,11 +29,11 @@ DROP TABLE Pessoa;
 CREATE TABLE Pessoa (
 	Passaporte CHAR(8),
 		PRIMARY KEY (Passaporte),
-	Nome VARCHAR(30) ,
-	Cidade VARCHAR(30) ,
-	Estado VARCHAR(30) ,
-	Pais VARCHAR(30) ,
-	Sexo CHAR(1) ,
+	Nome VARCHAR(30) NOT NULL,
+	Cidade VARCHAR(30) NOT NULL,
+	Estado VARCHAR(30) NOT NULL,
+	Pais VARCHAR(30) NOT NULL,
+	Sexo CHAR(1) NOT NULL,
 	DataNascimento DATE
 );
 
@@ -42,22 +42,22 @@ CREATE TABLE Preparador (
 		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE SET NULL,
 	Email VARCHAR(50) CHECK (
 		REGEXP_LIKE(Email, '^[a-zA-Z0-9.\_]+@[a-zA-Z]+(\.[a-z]+)+$')
-	) ,
-	Senha VARCHAR(30)  
+	) NOT NULL,
+	Senha VARCHAR(30) NOT NULL 
 );
 
 CREATE TABLE Modalidade (
 	IDModalidade NUMBER,
 	PRIMARY KEY(IDModalidade),
-	Nome VARCHAR2(30) ,
-	Descricao VARCHAR2(4000)  
+	Nome VARCHAR2(30) NOT NULL,
+	Descricao VARCHAR2(4000) NOT NULL 
 );
 
 CREATE TABLE Nacao (
 	NomeNacao VARCHAR2(50),
 	PRIMARY KEY(NomeNacao),
-	Continente VARCHAR(16) ,
-	NAtletas NUMBER ,
+	Continente VARCHAR(16) NOT NULL,
+	NAtletas NUMBER NOT NULL,
 	EsportePrincipal VARCHAR(60),
 	Bandeira BLOB,
 	Hino BLOB
@@ -73,10 +73,10 @@ CREATE TABLE Atleta (
 	Pessoa CHAR(8),
 		PRIMARY KEY(Pessoa),
 		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE SET NULL,
-	Peso NUMBER CHECK (Peso > 0) ,
-	Altura NUMBER CHECK (Altura > 0) ,
-	Regularidade NUMBER(1, 0) ,
-	NPunicoes NUMBER CHECK (NPunicoes >= 0) 
+	Peso NUMBER CHECK (Peso > 0) NOT NULL,
+	Altura NUMBER CHECK (Altura > 0) NOT NULL,
+	Regularidade NUMBER(1, 0) NOT NULL,
+	NPunicoes NUMBER CHECK (NPunicoes >= 0) NOT NULL
 );
 
 CREATE TABLE TelefonePessoa (
@@ -89,11 +89,11 @@ CREATE TABLE TelefonePessoa (
 CREATE TABLE Medico (
 	CRM VARCHAR2(12),
 		PRIMARY KEY (CRM),
-	Identidade NUMBER(9, 0)  ,
-	Nome VARCHAR2(100) ,
-	Cidade VARCHAR2(100) ,
-	Estado VARCHAR2(100) ,
-	Pais VARCHAR2(100)  
+	Identidade NUMBER(9, 0) NOT NULL ,
+	Nome VARCHAR2(100) NOT NULL,
+	Cidade VARCHAR2(100) NOT NULL,
+	Estado VARCHAR2(100) NOT NULL,
+	Pais VARCHAR2(100) NOT NULL 
 );
 
 CREATE TABLE TelefoneMedico (
@@ -108,7 +108,7 @@ CREATE TABLE RotinaTreino (
 	Preparador CHAR(8),
 	PRIMARY KEY(IDRotina, Preparador),
 	FOREIGN KEY(Preparador) REFERENCES Preparador(Pessoa) ON DELETE SET NULL,
-	Duracao NUMBER CHECK (Duracao > 0)  
+	Duracao NUMBER CHECK (Duracao > 0) NOT NULL 
 );
 
 CREATE TABLE DiasTreino (
@@ -126,19 +126,19 @@ CREATE TABLE DiasTreino (
 CREATE TABLE Preparo (
 	IDPreparo NUMBER,
 	PRIMARY KEY(IDPreparo),
-	DescricaoPreparo VARCHAR2(4000)  
+	DescricaoPreparo VARCHAR2(4000) NOT NULL 
 );
 
 CREATE TABLE Recuperacao (
 	IDRecuperacao NUMBER,
 	PRIMARY KEY(IDRecuperacao),
-	DescricaoFisioterapia VARCHAR2(4000)  
+	DescricaoFisioterapia VARCHAR2(4000) NOT NULL 
 );
 
 CREATE TABLE Treino (
 	IDTreino NUMBER,
 	PRIMARY KEY(IDTreino),
-	DescricaoTreino VARCHAR2(4000)  
+	DescricaoTreino VARCHAR2(4000) NOT NULL 
 );
 
 CREATE TABLE PreparoRotina (
@@ -183,7 +183,7 @@ CREATE TABLE TreinoRotina (
 CREATE TABLE TesteDoping (
 	IDTeste NUMBER PRIMARY KEY,
 	Descricao VARCHAR2(4000),
-	Resultado NUMBER(1, 0)  
+	Resultado NUMBER(1, 0) NOT NULL 
 );
 
 CREATE TABLE TestarDoping (
@@ -198,13 +198,13 @@ CREATE TABLE TestarDoping (
 
 CREATE TABLE MetodoTratamento (
 	IDMetodo NUMBER PRIMARY KEY,
-	DescricaoMetodo VARCHAR2(4000) ,
+	DescricaoMetodo VARCHAR2(4000) NOT NULL,
 	DescricaoEfetividade VARCHAR2(4000)
 );
 
 CREATE TABLE Diagnostico (
 	IDDiagnostico NUMBER PRIMARY KEY,
-	DescricaoDiagnostico VARCHAR2(4000) 
+	DescricaoDiagnostico VARCHAR2(4000) NOT NULL
 );
 
 CREATE TABLE Consulta (
@@ -239,7 +239,7 @@ CREATE TABLE Tratamento (
 
 CREATE TABLE Lesao (
 	IDLesao NUMBER PRIMARY KEY,
-	Descricao VARCHAR2(4000)  
+	Descricao VARCHAR2(4000) NOT NULL 
 );
 
 CREATE TABLE LesaoMedico (

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2017.5.17)  25 JUN 2017 16:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2017.5.17)  27 JUN 2017 23:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -781,21 +781,53 @@ Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \@thisruleclass=\count181
 \@lastruleclass=\count182
 \@thisrulewidth=\dimen192
-) (./mrel.aux)
+) (./mrel.aux
+! Missing \endcsname inserted.
+<to be read again> 
+                   \unhbox 
+l.10 ...label{Rela\IeC {\c c}\IeC {\~o}es}{{1}{4}}
+                                                  
+? 
+
+LaTeX Warning: Label `Rela\IeC {\c c}\IeC {\~o}es' multiply defined.
+
+! Missing \endcsname inserted.
+<to be read again> 
+                   \unhbox 
+l.10 ...label{Rela\IeC {\c c}\IeC {\~o}es}{{1}{4}}
+                                                  
+? 
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.10 ...label{Rela\IeC {\c c}\IeC {\~o}es}{{1}{4}}
+                                                  
+? 
+! Extra \endcsname.
+\@namedef ...xpandafter \def \csname #1\endcsname 
+                                                  
+l.10 ...label{Rela\IeC {\c c}\IeC {\~o}es}{{1}{4}}
+                                                  
+? 
+)
 \openout1 = `mrel.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -832,7 +864,7 @@ LaTeX Font Info:    ... okay on input line 115.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 115.
+LaTeX Info: Redefining \selectfont on input line 90.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -896,72 +928,68 @@ e
 <logo-header.png, id=1, 228.3732pt x 101.6598pt>
 File: logo-header.png Graphic file (type png)
  <use logo-header.png>
-Package pdftex.def Info: logo-header.png used on input line 118.
+Package pdftex.def Info: logo-header.png used on input line 93.
 (pdftex.def)             Requested size: 115.054pt x 51.21504pt.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo-header.png>] (./mre
-l.toc
-[2])
+l.toc)
 \tf@toc=\write3
 \openout3 = `mrel.toc'.
 
- [3] [4] [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 263--265
+[2]
 
- []
-
-[7]
-Overfull \hbox (25.19821pt too wide) in paragraph at lines 304--307
-\OT1/cmr/m/n/12 A al-ter-na-tiva es-co-lhida foi ma-pear dias de treino em ta-b
-e-las se-pa-ra-das. \OT1/cmr/bx/n/12 Modalidade\OT1/cmr/m/n/12 ($[]$,
- []
+LaTeX Warning: File `Relacoes.png' not found on input line 105.
 
 
-Overfull \hbox (32.38492pt too wide) in paragraph at lines 320--321
-[]\OT1/cmr/bx/n/12 Atendimento\OT1/cmr/m/n/12 ($[]$ (fk), $[]$ (fk), $[]$ (fk),
- $[]$ (fk), $[]$
- []
+! Package pdftex.def Error: File `Relacoes.png' not found.
 
-[8]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 377.
-
- (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.105 ...\includegraphics[scale=0.5]{Relacoes.png}
+                                                  
+? 
+[3] (./mrel.aux
+! Missing \endcsname inserted.
+<to be read again> 
+                   \unhbox 
+l.10 \newlabel{Rela\c {c}\~{o}es}{{1}{3}}
+                                         
+? 
+! Extra \endcsname.
+\@newl@bel ... \bbl@tempa \csname #1@#2\endcsname 
+                                                  \def \bbl@tempb {#3}\@safe...
+l.10 \newlabel{Rela\c {c}\~{o}es}{{1}{3}}
+                                         
+? 
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 377.
 
-Underfull \hbox (badness 10000) in paragraph at lines 369--393
+LaTeX Warning: There were multiply-defined labels.
 
- []
-
-[9] [10] [11] [12] [13] [14] (./mrel.aux) ) 
+ ) 
 Here is how much of TeX's memory you used:
- 11901 strings out of 493013
- 212944 string characters out of 6139317
- 279708 words of memory out of 5000000
- 15318 multiletter control sequences out of 15000+600000
- 10882 words of font info for 39 fonts, out of 8000000 for 9000
+ 11848 strings out of 493013
+ 212172 string characters out of 6139317
+ 272661 words of memory out of 5000000
+ 15267 multiletter control sequences out of 15000+600000
+ 10704 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,13n,26p,10339b,413s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/iron/.texlive/texmf-var/font
-s/pk/ljfour/public/cm/cmsy10.720pk> </home/iron/.texlive/texmf-var/fonts/pk/ljf
-our/public/cm/cmsy8.600pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/publi
-c/cm/cmmi8.600pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmmi
-12.600pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmti12.600pk
-> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.720pk> </home
-/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.600pk> </home/iron/.t
-exlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.864pk> </home/iron/.texlive/t
-exmf-var/fonts/pk/ljfour/public/cm/cmr12.720pk> </home/iron/.texlive/texmf-var/
-fonts/pk/ljfour/public/cm/cmcsc10.600pk> </home/iron/.texlive/texmf-var/fonts/p
-k/ljfour/public/cm/cmcsc10.864pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfou
-r/public/cm/cmr17.864pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi60
-0/cmr12.pk>
-Output written on mrel.pdf (14 pages, 163017 bytes).
+ </home/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmtt12.600pk> </hom
+e/iron/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.720pk> </home/iron/.
+texlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.600pk> </home/iron/.texlive/
+texmf-var/fonts/pk/ljfour/public/cm/cmbx12.864pk> </home/iron/.texlive/texmf-va
+r/fonts/pk/ljfour/public/cm/cmr12.720pk> </home/iron/.texlive/texmf-var/fonts/p
+k/ljfour/public/cm/cmcsc10.600pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfou
+r/public/cm/cmcsc10.864pk> </home/iron/.texlive/texmf-var/fonts/pk/ljfour/publi
+c/cm/cmr17.864pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr12
+.pk>
+Output written on mrel.pdf (3 pages, 85132 bytes).
 PDF statistics:
- 452 PDF objects out of 1000 (max. 8388607)
- 85 compressed objects within 1 object stream
+ 223 PDF objects out of 1000 (max. 8388607)
+ 44 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
