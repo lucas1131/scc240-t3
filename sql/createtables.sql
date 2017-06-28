@@ -11,7 +11,7 @@ CREATE TABLE Pessoa (
 
 CREATE TABLE Preparador (
 	Pessoa CHAR(8) PRIMARY KEY,
-		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE CASCADE,
+		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE SET NULL,
 	Email VARCHAR(50) CHECK (
 		REGEXP_LIKE(Email, '^[a-zA-Z0-9.\_]+@[a-zA-Z]+(\.[a-z]+)+$')
 	) NOT NULL,
@@ -37,14 +37,14 @@ CREATE TABLE Nacao (
 
 CREATE TABLE Atleta (
 	Preparador CHAR(8),
-		FOREIGN KEY (Preparador) REFERENCES Preparador(Pessoa) ON DELETE CASCADE,
+		FOREIGN KEY (Preparador) REFERENCES Preparador(Pessoa) ON DELETE SET NULL,
 	Modalidade NUMBER,
-		FOREIGN KEY (Modalidade) REFERENCES Modalidade(IDModalidade) ON DELETE CASCADE,
+		FOREIGN KEY (Modalidade) REFERENCES Modalidade(IDModalidade) ON DELETE SET NULL,
 	Nacao VARCHAR2(50),
-		FOREIGN KEY (Nacao) REFERENCES Nacao(NomeNacao) ON DELETE CASCADE,
+		FOREIGN KEY (Nacao) REFERENCES Nacao(NomeNacao) ON DELETE SET NULL,
 	Pessoa CHAR(8),
 		PRIMARY KEY(Pessoa),
-		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE CASCADE,
+		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE SET NULL,
 	Peso NUMBER CHECK (Peso > 0) NOT NULL,
 	Altura NUMBER CHECK (Altura > 0) NOT NULL,
 	Regularidade NUMBER(1, 0) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE Atleta (
 
 CREATE TABLE TelefonePessoa (
 	Pessoa CHAR(8),
-		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE CASCADE,
+		FOREIGN KEY (Pessoa) REFERENCES Pessoa(Passaporte) ON DELETE SET NULL,
 	PRIMARY KEY(Pessoa, Telefone),
 	Telefone NUMBER CHECK (Telefone > 0)	
 );
@@ -70,7 +70,7 @@ CREATE TABLE Medico (
 
 CREATE TABLE TelefoneMedico (
 	Medico VARCHAR2(12),
-		FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE CASCADE,
+		FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE SET NULL,
 	PRIMARY KEY(Medico, Telefone),
 	Telefone NUMBER CHECK (Telefone > 0)
 );
@@ -79,7 +79,7 @@ CREATE TABLE RotinaTreino (
 	IDRotina NUMBER,
 	Preparador CHAR(8),
 	PRIMARY KEY(IDRotina, Preparador),
-	FOREIGN KEY(Preparador) REFERENCES Preparador(Pessoa) ON DELETE CASCADE,
+	FOREIGN KEY(Preparador) REFERENCES Preparador(Pessoa) ON DELETE SET NULL,
 	Duracao NUMBER CHECK (Duracao > 0) NOT NULL 
 );
 
@@ -92,7 +92,7 @@ CREATE TABLE DiasTreino (
 	),
 	PRIMARY KEY(RotinaTreino, DiaSemana),
 	FOREIGN KEY(RotinaTreino, Preparador) 
-		REFERENCES RotinaTreino(IDRotina, Preparador) ON DELETE CASCADE
+		REFERENCES RotinaTreino(IDRotina, Preparador) ON DELETE SET NULL
 );
 
 CREATE TABLE Preparo (
@@ -122,8 +122,8 @@ CREATE TABLE PreparoRotina (
 	PRIMARY KEY(RotinaTreino, Preparo),
 	FOREIGN KEY(RotinaTreino, Preparador) 
 		REFERENCES RotinaTreino(IDRotina, Preparador) 
-		ON DELETE CASCADE,
-	FOREIGN KEY(Preparo) REFERENCES Preparo(IDPreparo) ON DELETE CASCADE
+		ON DELETE SET NULL,
+	FOREIGN KEY(Preparo) REFERENCES Preparo(IDPreparo) ON DELETE SET NULL
 );
 
 CREATE TABLE RecuperacaoRotina (
@@ -135,8 +135,8 @@ CREATE TABLE RecuperacaoRotina (
 	PRIMARY KEY(RotinaTreino, Recuperacao),
 	FOREIGN KEY(RotinaTreino, Preparador) 
 		REFERENCES RotinaTreino(IDRotina, Preparador) 
-		ON DELETE CASCADE,
-	FOREIGN KEY(Recuperacao) REFERENCES Recuperacao(IDRecuperacao) ON DELETE CASCADE
+		ON DELETE SET NULL,
+	FOREIGN KEY(Recuperacao) REFERENCES Recuperacao(IDRecuperacao) ON DELETE SET NULL
 );
 
 CREATE TABLE TreinoRotina (
@@ -148,8 +148,8 @@ CREATE TABLE TreinoRotina (
 	PRIMARY KEY(RotinaTreino, Treino),
 	FOREIGN KEY(RotinaTreino, Preparador) 
 		REFERENCES RotinaTreino(IDRotina, Preparador) 
-		ON DELETE CASCADE,
-	FOREIGN KEY(Treino) REFERENCES Treino(IDTreino) ON DELETE CASCADE
+		ON DELETE SET NULL,
+	FOREIGN KEY(Treino) REFERENCES Treino(IDTreino) ON DELETE SET NULL
 );
 
 CREATE TABLE TesteDoping (
@@ -163,9 +163,9 @@ CREATE TABLE TestarDoping (
 	Atleta CHAR(8), 
 	TesteDoping NUMBER,
 	PRIMARY KEY(Medico, Atleta, TesteDoping),
-	FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE CASCADE,
-	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE CASCADE,
-	FOREIGN KEY(TesteDoping) REFERENCES TesteDoping(IDTeste) ON DELETE CASCADE
+	FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE SET NULL,
+	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE SET NULL,
+	FOREIGN KEY(TesteDoping) REFERENCES TesteDoping(IDTeste) ON DELETE SET NULL
 );
 
 CREATE TABLE MetodoTratamento (
@@ -186,8 +186,8 @@ CREATE TABLE Consulta (
 	Diagnostico NUMBER,
 	DescricaoConsulta VARCHAR(4000),
 	PRIMARY KEY(Atleta, Medico, Data),
-	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE CASCADE,
-	FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE CASCADE,
+	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE SET NULL,
+	FOREIGN KEY(Medico) REFERENCES Medico(CRM) ON DELETE SET NULL,
 	FOREIGN KEY(Diagnostico) REFERENCES Diagnostico(IDDiagnostico) ON DELETE SET NULL
 );
 
@@ -198,15 +198,15 @@ CREATE TABLE Atendimento (
 	PRIMARY KEY(AtletaConsulta, MedicoConsulta, DataConsulta),
 	FOREIGN KEY(AtletaConsulta, MedicoConsulta, DataConsulta) 
 		REFERENCES Consulta(Atleta, Medico, Data)
-		ON DELETE CASCADE
+		ON DELETE SET NULL
 );
 
 CREATE TABLE Tratamento (
 	Diagnostico NUMBER,
 	MetodoTratamento NUMBER,
 	PRIMARY KEY(Diagnostico, MetodoTratamento),
-	FOREIGN KEY(Diagnostico) REFERENCES Diagnostico(IDDiagnostico) ON DELETE CASCADE, 
-	FOREIGN KEY(MetodoTratamento) REFERENCES MetodoTratamento(IDMetodo) ON DELETE CASCADE
+	FOREIGN KEY(Diagnostico) REFERENCES Diagnostico(IDDiagnostico) ON DELETE SET NULL, 
+	FOREIGN KEY(MetodoTratamento) REFERENCES MetodoTratamento(IDMetodo) ON DELETE SET NULL
 );
 
 CREATE TABLE Lesao (
@@ -227,8 +227,8 @@ CREATE TABLE LesaoAtleta (
 	Lesao NUMBER, 
 	Atleta CHAR(8),
 	PRIMARY KEY(Lesao, Atleta),
-	FOREIGN KEY(Lesao) REFERENCES Lesao(IDLesao) ON DELETE CASCADE,
-	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE CASCADE
+	FOREIGN KEY(Lesao) REFERENCES Lesao(IDLesao) ON DELETE SET NULL,
+	FOREIGN KEY(Atleta) REFERENCES Atleta(Pessoa) ON DELETE SET NULL
 );
 
 CREATE TABLE Sintoma (
@@ -239,7 +239,7 @@ CREATE TABLE Sintoma (
 	PRIMARY KEY(DataConsulta, MedicoConsulta, AtletaConsulta),
 	FOREIGN KEY(DataConsulta, MedicoConsulta, AtletaConsulta) 
 		REFERENCES Consulta(Data, Medico, Atleta) 
-		ON DELETE CASCADE
+		ON DELETE SET NULL
 );
 
 -- See all tables
