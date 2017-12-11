@@ -4,6 +4,7 @@
 \usepackage[brazil]{babel}
 \usepackage{blindtext}
 \usepackage{ragged2e}
+\usepackage{soul}
 \usepackage[utf8]{inputenc}
 \usepackage{indentfirst}
 \usepackage{mathtools}
@@ -36,18 +37,44 @@
 \usepackage{array}
 
 \newcommand{\university}{Universidade de São Paulo - ICMC}
-\newcommand{\discipline}{SCC0240 - Bases de Dados}
+\newcommand{\discipline}{SCC0540 - Bases de Dados}
 \newcommand{\data}{$1^o$ semestre / 2017}
 \newcommand{\teacher}{Prof. Robson Leonardo Ferreira Cordeiro}
 \newcommand{\PAE}{PAEs: Gabriel Spadon de Souza, Paulo Henrique de Oliveira}
-\newcommand{\specification}{Documentação Prática 3}
+\newcommand{\specification}{Prática 2: Modelo Relacional}
+
+% Create relation
+% #1 - Relation name
+% #2 - Attributes
+\newcommand{\createrelation}[2]{#1(#2) \hspace{0.3cm} N = \countitems{#2}}
+
+% Create domain
+% #1 - Domain name
+% #2 - Attribute
+% #3 - Domain definition
+\newcommand{\createdomain}[3]{
+    $Dom_{#1}$(#2) = {\bf #3}
+}
+
+% Primary & Secundary key  & Null attribute- attribute
+\newcommand{\primarykey}[1]{\ul{#1}}
+\newcommand{\secondarykey}[1]{\ul{\ul{#1}}}
+\newcommand{\nullatt}[1]{#1$^*$}
+
+% Super key
+% #1 - super key name
+% #2 - attributes that compose the key
+\newcommand{\superkey}[2]{$SC$(#1) = {#2}}
+\newcommand{\rarrow}{$\Longrightarrow$}
+
 \newcommand{\members}{
     \begin{table}[!ht]
         \centering
         \begin{tabular}{ll}
             \large\textsc{Giovanna Oliveira Guimarães} & \large\textsc{Nº USP: 9293693} \\
+            \large\textsc{José Augusto Noronha de Menezes Neto} & \large\textsc{Nº USP: 9293049} \\
+            \large\textsc{Letícia Rina Sakurai} & \large\textsc{Nº USP: 9278010} \\
             \large\textsc{Lucas Alexandre Soares} & \large\textsc{Nº USP: 9293265} \\
-            \large\textsc{Rafael Augusto Monteiro} & \large\textsc{Nº USP: 9293095} \\
         \end{tabular}
     \end{table}{}
 }
@@ -63,7 +90,7 @@
                     %& \course\\ 
                     & \discipline\\
                     & \teacher\\
-                    & \PAE\\
+                    %& \PAE\\
                 \end{tabular}
             \end{table}
         \end{center}
@@ -95,18 +122,725 @@
 \tableofcontents
 \newpage
 
-\section{Interface}
-\subsection{Relações}
+% Seta espaçamento entre linhas
+\singlespacing
 
-A interface de nosso projeto possui uma única tela com duas abas: uma para visualização das colunas de uma tabela da base de dados e outra para visualização dos relatórios. Abaixo, na Figura 1, encontra-se a aba de Relações. 
+% começa finalmente 
+% Aqui explica como este documento está estruturado e por que ele está assim, qual o motivo de usarmos este doc
+\section{Estrutura do Documento}
+    Este documento explica as decisões de projeto tomadas durante a construção dos modelos conceitual e lógico. Na Sessão~\ref{sec:merx} corrigimos os problemas identificados na primeira parte do projeto além de justificar as decisões de tal etapa. Na Sessão~\ref{sec:mrel} apresentamos a parte seguinte do projeto e justificamos as decisões tomadas.
 
- \begin{figure}[!h]
-        \centering
-        \includegraphics[scale=0.5]{Relacoes.png}
-        \caption{Aba de relatórios da interface do projeto}
-        \label{Rela\c{c}\~{o}es}
-    \end{figure}
+
+\section{Correções da Prática 1: Modelo Conceitual (MER-X)}\label{sec:merx}
+
+    A chave da entidade Dispositivo, anteriormente identificada pelo nome do aparelho e pelo seu sistema operacional, foi substituída por um ID artificial.
+
+    Perfil é uma entidade fraca, por isso, sua chave é composta pelo atributo "Nome de usuário", proveniente da entidade Conta e pelo seu próprio atributo "alias", o qual é, portanto, uma chave parcial e, por isso deve ser sublinhado com linha pontilhada.
+
+    A cardinalidade da relação gerencia foi alterada de N:N para 1:N.
+
+    Os atributos que davam aos perfis kids a possibilidade de decidirem preferências foram removidos da entidade geral Perfil e colocados na entidade Adulto. Agora somente os perfis adultos podem escolher suas preferências.
+
+    Foram acrescentados os métodos para o cálculo dos atributos derivados: "Valor", "Período" e "Bandeira".
+
+    A forma de pagamento foi associada à conta, para que o usuário não precise decidí-la sempre que for efetuar um pagamento. Com isso, é possível saber qual é a forma de pagamento atual de um usuário e a redundância no armazenamento foi removida.
+
+    Foi acrescentada uma participação total na geralização da entidade Mídia. Agora toda mídia inserida deve, obrigatoriamente, ser classificada como episódio de série, ou um como um filme.
+
+    Foram acrescentadas participações totais para garantir que não hajam episódios sem temporadas e temporadas sem série.
+
+    O Nome da agregação Amizade foi mantido, uma vez que isto só é armazenado quando a solitação é aceita. Alterar o nome prejudicaria a semântica da modelagem, uma vez que não faz sentido uma "solicitação de amizade" recomendar algum tipo de Mídia.
+
+    A agregação "Review pública" foi transformada em um ternário para possibilitar que um usuário possa assistir algum tipo de mídia sem ter que, obrigatóriamente, avaliá-la.
+
+\section{Prática 2: Projeto Lógico Normalizado}\label{sec:mrel}
+
+\subsection{Especificações dos Domínios}
+
+    {\bf Apelido}: Texto alfanúmerico de até 20 caractéres 
     
-    Como podemos observar, as funções atualizar tabela, adicionar registro, remover registro selecionado e editar registro selecionado podem ser efetuadas nesta aba ao pressionar os botões homônimos. Os dados desejados serão exibidos em suas respectivas colunas na tabela, tal como representado na Figura 1.
+    {\bf Banco}: Nome do banco (texto pequeno) 
+    
+    {\bf Bandeira}: Nome da bandeira do cartão (texto pequeno) 
+    
+    {\bf Big Integer}: Número inteiro que pode ter tamanho indefinido (e ser maior do que um número padrão) 
+    
+    {\bf Booleano}: Verdadeiro ou falso 
+    
+    {\bf Conta}: Número de 6 dígitos de conta bancária 
+    
+    {\bf CPF}: Número de 11 dígitos único  
+    
+    {\bf Código de Segurança}: Número inteiro de três dígitos 
+    
+    {\bf Data}: Representação da data do SGBD (visualização depende do local definido) 
+    
+    {\bf E-mail}: {\it String} única - deve seguir uma formatação padrão de e-mail como por exemplo ``s/$\wedge$[a-zA-Z0-9.\_]+@[a-zA-Z]+(\textbackslash.[a-z]+)+\$//''. 
+    
+    {\bf Endereço de IP}: Número de 12 dígitos descrevendo um IPv4 
+    
+    {\bf Faixa Etária}: Classificacao etária definida como um número inteiro positivo incluindo 0 (free for everyone) 
+    
+    {\bf Forma de pagamento}: cartão de crédito, paypal ou depósito bancário 
+    
+    {\bf Gênero}: Nome de gênero de mídia 
+    
+    {\bf Idade}: Número inteiro positivo 
+    
+    {\bf ID}: Número inteiro positivo único 
+    
+    {\bf Nome de arquivo}: Nome completo (caminho) do arquivo dentro do sistema 
+    
+    {\bf Nome}: Conjunto de nomes possíveis 
+    
+    {\bf Nota}: Número inteiro positivo que pode variar de 0 à 10 
+    
+    {\bf Número de Agência}: Número de 5 digitos 
+    
+    {\bf Número do cartão}: Número positivo único de 16 dígitos 
+    
+    {\bf Número real}: Número real 
+    
+    {\bf Número}: Número inteiro positivo de tamanho limitado 
+    
+    {\bf Senha}: Texto curto de 6 a 30 caracteres alfanuméricos e especiais (\#, \$, *, etc) 
+    
+    {\bf Texto curto}: Texto podendo conter números, dígitos e símbolos especiais de até 100 caractéres 
+    
+    {\bf Texto de preferencia}: {\it String} com o valor da configuração de preferência 
+    
+    {\bf Texto}: Texto comprido de tamanho variável 
+    
+    {\bf Usuário}: Texto alfanúmerico de até 20 caractéres permitindo apenas \_ de símbolo especial e sem espaços
+    
+    \singlespacing
+    \subsubsection{Plano}
+        \createdomain{Plano}{Nome}{Nome}
+
+        \createdomain{Plano}{Preco}{Número real}
+
+        \createdomain{Plano}{Qualidade}{Texto de preferencia}
+
+        \createdomain{Plano}{Videos simultaneos}{Número}
+
+        \createdomain{Plano}{Numero de perfis}{Número}
+
+        \createdomain{Plano}{Outras descricoes}{Texto}
+
+
+    \subsubsection{Conta Assina Plano}
+        \createdomain{Conta Assina Plano}{Nome Plano}{Nome}
+
+        \createdomain{Conta Assina Plano}{Nome de usuario Conta}{Usuário}
+
+
+    \subsubsection{Assinatura}
+        \createdomain{Assinatura}{Data vigor}{Data}
+
+        \createdomain{Assinatura}{Nome Plano}{Nome}
+
+        \createdomain{Assinatura}{Nome de usuario Conta}{Usuário}
+
+
+    \subsubsection{Pagamento}
+        \createdomain{Pagamento}{Codigo da fatura}{ID}
+
+        \createdomain{Pagamento}{Data vigor Assinatura}{Data}
+
+        \createdomain{Pagamento}{Nome Plano Assinatura}{Nome}
+
+        \createdomain{Pagamento}{Nome de usuario Assinatura}{Usuário}
+
+        \createdomain{Pagamento}{Valor}{Número real}
+
+        \createdomain{Pagamento}{Periodo}{Número}
+
+
+    \subsubsection{Forma de Pagamento}
+        \createdomain{Forma de Pagamento}{Metodo}{Forma de pagamento}
+
+
+    \subsubsection{Cartao de Credito}
+        \createdomain{Cartao de Credito}{Forma de Pagamento}{Forma de Pagamento}
+
+        \createdomain{Cartao de Credito}{Bandeira}{Bandeira}
+
+        \createdomain{Cartao de Credito}{Codigo de seguranca}{Código de Segurança}
+
+        \createdomain{Cartao de Credito}{Vencimento do cartao}{Data}
+
+        \createdomain{Cartao de Credito}{Nome}{Nome}
+
+        \createdomain{Cartao de Credito}{Numero do cartao}{Número do cartão}
+
+
+    \subsubsection{Deposito Bancario}
+        \createdomain{Deposito Bancario}{Forma de Pagamento}{Forma de Pagamento}
+
+        \createdomain{Deposito Bancario}{Conta}{Conta}
+
+        \createdomain{Deposito Bancario}{Agencia}{Número de Agência}
+
+        \createdomain{Deposito Bancario}{Banco}{Banco}
+
+        \createdomain{Deposito Bancario}{Nome titular}{Nome}
+
+        \createdomain{Deposito Bancario}{Sobrenome titular}{Nome}
+
+        \createdomain{Deposito Bancario}{CPF}{CPF}
+
+
+    \subsubsection{Paypal}
+        \createdomain{Paypal}{Forma de Pagamento}{Forma de Pagamento}
+
+        \createdomain{Paypal}{Senha}{Senha}
+
+        \createdomain{Paypal}{Email paypal}{E-mail}
+
+
+    \subsubsection{Conta}
+        \createdomain{Conta}{Nome de usuario}{Usuário}
+
+        \createdomain{Conta}{Forma de Pagamento}{Forma de Pagamento}
+
+        \createdomain{Conta}{Senha}{Senha}
+
+        \createdomain{Conta}{Nome}{Nome}
+
+        \createdomain{Conta}{CPF}{CPF}
+
+        \createdomain{Conta}{Email}{E-mail}
+
+        \createdomain{Conta}{Data de nascimento}{Data}
+
+
+    \subsubsection{Perfil Prefere Genero}
+        \createdomain{Perfil Prefere Genero}{Alias Perfil}{Apelido}
+
+        \createdomain{Perfil Prefere Genero}{Nome de usuario Perfil}{Usuário}
+
+        \createdomain{Perfil Prefere Genero}{Nome Genero}{Gênero}
+
+        \createdomain{Perfil Prefere Genero}{Nota}{Nota}
+
+
+    \subsubsection{Genero}
+        \createdomain{Genero}{Nome}{Gênero}
+
+
+    \subsubsection{Perfil Solicita Amizade}
+        \createdomain{Perfil Solicita Amizade}{Aceitou}{Booleano}
+
+        \createdomain{Perfil Solicita Amizade}{Data solicitacao}{Data}
+
+        \createdomain{Perfil Solicita Amizade}{Alias fez solicitacao Perfil}{Apelido}
+
+        \createdomain{Perfil Solicita Amizade}{Nome de usuario fez solicitacao Perfil}{Usuário}
+
+        \createdomain{Perfil Solicita Amizade}{Alias recebe solicitacao Perfil}{Apelido}
+
+        \createdomain{Perfil Solicita Amizade}{Nome de usuario recebe solicitacao Perfil}{Usuário}
+
+
+    \subsubsection{Perfil}
+        \createdomain{Perfil}{Alias}{Apelido}
+
+        \createdomain{Perfil}{Nome de Usuario Conta}{Usuário}
+
+        \createdomain{Perfil}{Idade}{Idade}
+
+        \createdomain{Perfil}{Preferencia qualidade}{Texto de preferência}
+
+        \createdomain{Perfil}{Preferencia legenda}{Texto de preferência}
+
+        \createdomain{Perfil}{Preferencia idioma}{Texto de preferência}
+
+        \createdomain{Perfil}{Faixa etaria}{Faixa Etária}
+
+
+    \subsubsection{Perfil Assiste Midia}
+        \createdomain{Perfil Assiste Midia}{Alias Perfil}{Apelido}
+
+        \createdomain{Perfil Assiste Midia}{Nome de Usuario Perfil}{Usuário}
+
+        \createdomain{Perfil Assiste Midia}{Titulo Midia}{Texto curto}
+
+        \createdomain{Perfil Assiste Midia}{Id Review}{ID}
+
+        \createdomain{Perfil Assiste Midia}{Tempo}{Número}
+
+
+    \subsubsection{Review}
+        \createdomain{Review}{Id}{ID}
+
+        \createdomain{Review}{Nota}{Nota}
+
+        \createdomain{Review}{Data nota}{Data}
+
+        \createdomain{Review}{Comentario}{Texto}
+
+        \createdomain{Review}{Data comentario}{Data}
+
+
+    \subsubsection{Gerencia}
+        \createdomain{Gerencia}{Alias adulto gerencia Perfil}{Apelido}
+
+        \createdomain{Gerencia}{Nome de Usuario adulto gerencia Perfil}{Usuário}
+
+        \createdomain{Gerencia}{Alias kids gerenciado Perfil}{Apelido}
+
+        \createdomain{Gerencia}{Nome de Usuario kids gerenciado Perfil}{Usuário}
+
+
+    \subsubsection{Midia}
+        \createdomain{Midia}{Titulo}{Texto curto}
+
+        \createdomain{Midia}{Tipo}{Texto curto}
+
+        \createdomain{Midia}{Thumbnail}{Nome de arquivo}
+
+        \createdomain{Midia}{Lancamento}{Data}
+
+        \createdomain{Midia}{Duracao}{Número}
+
+        \createdomain{Midia}{Sinopse}{Texto}
+
+        \createdomain{Midia}{Classificacao}{Faixa etária}
+
+
+    \subsubsection{Audio Midia}
+        \createdomain{Audio Midia}{Audio}{Nome de arquivo}
+
+        \createdomain{Audio Midia}{Titulo Midia}{Texto curto}
+
+
+    \subsubsection{Legenda Midia}
+        \createdomain{Legenda Midia}{Legenda}{Nome de arquivo}
+
+        \createdomain{Legenda Midia}{Titulo Midia}{Texto curto}
+
+
+    \subsubsection{Midia Pertence Genero}
+        \createdomain{Midia Pertence Genero}{Titulo Midia}{Texto curto}
+
+        \createdomain{Midia Pertence Genero}{Nome Genero}{Gênero}
+
+
+    \subsubsection{Perfil Prefere Genero}
+        \createdomain{Perfil Prefere Genero}{Titulo Midia}{Texto curto}
+
+        \createdomain{Perfil Prefere Genero}{Alias Perfil}{Apelido}
+
+        \createdomain{Perfil Prefere Genero}{Nome de Usuario Perfil}{Usuário}
+
+        \createdomain{Perfil Prefere Genero}{Nota}{Nota}
+
+
+    \subsubsection{Midia Pertence Temporada}
+        \createdomain{Midia Pertence Temporada}{Titulo Midia}{Texto curto}
+
+        \createdomain{Midia Pertence Temporada}{Numero Temporada}{Número}
+
+
+    \subsubsection{Acesso}
+        \createdomain{Acesso}{Timestamp}{Big Integer}
+
+        \createdomain{Acesso}{Nome Dispositivo}{Nome}
+
+        \createdomain{Acesso}{Alias Perfil}{Apelido}
+
+        \createdomain{Acesso}{Ip}{Endereço de IP}
+
+
+    \subsubsection{Perfil Possui Dispositivo}
+        \createdomain{Perfil Possui Dispositivo}{Id Dispositivo}{ID}
+
+        \createdomain{Perfil Possui Dispositivo}{Alias Perfil}{Apelido}
+
+        \createdomain{Perfil Possui Dispositivo}{Nome de Usuario Perfil}{Usuário}
+
+
+    \subsubsection{Dispositivo}
+        \createdomain{Dispositivo}{Id}{ID}
+
+        \createdomain{Dispositivo}{Nome}{Nome}
+
+        \createdomain{Dispositivo}{Sistema operacional}{Nome}
+
+
+    \subsubsection{Amizade}
+        \createdomain{Amizade}{Id}{ID}
+
+        \createdomain{Amizade}{Alias fez solicitacao Perfil}{Apelido}
+
+        \createdomain{Amizade}{Nome de usuario fez solicitacao Perfil}{Usuário}
+
+        \createdomain{Amizade}{Alias recebe solicitacao Perfil}{Apelido}
+
+        \createdomain{Amizade}{Nome de usuario recebe solicitacao Perfil}{Usuário}
+
+
+    \subsubsection{Amizade Recomenda Midia}
+        \createdomain{Amizade Recomenda Midia}{Id Amizade}{ID}
+
+        \createdomain{Amizade Recomenda Midia}{Alias fez solicitacao Perfil}{Apelido}
+
+        \createdomain{Amizade Recomenda Midia}{Nome de usuario fez solicitacao Perfil}{Usuário}
+
+        \createdomain{Amizade Recomenda Midia}{Alias recebe solicitacao Perfil}{Apelido}
+
+        \createdomain{Amizade Recomenda Midia}{Nome de usuario recebe solicitacao Perfil}{Usuário}
+
+        \createdomain{Amizade Recomenda Midia}{Titulo Midia}{Texto curto}
+
+        \createdomain{Amizade Recomenda Midia}{Comentario de recomendacao}{Texto}
+
+
+    \subsubsection{Temporada}
+        \createdomain{Temporada}{Numero}{Número}
+
+        \createdomain{Temporada}{Nome Serie}{Texto curto}
+
+        \createdomain{Temporada}{Numero de episodios}{Número}
+
+
+    \subsubsection{Serie}
+        \createdomain{Serie}{Nome}{Texto curto}
+
+        \createdomain{Serie}{Numero temporadas}{Número}
+
+        \createdomain{Serie}{Classificacao}{Faixa etária}
+
+
+    \subsubsection{Pessoa}
+        \createdomain{Pessoa}{Nome}{Nome}
+
+
+    \subsubsection{Pessoa Participa Midia}
+        \createdomain{Pessoa Participa Midia}{Titulo Midia}{Texto curto}
+
+        \createdomain{Pessoa Participa Midia}{Nome Pessoa}{Nome}
+
+        \createdomain{Pessoa Participa Midia}{Diretor}{Booleano}
+
+        \createdomain{Pessoa Participa Midia}{Ator}{Booleano}
+
+
+    \subsubsection{Pessoa Participa Serie}
+        \createdomain{Pessoa Participa Serie}{Nome Serie}{Texto curto}
+
+        \createdomain{Pessoa Participa Serie}{Nome Pessoa}{Nome}
+
+        \createdomain{Pessoa Participa Serie}{Diretor}{Booleano}
+
+        \createdomain{Pessoa Participa Serie}{Ator}{Booleano}
+
+\subsection{Esquema de Relações Inicial}
+    
+    Aqui é apresentado o esquema de relações logo após o mapeamento do MER-X para o Modelo Relacional, sem pensar em aplicar as normalizações.
+    
+    Nota: utilizamos a notação {\bf (fk)} para indicar que o atributo é uma chave estrangeira. O nome da chave estrangeira será sempre o nome do atributo seguido do nome da relação que ela se refere.
+    
+    \singlespacing
+
+    \doublespacing
+    % //(Alternativa 1_de mapeamento)
+    \subsubsection{Forma de pagamento: cartão de crédito, depósito bancário e Paypal}
+    
+    O mapeamento foi realizado de acordo com a Alternativa 1, pois as consultas tipicamente se concentram em um ou poucos conjuntos de entidades específicas de cada vez. A especialização total é garantida com a existência uma chave estrangeira Forma de Pagamento em cada tabela específica.
+        
+    \createrelation{{\bf Forma de Pagamento}}{\primarykey{Metodo}}
+
+    \createrelation{{\bf Cartao de Credito}}{\primarykey{Forma de Pagamento} (fk), Bandeira, Codigo de seguranca, Vencimento do cartao, Nome, Numero do cartao}
+
+    \createrelation{{\bf Deposito Bancario}}{\primarykey{Forma de Pagamento} (fk), Conta, Agencia, Banco, Nome titular, Sobrenome titular, CPF}
+
+    \createrelation{{\bf Paypal}}{\primarykey{Forma de Pagamento} (fk), Senha, Email paypal}
+
+	\subsubsection{Mídia: filme e episódio}
+    
+	% //(Alternativa 2_de mapeamento)
+    % //NOTE Ator só terá relacionamento com mídia caso o_Tipo seja Filme.
+    A segunda alternativa foi escolhida para este mapeamento, pois os conjuntos de entidades específicas possuem poucos atributos próprios. Garantimos a especialização total colocando o atributo de classificação (tipo) como chave da tabela. Desta forma, as mídias registradas na base de dados devem pertencer, obrigatoriamente, a um dos tipos disponíveis.\\
+    Contudo, utilizando esta alternativa, teremos mídias que não pertencem à temporadas (Filmes). Por isso, foi criada uma tabela para relacionar todas as mídias do tipo Episódio com suas respectivas temporadas.\\
+    Para evitar redundância e, consequentemente, inconsistências, haverá relacionamento entre mídia e atores somente quando a mídia em questão for do tipo filme. Caso contrário, o ator irá relacionar-se diretamente com a série.\\
+    
+    % //NOTE:_Por causa do mapeamento da especialização de Midia,_temos mídias que não pertencem à_uma temporada,_então compensa mais criar uma tabela relacionando as mídias do tipo Episódio com Temporada
+    
+    \createrelation{{\bf Midia}}{\primarykey{Titulo}, \nullatt{Tipo}, Thumbnail, Lancamento, Duracao, Sinopse, Classificacao}
+
+	\subsubsection{Perfil: adulto e kids}
+    A segunda alternativa foi escolhida para esse mapeamento pela existência de poucos atributos próprios nos conjuntos de entidade específicos.
+    
+    % //(Alternativa 2_de mapeamento)
+    \createrelation{{\bf Perfil}}{\primarykey{Alias}, \primarykey{Nome usuario Conta} (fk), \nullatt{Idade}, Preferencia qualidade, Preferencia legenda, Preferencia idioma, Faixa etaria}
+
+	\createrelation{{\bf Plano}}{\primarykey{Nome}, Preco, Qualidade, Videos simultaneos, Numero de perfis, Outras descricoes}
+
+    \createrelation{{\bf Conta Assina Plano}}{\primarykey{Nome Plano} (fk), \primarykey{Nome de usuario Conta} (fk)}
+
+    \createrelation{{\bf Assinatura}}{\primarykey{Data vigor}, \primarykey{Nome Plano} (fk), \primarykey{Nome de usuario Conta} (fk)}
+
+    \createrelation{{\bf Pagamento}}{\primarykey{Codigo da fatura}, \nullatt{Data vigor Assinatura} (fk), \nullatt{Nome Assinatura} (fk), \nullatt{Nome de usuario Assinatura} (fk), Valor, Periodo}
+
+    \createrelation{{\bf Conta}}{\primarykey{Nome de usuario}, \nullatt{Forma de Pagamento} (fk), Senha, Nome, CPF, Email, Data de nascimento}
+
+    \createrelation{{\bf Perfil Prefere Genero}}{\primarykey{Alias Perfil} (fk), \primarykey{Nome de usuario Perfil} (fk), \primarykey{Nome Genero} (fk), Nota}
+
+    \createrelation{{\bf Genero}}{\primarykey{Nome}}
+
+    \createrelation{{\bf Perfil Solicita Amizade}}{\primarykey{Alias fez solicitacao Perfil} (fk), \primarykey{Nome de usuario fez solicitacao Perfil} (fk), \primarykey{Alias recebe solicitacao Perfil} (fk), \primarykey{Nome de usuario recebe solicitacao Perfil} (fk), Aceitou, Data solicitacao}
+
+    \createrelation{{\bf Perfil Assiste Midia}}{\primarykey{Alias Perfil} (fk), \primarykey{Nome usuario Perfil} (fk), \primarykey{Titulo Midia} (fk), Id Review (fk), Tempo}
+
+    \createrelation{{\bf Publica}}{\primarykey{Id}, Nota, Data nota, Comentario, Data comentario}
+
+    \createrelation{{\bf Gerencia}}{\nullatt{Alias adulto gerencia Perfil} (fk), \nullatt{Nome usuario adulto gerencia Perfil} (fk), \primarykey{Alias kids gerenciado Perfil} (fk), \primarykey{Nome usuario kids gerenciado Perfil} (fk)}
+
+    \createrelation{{\bf Audio Midia}}{\primarykey{Audio}, \primarykey{Titulo}(fk Midia)}
+
+    \createrelation{{\bf Legenda Midia}}{\primarykey{Legenda}, \primarykey{Titulo}(fk Midia)}
+
+    \createrelation{{\bf Midia Pertence Genero}}{\primarykey{Titulo Midia} (fk), \primarykey{Nome Genero} (fk)}
+    
+    \createrelation{{\bf Midia Pertence Temporada}}{\primarykey{Titulo Midia} (fk), \primarykey{Numero Temporada} (fk)}
+
+    \createrelation{{\bf Temporada Midia}}{\primarykey{Titulo Midia} (fk), \primarykey{Numero Temporada} (fk)}
+
+    \createrelation{{\bf Review}}{\primarykey{Id}, Nota, Data Nota, Comentario, Data Comentario}
+
+    \createrelation{{\bf Perfil Assiste Midia}}{\primarykey{Alias Perfil} (fk), \primarykey{Nome de usuario Perfil} (fk), \primarykey{Titulo Midia} (fk), Id Review (fk), Tempo}
+
+    \createrelation{{\bf Acesso}}{\primarykey{Timestamp}, \primarykey{Nome Dispositivo} (fk), \primarykey{Alias Perfil} (fk), Ip}
+
+    \createrelation{{\bf Perfil Possui Dispositivo}}{\primarykey{Id Dispositivo} (fk), \primarykey{Alias Perfil} (fk), \primarykey{Nome de usuario Perfil} (fk)}
+
+    \createrelation{{\bf Dispositivo}}{\primarykey{Id}, Nome, Sistema operacional}
+
+    \createrelation{{\bf Amizade}}{\primarykey{Id}, \primarykey{Alias fez solicitacao Perfil} (fk), \primarykey{Nome de usuario fez solicitacao Perfil} (fk), \primarykey{Alias recebe solicitacao Perfil} (fk), \primarykey{Nome de usuario recebe solicitacao Perfil} (fk)}
+    
+    \createrelation{{\bf Amizade Recomenda Midia}}{\primarykey{Id Amizade} (fk), \primarykey{Alias fez solicitacao Perfil} (fk), \primarykey{Nome de usuario fez solicitacao Perfil} (fk), \primarykey{Alias recebe solicitacao Perfil} (fk), \primarykey{Nome de usuario recebe solicitacao Perfil} (fk), \primarykey{Titulo Midia} (fk), Comentario de recomendacao}
+
+    % //NOTE:_todas as temporadas precisam ter uma série,_logo não teremos nenhum nulo_
+    \createrelation{{\bf Temporada}}{\primarykey{Numero}, \nullatt{Nome Serie} (fk), Numero de episodios}
+
+    \createrelation{{\bf Serie}}{\primarykey{Nome}, Numero temporadas, Classificacao}
+
+    \createrelation{{\bf Pessoa}}{\primarykey{Nome}}
+
+    % //NOTE:_Pessoa só participa da relação Participa caso a_Mídia seja filme
+    \createrelation{{\bf Midia Pessoa}}{\primarykey{Titulo Midia} (fk), \primarykey{Nome Pessoa} (fk), Diretor, Ator}
+
+    \createrelation{{\bf Serie Pessoa}}{\primarykey{Nome Serie} (fk), \primarykey{Nome Pessoa} (fk), Diretor, Ator}
+    
+    \createrelation{{\bf Pessoa Participa Midia}}{\primarykey{Titulo Midia} (fk), \primarykey{Nome Pessoa} (fk), Diretor, Ator}
+    
+    \createrelation{{\bf Pessoa Participa Serie}}{\primarykey{Titulo Midia} (fk), \primarykey{Nome Pessoa} (fk), Diretor, Ator}
+
+\newpage
+\subsection{Dependências Funcionais}
+    
+    \singlespacing
+    {\bf Tabela Plano: }
+    \begin{itemize}
+        \item \{Nome\} \rarrow \{Preço, Qualidade, Videos simultaneos, Numero de perfis, Outras descricoes\} \\
+    \end{itemize}
+    
+    {\bf Tabela Conta Assina Plano: }
+    \begin{itemize}
+        \item \{Nome Plano, Nome de usuario Conta\} \rarrow \{\} \\
+    \end{itemize}
+    
+    {\bf Tabela Assinatura: }
+    \begin{itemize}
+        \item \{Data vigor, Nome Plano, Nome de usuario Conta\} \rarrow \{\} \\
+    \end{itemize}
+    
+    {\bf Tabela Pagamento: }
+    \begin{itemize}
+        \item \{Codigo da fatura\} \rarrow \{Valor, Periodo, Data vigor Assinatura, Nome Assinatura, Nome de usuario Assinatura\}\\
+    \end{itemize}
+    
+    {\bf Tabela Forma de Pagamento: }
+    \begin{itemize}
+        \item \{Metodo\} \rarrow \{\} \\
+    \end{itemize}
+    
+    {\bf Tabela Cartao de Credito: }
+    \begin{itemize}
+        \item \{Forma de Pagamento\} \rarrow \{Numero do Cartao, Bandeira, Codigo de seguranca, Vencimento do cartao, Nome\}
+        \item \{Numero do Cartao\} \rarrow \{Bandeira, Codigo de seguranca, Vencimento do cartao, Nome\} \\
+    \end{itemize}
+    
+    {\bf Tabela Deposito Bancario: }
+    \begin{itemize}
+        \item \{Forma de Pagamento\} \rarrow \{Conta, Agencia, Banco, Nome titular, Sobrenome titular, CPF\}
+        \item \{Conta, Agencia\} \rarrow \{Banco, Nome titular, Sobrenome titular, CPF\}\\
+    \end{itemize}
+    
+    {\bf Tabela Paypal: }
+    \begin{itemize}
+        \item \{Forma de Pagamento\} \rarrow \{Senha, Email paypal\} \\
+    \end{itemize}
+    
+    {\bf Tabela Conta: }
+    \begin{itemize}
+        \item \{Nome de usuario\} \rarrow \{Forma de Pagamento, Senha, Nome, CPF, Email, Data de nascimento\} \\
+    \end{itemize}
+    
+    {\bf Tabela Perfil Prefere Genero: }
+    \begin{itemize}
+        \item \{Alias Perfil, Nome de usuario Perfil, Nome Genero\} \rarrow \{Nota\} \\
+    \end{itemize}
+    
+    {\bf Tabela Genero: }
+    \begin{itemize}
+        \item \{nome\} \rarrow \{\} \\
+    \end{itemize}
+    
+    {\bf Tabela Perfil Solicita Amizade: }
+    \begin{itemize}
+        \item \{Alias fez solicitacao Perfil, Nome de usuario fez solicitacao Perfil, Alias recebe solicitacao Perfil, Nome de usuario recebe solicitacao Perfil\} \rarrow \{Aceitou, Data solicitacao\} \\
+    \end{itemize}
+    
+    {\bf Tabela Perfil: }
+    \begin{itemize}
+        \item \{Alias, Nome de usuario Conta\} \rarrow \{Idade, Preferencia qualidade, Preferencia legenda, Preferencia idioma\}
+        \item \{Idade\} \rarrow \{Faixa etaria\} \\
+    \end{itemize}
+    
+    {\bf Tabela Perfil Assiste Midia: }
+    \begin{itemize}
+        \item \{Alias Perfil, Nome usuario Perfil, Titulo Midia\} \rarrow \{Id Review, Tempo\} \\
+    \end{itemize}
+    
+    {\bf Tabela Review:}
+    \begin{itemize}
+        \item \{Id\} \rarrow \{Nota, Data nota, Comentario, Data comentario\} \\
+    \end{itemize}
+    
+    {\bf Tabela Gerencia: }
+    \begin{itemize}
+        \item \{Alias kids gerenciado Perfil, Nome usuario kids gerenciado Perfil\} \rarrow \{Alias adulto gerencia Perfil, Nome usuario adulto gerencia Perfil\} \\
+    \end{itemize}
+    
+    {\bf Tabela Midia: }
+    \begin{itemize}
+        \item \{Titulo\} \rarrow \{Tipo, Thumbnail, Lancamento, Duracao, Sinopse, Classificacao\} \\
+    \end{itemize}
+    
+    {\bf Tabela Audio Midia: }
+    \begin{itemize}
+        \item \{Audio, Titulo\} \rarrow \{\} \\
+    \end{itemize}
+    
+    {\bf Tabela Legenda Midia: }
+    \begin{itemize}
+        \item \{Legenda, Titulo\} \rarrow \{\} \\
+    \end{itemize}
+    
+    {\bf Tabela Midia Pertence Genero: }
+    \begin{itemize}
+        \item \{Titulo Midia, Nome Genero\} \rarrow \{\} \\
+    \end{itemize}
+    
+    {\bf Tabela Perfil Prefere Genero: }
+    \begin{itemize}
+        \item \{Alias Perfil, Nome de usuario Perfil, Nome Genero\} \rarrow \{Nota\} \\
+    \end{itemize}
+    
+    {\bf Tabela Midia Pertence Temporada: }
+    \begin{itemize}
+        \item \{Titulo Midia, Numero Temporada\} \rarrow \{\} \\
+    \end{itemize}
+    
+    {\bf Tabela Acesso: }
+    \begin{itemize}
+        \item \{Timestamp, Nome Dispositivo, Alias Perfil\} \rarrow \{Ip\} \\
+    \end{itemize}
+    
+    {\bf Tabela Perfil Possui Dispositivo: }
+    \begin{itemize}
+        \item \{Id Dispositivo, Alias Perfil, Nome de usuario Perfil\} \rarrow \{\} \\
+    \end{itemize}
+    
+    {\bf Tabela Dispositivo: }
+    \begin{itemize}
+        \item \{Id\} \rarrow \{Nome, Sistema operacional\} \\
+    \end{itemize}
+    
+    {\bf Tabela Amizade: }
+    \begin{itemize}
+        \item \{Id, Alias fez solicitacao Perfil, Nome de usuario fez solicitacao Perfil, Alias recebe solicitacao Perfil, Nome de usuario recebe solicitacao Perfil\} \rarrow \{\} \\
+    \end{itemize}
+    
+    {\bf Tabela Amizade Recomenda Midia: }
+    \begin{itemize}
+        \item \{Id Amizade, Alias fez solicitacao Perfil, Nome de usuario fez solicitacao Perfil, Alias recebe solicitacao Perfil, Nome de usuario recebe solicitacao Perfil, Titulo Midia\} \rarrow \{Comentario de recomendacao\} \\
+    \end{itemize}
+    
+    {\bf Tabela Temporada: }
+    \begin{itemize}
+        \item \{Numero, Nome Serie\} \rarrow \{Numero de episodios\} \\
+    \end{itemize}
+    
+    {\bf Tabela Serie: }
+    \begin{itemize}
+        \item \{Nome\} \rarrow \{Numero temporadas, Classificacao\} \\
+    \end{itemize}
+    
+    {\bf Tabela Pessoa: }
+    \begin{itemize}
+        \item \{Nome\} \rarrow \{\} \\
+    \end{itemize}
+    
+    {\bf Tabela Pessoa Participa Midia: }
+    \begin{itemize}
+        \item \{Titulo Midia, Nome Pessoa\} \rarrow \{Diretor, Ator\} \\
+    \end{itemize}
+    
+    {\bf Tabela Pessoa Participa Serie: }
+    \begin{itemize}
+        \item \{Titulo Midia, Nome Pessoa\} \rarrow \{Diretor, Ator\} \\
+    \end{itemize}
+
+\subsection{Primeira Forma Normal}
+
+    Não houve necessidade de alterar nada no esquema de relacionamentos pois após o mapeamento, elas já estavam na primeira forma normal.
+    
+\subsection{Segunda Forma Normal}
+
+    Não houve necessidade de alterar nada no esquema de relacionamentos pois após o mapeamento, elas já estavam na segunda forma normal.
+    
+\subsection{Terceira Forma Normal}
+
+    Houve necessidade de alterar a tabela Perfil. Nela, o atributo faixa etária era determinado pelo atributo idade. Por isso, também foi separado em duas tabelas: "Perfil" e "Idade Faixa Etaria".\\
+
+\createrelation{{\bf Perfil}}{\primarykey{Alias}, \primarykey{Nome usuario Conta} (fk), \nullatt{Idade Faixa Etaria}(fk), Preferencia qualidade, Preferencia legenda, Preferencia idioma}\\
+
+\createrelation{{\bf Idade Faixa Etaria}}{\primarykey{Idade}, Faixa Etaria}
+
+\subsection{Forma de Boyce-Codd}
+
+	
+    Houve necessidade de alterar duas tabelas para que elas se ajustassem à BCNF: "Depósito Bancário" e "Cartão de crédito".\\
+    Na tabela Depósito Bancário, os atributos Banco, Nome titular, Sobrenome titular e CPF estavam sendo determinados indiretamente pela Forma de pagamento e, portanto, a tabela foi separada em duas: "Depósito Bancário" e "Conta do Depósito Bancário".\\
+    
+    \createrelation{{\bf Deposito Bancario}}{\primarykey{Forma de Pagamento} (fk), Conta Deposito Bancario (fk), Agencia Deposito Bancario (fk)}\\
+
+    \createrelation{{\bf Conta do Deposito Bancario}}{\primarykey{Conta, Agencia}, Banco, Nome titular, Sobrenome titular, CPF}\\
+   
+   Na tabela "Cartão de Crédito", o atributo não chave "Número do cartão" estava determinando os demais "Bandeira", "Codigo de seguranca", "Vencimento do cartao", "Nome".\\ 
+   
+        \createrelation{{\bf Cartao de Credito}}{\primarykey{Forma de Pagamento} (fk), Numero do cartao (fk)}\\
+
+        \createrelation{{\bf Número do Cartao de Credito}}{\primarykey{Numero do cartao}, Bandeira, Codigo de seguranca, Vencimento do cartao, Nome}
+
+
+\subsection{Quarta Forma Normal}
+
+    Não houve necessidade de alterar nada no esquema de relacionamentos pois após o mapeamento, elas já estavam na quarta forma normal.
+    
 
 \end{document}
+
