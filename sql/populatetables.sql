@@ -10,11 +10,26 @@ INSERT INTO Genero VALUES('Ficção Científica');
 INSERT INTO Genero VALUES('Suspense');
 
 -- Pessoas que participam de séries ou filmes
-INSERT INTO Pessoa VALUES('Gebariel Nacismento');
-INSERT INTO Pessoa VALUES('José Otávio Edmilson');
-INSERT INTO Pessoa VALUES('Letícia Tina Sakurai');
-INSERT INTO Pessoa VALUES('Otávio Luis Aguiar');
-INSERT INTO Pessoa VALUES('Airo Soares');
+INSERT INTO Pessoa VALUES ('Daniel Radcliffe');
+INSERT INTO Pessoa VALUES ('John Hughes');
+INSERT INTO Pessoa VALUES ('Brad Pitt');
+INSERT INTO Pessoa VALUES ('Leonardo DiCaprio');
+INSERT INTO Pessoa VALUES ('Barry Jenkins');
+INSERT INTO Pessoa VALUES ('Jennifer Aniston');
+INSERT INTO Pessoa VALUES ('Josh Radnor');
+INSERT INTO Pessoa VALUES ('The Duffer Brothers');
+INSERT INTO Pessoa VALUES ('Peter Nowalk');
+INSERT INTO Pessoa VALUES ('Jeffrey Lieber');
+INSERT INTO Pessoa VALUES ('Bonnie Wright');
+INSERT INTO Pessoa VALUES ('Carl Reed');
+INSERT INTO Pessoa VALUES ('Art Linson');
+INSERT INTO Pessoa VALUES ('Jon Landau');
+INSERT INTO Pessoa VALUES ('Jaden Piner');
+INSERT INTO Pessoa VALUES ('Kevin S. Bright');
+INSERT INTO Pessoa VALUES ('Michael J. Fox');
+INSERT INTO Pessoa VALUES ('Cindy Holland');
+INSERT INTO Pessoa VALUES ('Katie Findlay');
+INSERT INTO Pessoa VALUES ('J. J. Abrams');
 
 -- Aqui é o nome da série e não das pessoas :v
 -- Número de temporada e classificação são NUMBER não VARCHAR2
@@ -45,17 +60,17 @@ INSERT INTO Conta VALUES ('jureg_monteiro', 'P', 'nossaSenhoraDo5Bola', 'Jureg M
 INSERT INTO Conta VALUES ('kawaiiro', 'P', 'meLivraiDasDps', 'Kawaiiro', 12348765012, 'lucassoares1793@gmail.com', '13-DEC-2002');
 INSERT INTO Conta VALUES ('g_guimaraes', 'P', 'olhaOsNaboVindo', 'Giovanna Guimaraes', 10273849273, 'deusasombriadastrevastrevosas@gmail.com', '13-DEC-2004');
 
-INSERT INTO Conta_Assina_Plano VALUES ('Super Premium', 'José Otávio Edmilson');
-INSERT INTO Conta_Assina_Plano VALUES ('Só Premium Mesmo', 'Otávio Luis Aguiar');
-INSERT INTO Conta_Assina_Plano VALUES ('Plano Bom', 'Letícia Tina Sakurai');
-INSERT INTO Conta_Assina_Plano VALUES ('Como Você Sobrevive Com Essa Internet?', 'Gebariel Nacismento');
-INSERT INTO Conta_Assina_Plano VALUES ('Sua Internet é Ruim, Né?', 'Airo Soares');
+INSERT INTO Conta_Assina_Plano VALUES ('Super Premium', 'leticia_rina');
+INSERT INTO Conta_Assina_Plano VALUES ('Só Premium Mesmo', 'mr_pinoquio');
+INSERT INTO Conta_Assina_Plano VALUES ('Plano Bom', 'jureg_monteiro');
+INSERT INTO Conta_Assina_Plano VALUES ('Como Você Sobrevive Com Essa Internet?', 'kawaiiro');
+INSERT INTO Conta_Assina_Plano VALUES ('Sua Internet é Ruim, Né?', 'g_guimaraes');
 
-INSERT INTO Assinatura VALUES ('10-NOV-2016', 'Super Premium', 'José Otávio Edmilson');
-INSERT INTO Assinatura VALUES ('10-DEC-2016', 'Só Premium Mesmo', 'Otávio Luis Aguiar');
-INSERT INTO Assinatura VALUES ('10-JAN-2016', 'Plano Bom', 'Letícia Tina Sakurai');
-INSERT INTO Assinatura VALUES ('10-OCT-2016', 'Como Você Sobrevive Com Essa Internet?', 'Gebariel Nacismento');
-INSERT INTO Assinatura VALUES ('10-APR-2016', 'Sua Internet é Ruim, Né?', 'Airo Soares');
+INSERT INTO Assinatura VALUES ('10-NOV-2016', 'Super Premium', 'leticia_rina');
+INSERT INTO Assinatura VALUES ('10-DEC-2016', 'Só Premium Mesmo', 'mr_pinoquio');
+INSERT INTO Assinatura VALUES ('10-JAN-2016', 'Plano Bom', 'jureg_monteiro');
+INSERT INTO Assinatura VALUES ('10-OCT-2016', 'Como Você Sobrevive Com Essa Internet?', 'kawaiiro');
+INSERT INTO Assinatura VALUES ('10-APR-2016', 'Sua Internet é Ruim, Né?', 'g_guimaraes');
 
 INSERT INTO Numero_do_Cartao_de_Credito VALUES(1111111111111111, 'ELO', 123, '11-SEP-2001', 'Gebariel Nacismento');
 INSERT INTO Numero_do_Cartao_de_Credito VALUES(2222222222222222, 'CIELO', 456, '29-APR-1994', 'José Otávio Edmilson');
@@ -108,26 +123,12 @@ INSERT INTO Temporada VALUES (3, 'Lost', 17);
 INSERT INTO Temporada VALUES (4, 'Lost', 17);
 INSERT INTO Temporada VALUES (5, 'Lost', 17);
 
--- Falta tabela de mídia pra conseguir inserir
--- (Titulo da midia, nome da série, número da temporada que o ep pertence)
-INSERT INTO Temporada_Midia	VALUES('Episodio 1 season 1', NULL, 1);
-INSERT INTO Temporada_Midia	VALUES('E2S8', 'How I Met Your Mother', 8);
-INSERT INTO Temporada_Midia	VALUES('E3S1', 'Stranger Things', 2);
-INSERT INTO Temporada_Midia	VALUES('E1E4', 'How to Get Away with Murder', 4);
-INSERT INTO Temporada_Midia	VALUES('E1S5', 'Lost', 6);
 
--- No parent key
-INSERT INTO Pagamento VALUES (123, '10-NOV-2017', 'Super Premium', 'José Otávio Edmilson', 30.0, 30);
-INSERT INTO Pagamento VALUES (456, '10-DEZ-2017', 'Só Premium Mesmo', 'Otávio Luis Aguiar', 20.0, 0);
-INSERT INTO Pagamento VALUES (666, '10-JAN-2017', 'Letícia Tina Sakurai', 15.0, 330);
-INSERT INTO Pagamento VALUES (323, '10-OUT-2017', 'Como Você Sobrevive Com Essa Internet?', 'Gebariel Nacismento', 10.0, 60);
-INSERT INTO Pagamento VALUES (171, '10-ABR-2017', 'Sua Internet é Ruim, Né?', 'Airo Soares', 5.0, 240);
-
-INSERT INTO Perfil_Assiste_Midia VALUES('leticiarina', 'leticia_rina', 'Harry Potter and the Half-Blood Prince', 1, 1456);
-INSERT INTO Perfil_Assiste_Midia VALUES('mrpinoquio', 'mr_pinoquio', 'The Breakfast Club', 2, 2735);
-INSERT INTO Perfil_Assiste_Midia VALUES('juregmonteiro', 'jureg_monteiro', 'Clube da Luta', 3, 1523);
-INSERT INTO Perfil_Assiste_Midia VALUES('kawaiiro', 'kawaiiro', 'Titanic', 4, 1233);
-INSERT INTO Perfil_Assiste_Midia VALUES('gguimaraes', 'g_guimaraes', 'Moonlight', 5, 1822);
+INSERT INTO Pagamento VALUES (123, '10-NOV-2016', 'Super Premium', 'leticia_rina', 30.0, 30);
+INSERT INTO Pagamento VALUES (456, '10-DEC-2016', 'Só Premium Mesmo', 'mr_pinoquio', 20.0, 0);
+INSERT INTO Pagamento VALUES (666, '10-JAN-2016', 'Plano Bom', 'jureg_monteiro', 15.0, 330);
+INSERT INTO Pagamento VALUES (323, '10-OCT-2016', 'Como Você Sobrevive Com Essa Internet?', 'kawaiiro', 10.0, 60);
+INSERT INTO Pagamento VALUES (171, '10-APR-2016', 'Sua Internet é Ruim, Né?', 'g_guimaraes', 5.0, 240);
 
 INSERT INTO Perfil VALUES ('leticiarina', 'leticia_rina', 18, 'Full HD', 'Chinês', 'Koreano');
 INSERT INTO Perfil VALUES ('mrpinoquio', 'mr_pinoquio', 18, 'HD', 'Português', 'Inglês');
@@ -136,10 +137,10 @@ INSERT INTO Perfil VALUES ('kawaiiro', 'kawaiiro', 20, 'Low quality', 'Inglês',
 INSERT INTO Perfil VALUES ('gguimaraes', 'g_guimaraes', 18, 'Normal', 'Japonês', 'Inglês');
 
 INSERT INTO Acesso VALUES ('25-JUN-2015 09:23:50', 1, 'leticiarina', 'leticia_rina', '192.168.1.2');
-INSERT INTO Acesso VALUES ('10-SET-2016 00:19:23', 2, 'mrpinoquio',	'mr_pinoquio', '127.183.4.5');
-INSERT INTO Acesso VALUES ('02-JAN-2017 18:01:35', 3, 'juregmonteiro', 'jureg_monteiro', '193.156.8.2');
-INSERT INTO Acesso VALUES ('17-NOV-2014 15:57:00', 4, 'kawaiiro', 'kawaiiro', '174.185.4.1');
-INSERT INTO Acesso VALUES ('21-MAI-2017 22:48:18', 5, 'gguimaraes', 'g_guimaraes', '139.177.7.2');
+INSERT INTO Acesso VALUES ('10-SEP-2016 01:19:23', 2, 'mrpinoquio',	'mr_pinoquio', '127.183.4.5');
+INSERT INTO Acesso VALUES ('02-JAN-2017 12:01:35', 3, 'juregmonteiro', 'jureg_monteiro', '193.156.8.2');
+INSERT INTO Acesso VALUES ('17-NOV-2014 05:57:00', 4, 'kawaiiro', 'kawaiiro', '174.185.4.1');
+INSERT INTO Acesso VALUES ('21-MAY-2017 02:48:18', 5, 'gguimaraes', 'g_guimaraes', '139.177.7.2');
 
 INSERT INTO Perfil_Possui_Dispositivo VALUES (1, 'leticiarina', 'leticia_rina');
 INSERT INTO Perfil_Possui_Dispositivo VALUES (2, 'mrpinoquio', 'mr_pinoquio');
@@ -159,29 +160,37 @@ INSERT INTO Amizade_Recomenda_Midia VALUES (3, 'kawaiiro', 'kawaiiro', 'gguimara
 INSERT INTO Amizade_Recomenda_Midia VALUES (4, 'juregmonteiro', 'jureg_monteiro', 'kawaiiro', 'kawaiiro', 'How I Met Your Mother', 'Marshall homão da porra');
 INSERT INTO Amizade_Recomenda_Midia VALUES (5, 'gguimaraes', 'g_guimaraes', 'leticiarina', 'leticia_rina');
 
-INSERT INTO Midia_Pessoa VALUES ('Harry Potter and the Half-Blood Prince', 'Daniel Radcliffe', 0, 1);
-INSERT INTO Midia_Pessoa VALUES ('The Breakfast Club', 'John Hughes', 1, 0);
-INSERT INTO Midia_Pessoa VALUES ('Clube da Luta', 'Brad Pitt', 0, 1);
-INSERT INTO Midia_Pessoa VALUES ('Titanic', 'Leonardo DiCaprio', 0, 1);
-INSERT INTO Midia_Pessoa VALUES ('Moonlight', 'Barry Jenkins', 1, 0);
+INSERT INTO Midia_Pessoa VALUES ('Harry Potter and the Half-Blood Prince', 'Daniel Radcliffe', 'F', 'T');
+INSERT INTO Midia_Pessoa VALUES ('The Breakfast Club', 'John Hughes', 'T', 'F');
+INSERT INTO Midia_Pessoa VALUES ('Clube da Luta', 'Brad Pitt', 'F', 'T');
+INSERT INTO Midia_Pessoa VALUES ('Titanic', 'Leonardo DiCaprio', 'F', 'T');
+INSERT INTO Midia_Pessoa VALUES ('Moonlight', 'Barry Jenkins', 'T', 'F');
 
-INSERT INTO Serie_Pessoa VALUES ('Friends', 'Jennifer Aniston', 0, 1);
-INSERT INTO Serie_Pessoa VALUES ('How I Met Your Mother', 'Josh Radnor', 0, 1);
-INSERT INTO Serie_Pessoa VALUES ('Stranger Things', 'The Duffer Brothers', 1, 0);
-INSERT INTO Serie_Pessoa VALUES ('How to Get Away with Murder', 'Peter Nowalk', 1, 0);
-INSERT INTO Serie_Pessoa VALUES ('Lost', 'Jeffrey Lieber', 1, 0);
+INSERT INTO Pessoa_Participa_Midia VALUES ('Harry Potter and the Half-Blood Prince', 'Bonnie Wright', 'F', 'T');
+INSERT INTO Pessoa_Participa_Midia VALUES ('The Breakfast Club', 'Carl Reed', 'F', 'T');
+INSERT INTO Pessoa_Participa_Midia VALUES ('Clube da Luta', 'Art Linson', 'T', 'F');
+INSERT INTO Pessoa_Participa_Midia VALUES ('Titanic', 'Jon Landau', 'T', 'F');
+INSERT INTO Pessoa_Participa_Midia VALUES ('Moonlight', 'Jaden Piner', 'F', 'T');
 
-INSERT INTO Pessoa_Participa_Midia VALUES ('Harry Potter and the Half-Blood Prince', 'Bonnie Wright', 0, 1);
-INSERT INTO Pessoa_Participa_Midia VALUES ('The Breakfast Club', 'Carl Reed', 0, 1);
-INSERT INTO Pessoa_Participa_Midia VALUES ('Clube da Luta', 'Art Linson', 1, 0);
-INSERT INTO Pessoa_Participa_Midia VALUES ('Titanic', 'Jon Landau', 1, 0);
-INSERT INTO Pessoa_Participa_Midia VALUES ('Moonlight', 'Jaden Piner', 0, 1);
+INSERT INTO Pessoa_Participa_Serie VALUES ('Friends', 'Kevin S. Bright', 'T', 'F');
+INSERT INTO Pessoa_Participa_Serie VALUES ('How I Met Your Mother', 'Michael J. Fox', 'F', 'T');
+INSERT INTO Pessoa_Participa_Serie VALUES ('Stranger Things', 'Cindy Holland', 'T', 'F');
+INSERT INTO Pessoa_Participa_Serie VALUES ('How to Get Away with Murder', 'Katie Findlay', 'F', 'T');
+INSERT INTO Pessoa_Participa_Serie VALUES ('Lost', 'J. J. Abrams', 'T', 'F');
 
-INSERT INTO Pessoa_Participa_Serie VALUES ('Friends', 'Kevin S. Bright', 1, 0);
-INSERT INTO Pessoa_Participa_Serie VALUES ('How I Met Your Mother', 'Michael J. Fox', 0, 1);
-INSERT INTO Pessoa_Participa_Serie VALUES ('Stranger Things', 'Cindy Holland', 1, 0);
-INSERT INTO Pessoa_Participa_Serie VALUES ('How to Get Away with Murder', 'Katie Findlay', 0, 1);
-INSERT INTO Pessoa_Participa_Serie VALUES ('Lost', 'J. J. Abrams', 1, 0);
+-- Falta tabela de mídia pra conseguir inserir
+-- (Titulo da midia, nome da série, número da temporada que o ep pertence)
+INSERT INTO Temporada_Midia	VALUES('Episodio 1 season 1', NULL, 1);
+INSERT INTO Temporada_Midia	VALUES('E2S8', 'How I Met Your Mother', 8);
+INSERT INTO Temporada_Midia	VALUES('E3S1', 'Stranger Things', 2);
+INSERT INTO Temporada_Midia	VALUES('E1E4', 'How to Get Away with Murder', 4);
+INSERT INTO Temporada_Midia	VALUES('E1S5', 'Lost', 6);
+
+INSERT INTO Perfil_Assiste_Midia VALUES('leticiarina', 'leticia_rina', 'Harry Potter and the Half-Blood Prince', 1, 1456);
+INSERT INTO Perfil_Assiste_Midia VALUES('mrpinoquio', 'mr_pinoquio', 'The Breakfast Club', 2, 2735);
+INSERT INTO Perfil_Assiste_Midia VALUES('juregmonteiro', 'jureg_monteiro', 'Clube da Luta', 3, 1523);
+INSERT INTO Perfil_Assiste_Midia VALUES('kawaiiro', 'kawaiiro', 'Titanic', 4, 1233);
+INSERT INTO Perfil_Assiste_Midia VALUES('gguimaraes', 'g_guimaraes', 'Moonlight', 5, 1822);
 
 
 COMMIT;
