@@ -79,12 +79,44 @@ INSERT INTO Review VALUES(3, 8, '05-APR-2005', 'Atores de primeira!', '20-MAY-20
 INSERT INTO Review VALUES(4, 10, '18-JUN-2001', 'Roteiros muito bem escritos.', '19-JUN-2001');
 INSERT INTO Review VALUES(5, 7, '22-APR-1996', 'Fraca. Esperava mais.', '22-MAY-1997');
 
+INSERT INTO Temporada VALUES (1, 'Friends', 24);
+INSERT INTO Temporada VALUES (2, 'Friends', 24);
+INSERT INTO Temporada VALUES (3, 'Friends', 24);
+INSERT INTO Temporada VALUES (4, 'Friends', 24);
+INSERT INTO Temporada VALUES (5, 'Friends', 24);
+INSERT INTO Temporada VALUES (6, 'Friends', 24);
+INSERT INTO Temporada VALUES (7, 'Friends', 24);
+INSERT INTO Temporada VALUES (8, 'Friends', 24);
+INSERT INTO Temporada VALUES (9, 'Friends', 24);
+INSERT INTO Temporada VALUES (10, 'Friends', 24);
+INSERT INTO Temporada VALUES (1, 'How I Met Your Mother', 24);
+INSERT INTO Temporada VALUES (2, 'How I Met Your Mother', 24);
+INSERT INTO Temporada VALUES (3, 'How I Met Your Mother', 24);
+INSERT INTO Temporada VALUES (4, 'How I Met Your Mother', 24);
+INSERT INTO Temporada VALUES (5, 'How I Met Your Mother', 24);
+INSERT INTO Temporada VALUES (6, 'How I Met Your Mother', 24);
+INSERT INTO Temporada VALUES (1, 'Stranger Things', 8);
+INSERT INTO Temporada VALUES (2, 'Stranger Things', 8);
+INSERT INTO Temporada VALUES (1, 'How to Get Away with Murder', 15);
+INSERT INTO Temporada VALUES (2, 'How to Get Away with Murder', 15);
+INSERT INTO Temporada VALUES (3, 'How to Get Away with Murder', 15);
+INSERT INTO Temporada VALUES (1, 'Lost', 17);
+INSERT INTO Temporada VALUES (2, 'Lost', 17);
+INSERT INTO Temporada VALUES (3, 'Lost', 17);
+INSERT INTO Temporada VALUES (4, 'Lost', 17);
+INSERT INTO Temporada VALUES (5, 'Lost', 17);
+
 -- (Titulo da midia, nome da série, número da temporada que o ep pertence)
-INSERT INTO Temporada_Midia VALUES('Episodio 1 season 1', 'Friends', 1);
-INSERT INTO Temporada_Midia VALUES('E2S8', 'How I Met Your Mother', 8);
-INSERT INTO Temporada_Midia VALUES('E3S1', 'Stranger Things', 2);
-INSERT INTO Temporada_Midia VALUES('E1E4', 'How to Get Away with Murder', 4);
-INSERT INTO Temporada_Midia VALUES('E1S5', 'Lost', 6);
+INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
+	VALUES('Episodio 1 season 1', NULL, 1);
+INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
+	VALUES('E2S8', 'How I Met Your Mother', 8);
+INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
+	VALUES('E3S1', 'Stranger Things', 2);
+INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
+	VALUES('E1E4', 'How to Get Away with Murder', 4);
+INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
+	VALUES('E1S5', 'Lost', 6);
 
 -- No parent key
 INSERT INTO Pagamento VALUES (123, '10-NOV-2017', 'Super Premium', 'José Otávio Edmilson', 30.0, 30);
@@ -124,11 +156,6 @@ INSERT INTO Amizade_Recomenda_Midia VALUES (3, 'kawaiiro', 'kawaiiro', 'gguimara
 INSERT INTO Amizade_Recomenda_Midia VALUES (4, 'juregmonteiro', 'jureg_monteiro', 'kawaiiro', 'kawaiiro', 'How I Met Your Mother', 'Marshall homão da porra');
 INSERT INTO Amizade_Recomenda_Midia VALUES (5, 'gguimaraes', 'g_guimaraes', 'leticiarina', 'leticia_rina');
 
-INSERT INTO Temporada VALUES (1, 'Friends', 24);
-INSERT INTO Temporada VALUES (6, 'How I Met Your Mother', 24);
-INSERT INTO Temporada VALUES (1, 'Stranger Things', 8);
-INSERT INTO Temporada VALUES (3, 'How to Get Away with Murder', 15);
-INSERT INTO Temporada VALUES (5, 'Lost', 17);
 
 INSERT INTO Midia_Pessoa VALUES ('Harry Potter and the Half-Blood Prince', 'Daniel Radcliffe', 0, 1);
 INSERT INTO Midia_Pessoa VALUES ('The Breakfast Club', 'John Hughes', 1, 0);
