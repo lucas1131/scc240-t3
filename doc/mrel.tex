@@ -445,7 +445,7 @@
     \subsubsection{Acesso}
         \createdomain{Acesso}{Timestamp}{Big Integer}
 
-        \createdomain{Acesso}{Nome Dispositivo}{Nome}
+        \createdomain{Acesso}{Id Dispositivo}{Id}
 
         \createdomain{Acesso}{Alias Perfil}{Apelido}
 
@@ -611,7 +611,7 @@
 
     \createrelation{{\bf Perfil Assiste Midia}}{\primarykey{Alias Perfil} (fk), \primarykey{Nome de usuario Perfil} (fk), \primarykey{Titulo Midia} (fk), Id Review (fk), Tempo}
 
-    \createrelation{{\bf Acesso}}{\primarykey{Timestamp}, \primarykey{Nome Dispositivo} (fk), \primarykey{Alias Perfil} (fk), Ip}
+    \createrelation{{\bf Acesso}}{\primarykey{Timestamp}, \primarykey{Id Dispositivo} (fk), \primarykey{Alias Perfil} (fk), Ip}
 
     \createrelation{{\bf Perfil Possui Dispositivo}}{\primarykey{Id Dispositivo} (fk), \primarykey{Alias Perfil} (fk), \primarykey{Nome de usuario Perfil} (fk)}
 
@@ -756,7 +756,7 @@
     
     {\bf Tabela Acesso: }
     \begin{itemize}
-        \item \{Timestamp, Nome Dispositivo, Alias Perfil\} \rarrow \{Ip\} \\
+        \item \{Timestamp, Id Dispositivo, Alias Perfil\} \rarrow \{Ip\} \\
     \end{itemize}
     
     {\bf Tabela Perfil Possui Dispositivo: }

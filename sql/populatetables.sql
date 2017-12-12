@@ -25,11 +25,13 @@ INSERT INTO Serie VALUES('How to Get Away with Murder', 4, 16);
 INSERT INTO Serie VALUES('Lost', 6, 10);
 
 -- Aqui são números, não precisa de strings
-INSERT INTO Idade_Faixa_Etaria VALUES(25, 18);
-INSERT INTO Idade_Faixa_Etaria VALUES(11, 14);
-INSERT INTO Idade_Faixa_Etaria VALUES(34, 18);
-INSERT INTO Idade_Faixa_Etaria VALUES(19, 16);
-INSERT INTO Idade_Faixa_Etaria VALUES(15, 10);
+INSERT INTO Idade_Faixa_Etaria VALUES(10, 10);
+INSERT INTO Idade_Faixa_Etaria VALUES(12, 12);
+INSERT INTO Idade_Faixa_Etaria VALUES(16, 16);
+INSERT INTO Idade_Faixa_Etaria VALUES(18, 18);
+INSERT INTO Idade_Faixa_Etaria VALUES(19, 18);
+INSERT INTO Idade_Faixa_Etaria VALUES(20, 18);
+INSERT INTO Idade_Faixa_Etaria VALUES(21, 18);
 
 INSERT INTO Plano VALUES ('Super Premium', 30.00, 'UHD 4k', 10, 8, 'Melhor plano 10/10');
 INSERT INTO Plano VALUES ('Só Premium Mesmo', 20.00, 'FHD 1080p', 6, 8, 'Segundo melhor plano, ainda 10/10');
@@ -37,11 +39,11 @@ INSERT INTO Plano VALUES ('Plano Bom', 15.00, 'HD 720p', 6, 8, 'Terceiro melhor 
 INSERT INTO Plano VALUES ('Sua Internet é Ruim, Né?', 10.00, '480p', 6, 8, 'Melhore seu plano de internet');
 INSERT INTO Plano VALUES ('Como Você Sobrevive Com Essa Internet?', 5.00, '240p', 6, 8, 'Meus pêsames');
 
-INSERT INTO Conta VALUES ('José Otávio Edmilson', 'P', 'batataDoce', 'João da Silva', 12345678901, 'jao@servidorx.com', '13-DEC-1996');
-INSERT INTO Conta VALUES ('Otávio Luis Aguiar', 'P', 'queroFeriasAjudaDeus', 'José da Silva', 43215678097, 'jose@servidorx.com', '13-DEC-1998');
-INSERT INTO Conta VALUES ('Letícia Tina Sakurai', 'P', 'nossaSenhoraDo5Bola', 'Maria da Silva', 67890854372, 'maria@servidorx.com', '13-DEC-2000');
-INSERT INTO Conta VALUES ('Gebariel Nacismento', 'P', 'meLivraiDasDps', 'Enzo da Silva', 12348765012, 'enzo@servidorx.com', '13-DEC-2002');
-INSERT INTO Conta VALUES ('Airo Soares', 'P', 'olhaOsNaboVindo', 'Valentina da Silva', 10273849273, 'valentina@servidorx.com', '13-DEC-2004');
+INSERT INTO Conta VALUES ('leticia_rina', 'P', 'batataDoce', 'Leticia Tina', 12345678901, 'leticiatina@gmail.com', '13-DEC-1996');
+INSERT INTO Conta VALUES ('mr_pinoquio', 'P', 'queroFeriasAjudaDeus', 'Mr Pinoquio', 43215678097, 'jose@gmail.com', '13-DEC-1998');
+INSERT INTO Conta VALUES ('jureg_monteiro', 'P', 'nossaSenhoraDo5Bola', 'Jureg Monteiro', 67890854372, 'jureg@meu.pantado.com', '13-DEC-2000');
+INSERT INTO Conta VALUES ('kawaiiro', 'P', 'meLivraiDasDps', 'Kawaiiro', 12348765012, 'lucassoares1793@gmail.com', '13-DEC-2002');
+INSERT INTO Conta VALUES ('g_guimaraes', 'P', 'olhaOsNaboVindo', 'Giovanna Guimaraes', 10273849273, 'deusasombriadastrevastrevosas@gmail.com', '13-DEC-2004');
 
 INSERT INTO Conta_Assina_Plano VALUES ('Super Premium', 'José Otávio Edmilson');
 INSERT INTO Conta_Assina_Plano VALUES ('Só Premium Mesmo', 'Otávio Luis Aguiar');
@@ -67,11 +69,11 @@ INSERT INTO Conta_do_Deposito_Bancario VALUES(135665, 68454, 'Santander', 'Valé
 INSERT INTO Conta_do_Deposito_Bancario VALUES(490207, 12213, 'City Bank', 'Roberta', 'Tonello', 05880236551);
 INSERT INTO Conta_do_Deposito_Bancario VALUES(133441, 25478, 'Caixa Econômica', 'Marcelo', 'Manzato', 00736512345);
 
-INSERT INTO Dispositivo VALUES(1, 'Gebariel Nacismento', 'Android');
-INSERT INTO Dispositivo VALUES(2, 'José Otávio Edmilson', 'IOS');
-INSERT INTO Dispositivo VALUES(3, 'Letícia Tina Sakurai', 'Android');
-INSERT INTO Dispositivo VALUES(4, 'Otávio Luis Aguiar', 'MAC OS');
-INSERT INTO Dispositivo VALUES(5, 'Airo Soares', 'Windows');
+INSERT INTO Dispositivo VALUES(1, 'Zenfone 5', 'Android');
+INSERT INTO Dispositivo VALUES(2, 'Galaxy S3', 'IOS');
+INSERT INTO Dispositivo VALUES(3, 'LG KP215', 'Android');
+INSERT INTO Dispositivo VALUES(4, 'iPhone 5C', 'MAC OS');
+INSERT INTO Dispositivo VALUES(5, 'Dell Inspiron', 'Windows');
 
 INSERT INTO Review VALUES(1, 6, '25-OCT-2016', 'Série muito boa! Melhor que Globo!', '25-OCT-2016');
 INSERT INTO Review VALUES(2, 5, '13-DEC-2013', 'Melhor que já vi!', '16-DEC-2003');
@@ -106,17 +108,13 @@ INSERT INTO Temporada VALUES (3, 'Lost', 17);
 INSERT INTO Temporada VALUES (4, 'Lost', 17);
 INSERT INTO Temporada VALUES (5, 'Lost', 17);
 
+-- Falta tabela de mídia pra conseguir inserir
 -- (Titulo da midia, nome da série, número da temporada que o ep pertence)
-INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
-	VALUES('Episodio 1 season 1', NULL, 1);
-INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
-	VALUES('E2S8', 'How I Met Your Mother', 8);
-INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
-	VALUES('E3S1', 'Stranger Things', 2);
-INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
-	VALUES('E1E4', 'How to Get Away with Murder', 4);
-INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
-	VALUES('E1S5', 'Lost', 6);
+INSERT INTO Temporada_Midia	VALUES('Episodio 1 season 1', NULL, 1);
+INSERT INTO Temporada_Midia	VALUES('E2S8', 'How I Met Your Mother', 8);
+INSERT INTO Temporada_Midia	VALUES('E3S1', 'Stranger Things', 2);
+INSERT INTO Temporada_Midia	VALUES('E1E4', 'How to Get Away with Murder', 4);
+INSERT INTO Temporada_Midia	VALUES('E1S5', 'Lost', 6);
 
 -- No parent key
 INSERT INTO Pagamento VALUES (123, '10-NOV-2017', 'Super Premium', 'José Otávio Edmilson', 30.0, 30);
@@ -131,11 +129,17 @@ INSERT INTO Perfil_Assiste_Midia VALUES('juregmonteiro', 'jureg_monteiro', 'Club
 INSERT INTO Perfil_Assiste_Midia VALUES('kawaiiro', 'kawaiiro', 'Titanic', 4, 1233);
 INSERT INTO Perfil_Assiste_Midia VALUES('gguimaraes', 'g_guimaraes', 'Moonlight', 5, 1822);
 
-INSERT INTO Acesso VALUES ('25-JUN-2015 09:23:50', 'Zenfone 5', 'leticiarina', '192.168.1.2');
-INSERT INTO Acesso VALUES ('10-SET-2016 00:19:23', 'Galaxy S3', 'mrpinoquio', '127.183.4.5');
-INSERT INTO Acesso VALUES ('02-JAN-2017 18:01:35', 'LG KP215', 'kawaiiro', '193.156.8.2');
-INSERT INTO Acesso VALUES ('17-NOV-2014 15:57:00', 'iPhone 5C', 'gguimaraes', '174.185.4.1');
-INSERT INTO Acesso VALUES ('21-MAI-2017 22:48:18', 'Dell Inspiron', 'juregmonteiro', '139.177.7.2');
+INSERT INTO Perfil VALUES ('leticiarina', 'leticia_rina', 18, 'Full HD', 'Chinês', 'Koreano');
+INSERT INTO Perfil VALUES ('mrpinoquio', 'mr_pinoquio', 18, 'HD', 'Português', 'Inglês');
+INSERT INTO Perfil VALUES ('juregmonteiro', 'jureg_monteiro', 18, 'HD', 'Inglês', 'Português');
+INSERT INTO Perfil VALUES ('kawaiiro', 'kawaiiro', 20, 'Low quality', 'Inglês', 'Espanhol');
+INSERT INTO Perfil VALUES ('gguimaraes', 'g_guimaraes', 18, 'Normal', 'Japonês', 'Inglês');
+
+INSERT INTO Acesso VALUES ('25-JUN-2015 09:23:50', 1, 'leticiarina', 'leticia_rina', '192.168.1.2');
+INSERT INTO Acesso VALUES ('10-SET-2016 00:19:23', 2, 'mrpinoquio',	'mr_pinoquio', '127.183.4.5');
+INSERT INTO Acesso VALUES ('02-JAN-2017 18:01:35', 3, 'juregmonteiro', 'jureg_monteiro', '193.156.8.2');
+INSERT INTO Acesso VALUES ('17-NOV-2014 15:57:00', 4, 'kawaiiro', 'kawaiiro', '174.185.4.1');
+INSERT INTO Acesso VALUES ('21-MAI-2017 22:48:18', 5, 'gguimaraes', 'g_guimaraes', '139.177.7.2');
 
 INSERT INTO Perfil_Possui_Dispositivo VALUES (1, 'leticiarina', 'leticia_rina');
 INSERT INTO Perfil_Possui_Dispositivo VALUES (2, 'mrpinoquio', 'mr_pinoquio');
@@ -149,13 +153,11 @@ INSERT INTO Amizade VALUES (3, 'kawaiiro', 'kawaiiro', 'gguimaraes', 'g_guimarae
 INSERT INTO Amizade VALUES (4, 'juregmonteiro', 'jureg_monteiro', 'kawaiiro', 'kawaiiro');
 INSERT INTO Amizade VALUES (5, 'gguimaraes', 'g_guimaraes', 'leticiarina', 'leticia_rina');
 
-
 INSERT INTO Amizade_Recomenda_Midia VALUES (1, 'leticiarina', 'leticia_rina', 'mrpinoquio', 'mr_pinoquio', 'Stranger Things', 'Melhor série Pipi');
 INSERT INTO Amizade_Recomenda_Midia VALUES (2, 'mrpinoquio', 'mr_pinoquio', 'juregmonteiro', 'jureg_monteiro', 'Lost', 'Assiste aí Jurg, muito bom');
 INSERT INTO Amizade_Recomenda_Midia VALUES (3, 'kawaiiro', 'kawaiiro', 'gguimaraes', 'g_guimaraes');
 INSERT INTO Amizade_Recomenda_Midia VALUES (4, 'juregmonteiro', 'jureg_monteiro', 'kawaiiro', 'kawaiiro', 'How I Met Your Mother', 'Marshall homão da porra');
 INSERT INTO Amizade_Recomenda_Midia VALUES (5, 'gguimaraes', 'g_guimaraes', 'leticiarina', 'leticia_rina');
-
 
 INSERT INTO Midia_Pessoa VALUES ('Harry Potter and the Half-Blood Prince', 'Daniel Radcliffe', 0, 1);
 INSERT INTO Midia_Pessoa VALUES ('The Breakfast Club', 'John Hughes', 1, 0);
@@ -181,10 +183,5 @@ INSERT INTO Pessoa_Participa_Serie VALUES ('Stranger Things', 'Cindy Holland', 1
 INSERT INTO Pessoa_Participa_Serie VALUES ('How to Get Away with Murder', 'Katie Findlay', 0, 1);
 INSERT INTO Pessoa_Participa_Serie VALUES ('Lost', 'J. J. Abrams', 1, 0);
 
-INSERT INTO Perfil VALUES ('leticiarina', 'leticia_rina', 18, 'Full HD', 'Japonês', 'Inglês');
-INSERT INTO Perfil VALUES ('mrpinoquio', 'mr_pinoquio', 18, 'HD', 'Português', 'Inglês');
-INSERT INTO Perfil VALUES ('juregmonteiro', 'jureg_monteiro', 18, 'HD', 'Inglês', 'Português');
-INSERT INTO Perfil VALUES ('kawaiiro', 'kawaiiro', 18, 'Low quality', 'Inglês', 'Espanhol');
-INSERT INTO Perfil VALUES ('gguimaraes', 'g_guimaraes', 18, 'Normal', 'Espanhol', 'Inglês');
 
 COMMIT;
