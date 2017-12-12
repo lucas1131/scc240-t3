@@ -193,4 +193,34 @@ INSERT INTO Perfil_Assiste_Midia VALUES('kawaiiro', 'kawaiiro', 'Titanic', 4, 12
 INSERT INTO Perfil_Assiste_Midia VALUES('gguimaraes', 'g_guimaraes', 'Moonlight', 5, 1822);
 
 
+INSERT INTO Midia_Pertence_Genero VALUES ('Friends', 'Comédia'); 
+INSERT INTO Midia_Pertence_Genero VALUES ('How I Met Your Mother', 'Comédia'); 
+INSERT INTO Midia_Pertence_Genero VALUES ('Lost', 'Suspense'); 
+INSERT INTO Midia_Pertence_Genero VALUES ('Stranger Things', 'Suspense'); 
+INSERT INTO Midia_Pertence_Genero VALUES ('How To Get Away With Muder', 'Suspense'); 
+
+INSERT INTO Numero_Cartao_de_Credito VALUES('C',1111111111111111);
+INSERT INTO Numero_Cartao_de_Credito VALUES('C',2222222222222222);
+INSERT INTO Numero_Cartao_de_Credito VALUES('C',3333333333333333);
+INSERT INTO Numero_Cartao_de_Credito VALUES('C',4444444444444444);
+INSERT INTO Numero_Cartao_de_Credito VALUES('C',5555555555555555);
+
+INSERT INTO Paypal VALUES('P','zikadorole','xovana@gmail.com');
+INSERT INTO Paypal VALUES('P','airoboylindo','airomello@hotmail.com');
+INSERT INTO Paypal VALUES('P','tinabinarina','ahmano@bol.com.br');
+INSERT INTO Paypal VALUES('P','pipidourado','pipizones@gmail.com');
+INSERT INTO Paypal VALUES('P','lolzinfoda','ritogomes@gmail.com');
+
+INSERT INTO Perfil_Prefere_Genero VALUES('leticiarina','leticia_rina','Comédia',7);
+INSERT INTO Perfil_Prefere_Genero VALUES('mrpinoquio','mr_pinoquio','Ficção Científica',8);
+INSERT INTO Perfil_Prefere_Genero VALUES('juregmonteiro','jureg_monteiro','Suspense',5);
+INSERT INTO Perfil_Prefere_Genero VALUES('kawaiiro','kawaiiro','Terror',8);
+INSERT INTO Perfil_Prefere_Genero VALUES('gguimaraes','g_guimaraes','Comédia',10);
+
+INSERT INTO Perfil_Solicita_Amizade VALUES ('jureg_monteiro', 'juregmonteiro', 'kawaiiro', 'kawaiiro', 'T', '10-DEZ-2017');
+INSERT INTO Perfil_Solicita_Amizade VALUES ('mr_pinoquio', 'mrpinoquio', 'leticia_rina', 'leticiarina', 'T', '10-DEZ-2017');
+INSERT INTO Perfil_Solicita_Amizade VALUES ('leticia_rina', 'leticiarina', 'mr_pinoquio', 'mrpinoquio', 'T', '10-DEZ-2017');
+INSERT INTO Perfil_Solicita_Amizade VALUES ('g_guimaraes', 'gguimaraes', 'mr_pinoquio', 'mrpinoquio', 'T', '10-DEZ-2017');
+INSERT INTO Perfil_Solicita_Amizade VALUES ('kawaiiro', 'kawaiiro', 'jureg_monteiro', 'juregmonteiro', 'T', '10-DEZ-2017');
+
 COMMIT;
