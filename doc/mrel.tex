@@ -622,7 +622,7 @@
     \createrelation{{\bf Amizade Recomenda Midia}}{\primarykey{Id Amizade} (fk), \primarykey{Alias fez solicitacao Perfil} (fk), \primarykey{Nome de usuario fez solicitacao Perfil} (fk), \primarykey{Alias recebe solicitacao Perfil} (fk), \primarykey{Nome de usuario recebe solicitacao Perfil} (fk), \primarykey{Titulo Midia} (fk), Comentario de recomendacao}
 
     % //NOTE:_todas as temporadas precisam ter uma série,_logo não teremos nenhum nulo_
-    \createrelation{{\bf Temporada}}{\primarykey{Numero}, \nullatt{Nome Serie} (fk), Numero de episodios}
+    \createrelation{{\bf Temporada}}{\primarykey{Numero}, \primarykey{\nullatt{Nome Serie}} (fk), Numero de episodios}
 
     \createrelation{{\bf Serie}}{\primarykey{Nome}, Numero temporadas, Classificacao}
 
