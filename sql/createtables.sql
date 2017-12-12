@@ -89,7 +89,6 @@ CREATE TABLE Serie (
         PRIMARY KEY (Nome),
 
     Numero_temporadas NUMBER CHECK (Numero_temporadas >= 0),
-
     Classificacao NUMBER CHECK (Classificacao >= 0)
 );
 
@@ -140,8 +139,8 @@ CREATE TABLE Temporada_Midia (
         PRIMARY KEY (Titulo_Midia, Numero_Temporada),
 
         FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE SET NULL,
-        FOREIGN KEY (Numero_Temporada, Nome_Serie_Temporada) 
-            REFERENCES Temporada(Numero, Nome_Serie) ON DELETE SET NULL
+        FOREIGN KEY (Nome_Serie_Temporada, Numero_Temporada) 
+            REFERENCES Temporada(Nome_Serie, Numero) ON DELETE SET NULL
 );
 
 
@@ -158,7 +157,9 @@ CREATE TABLE Conta (
     Senha VARCHAR2(20),
     Nome VARCHAR2(50),
     CPF NUMBER,
-    Email VARCHAR2(50),
+    Email VARCHAR2(50)CHECK (
+            REGEXP_LIKE(Email, '^[a-zA-Z_\.[:digit:]]+@([a-zA-Z[:digit:]]+\.[a-zA-Z]+)+$')
+        ),
     Data_de_nascimento DATE
 );
 
