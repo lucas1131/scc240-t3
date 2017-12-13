@@ -1,4 +1,4 @@
-CREATE TABLE Plano (
+CREATE TABLE Plano ( 
     Nome VARCHAR2(50),
         PRIMARY KEY (Nome),
     Preco REAL,
