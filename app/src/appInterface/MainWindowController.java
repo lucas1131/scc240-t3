@@ -94,17 +94,9 @@ public class MainWindowController {
 
         observablePersonMidia = FXCollections.observableArrayList(observableRelations);
 
-        midiaTitleCol.setCellValueFactory(
-                new PropertyValueFactory<>("Title")
-        );
-        
-        personNameCol.setCellValueFactory(
-                new PropertyValueFactory<>("Name")
-        );
-        
-        personRoleCol.setCellValueFactory(
-                new PropertyValueFactory<>("Role")
-        );
+        midiaTitleCol.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        personNameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        personRoleCol.setCellValueFactory(new PropertyValueFactory<>("Role"));
         
         tableView.setItems(observablePersonMidia);
     }
