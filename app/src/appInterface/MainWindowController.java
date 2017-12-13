@@ -82,16 +82,16 @@ public class MainWindowController {
         try {
             rset = dh.getPersonMidia();
             
-            role = rset.get("Ator"); ? "T" : "F";
+            role = rset.get("Ator") ? "T" : "F";
             role += ", ";
-            role += rset.get("Diretor"); ? "T" : "F";
+            role += rset.get("Diretor") ? "T" : "F";
         } catch (SQLException ex) {
             return;
         }
         
         try {
             while(rset.next()) {
-                observablePersonMidia.add(new PersonMidia(rset.getString("Titulo_Midia"),rset.getString("Nome_Pessoa"), role);
+                observablePersonMidia.add(new PersonMidia(rset.getString("Titulo_Midia"), rset.getString("Nome_Pessoa"), role));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
