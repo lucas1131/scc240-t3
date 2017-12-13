@@ -37,15 +37,16 @@ public class PersonMidia {
 
     public void setTitle(String title){ this.name.set(title); }
     public void setName(String name){ this.name.set(name); }
-    public void setActor(boolean actor){ this.name.set(actor); }
-    public void setDirector(boolean director){ this.name.set(director); }
+    public void setActor(String actor){ this.name.set(actor); }
+    public void setDirector(String director){ this.name.set(director); }
 
     public String getTitle(){ return title.get(); }
     public String getName(){ return name.get(); }
-    public boolean getActor(){ return getActor.get(); }
-    public boolean getDirector(){ return getDirector.get(); }
+    public boolean getActor(){ return actor.get(); }
+    public boolean getDirector(){ return director.get(); }
     
     public String getRole() {
+        String role;
     	role = getActor() ? "T" : "F";
         role += ", ";
         role += getDirector() ? "T" : "F";

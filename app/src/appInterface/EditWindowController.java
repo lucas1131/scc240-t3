@@ -24,8 +24,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.stage.Stage;
 import model.DataHandler;
-import model.Diagnostic;
-import model.Treatment;
+import model.Midia;
+import model.Person;
+import model.PersonMidia;
 
 /**
  * FXML Controller class
