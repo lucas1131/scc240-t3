@@ -1,9 +1,3 @@
-INSERT INTO Genero VALUES('Comédia');
-INSERT INTO Genero VALUES('Terror');
-INSERT INTO Genero VALUES('Romance');
-INSERT INTO Genero VALUES('Ficção Científica');
-INSERT INTO Genero VALUES('Suspense');
-
 INSERT INTO Numero_do_Cartao_de_Credito VALUES('1111111111111111','ELO','123','11/09/2001','Gebariel Nacismento');
 INSERT INTO Numero_do_Cartao_de_Credito VALUES('2222222222222222','CIELO','456','29/04/1994','José Otávio Edmilson');
 INSERT INTO Numero_do_Cartao_de_Credito VALUES('3333333333333333','VISAPAY','789','24/12/2017','Letícia Tina Sakurai');

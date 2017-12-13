@@ -57,15 +57,15 @@ CREATE TABLE Numero_do_Cartao_de_Credito (
 );
 
 
-CREATE TABLE Conta_do_Deposito_Bancario (
-    Conta NUMBER(6),
-        PRIMARY KEY (Conta),
-    Agencia NUMBER(5),
-    Banco VARCHAR2(20),
-    Nome_titular VARCHAR2(50),
-    Sobrenome_titular VARCHAR2(50),
-    CPF NUMBER(11)
-);
+-- CREATE TABLE Conta_do_Deposito_Bancario (
+--     Conta NUMBER(6),
+--         PRIMARY KEY (Conta),
+--     Agencia NUMBER(5),
+--     Banco VARCHAR2(20),
+--     Nome_titular VARCHAR2(50),
+--     Sobrenome_titular VARCHAR2(50),
+--     CPF NUMBER(11)
+-- );
 
 
 CREATE TABLE Idade_Faixa_Etaria (
@@ -349,13 +349,13 @@ CREATE TABLE Pessoa_Participa_Midia (
 
 
 CREATE TABLE Pessoa_Participa_Serie (
-    Titulo_Midia VARCHAR2(100),
-        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE SET NULL,
+    Nome_Serie VARCHAR2(100),
+        FOREIGN KEY (Nome_Serie) REFERENCES Serie(Nome) ON DELETE SET NULL,
     Nome_Pessoa VARCHAR2(50),
         FOREIGN KEY (Nome_Pessoa) REFERENCES Pessoa(Nome) ON DELETE SET NULL,
     Diretor CHAR CHECK (Diretor IN ('T', 'F')),
     Ator CHAR CHECK (Ator IN ('T', 'F')),
-        PRIMARY KEY (Titulo_Midia, Nome_Pessoa)
+        PRIMARY KEY (Nome_Serie, Nome_Pessoa)
 );
 
 

@@ -1,48 +1,15 @@
--- Até acesso
+-- Não dá para inserir esses valores pois ninguém no exemplo utiliza depósito bancário
+-- INSERT INTO Deposito_Bancario VALUES ('P', NULL, NULL); 
+-- INSERT INTO Deposito_Bancario VALUES ('P', NULL, NULL); 
+-- INSERT INTO Deposito_Bancario VALUES ('P', NULL, NULL); 
+-- INSERT INTO Deposito_Bancario VALUES ('P', NULL, NULL); 
+-- INSERT INTO Deposito_Bancario VALUES ('P', NULL, NULL); 
 
-INSERT INTO Plano VALUES ('Super Premium', 30.00, 'Ultra HD 4k', 10, 8, 'Melhor plano 10/10');
-INSERT INTO Plano VALUES ('Só Premium Mesmo', 20.00, 'Full HD 1080p', 6, 8, 'Segundo melhor plano, ainda 10/10');
-INSERT INTO Plano VALUES ('Plano Bom', 15.00, 'HD 720p', 6, 8, 'Terceiro melhor plano, aqui é tudo 10/10');
-INSERT INTO Plano VALUES ('Sua Internet é Ruim, Né?', 10.00, '480p', 6, 8, 'Melhore seu plano de internet');
-INSERT INTO Plano VALUES ('Como Você Sobrevive Com Essa Internet?', 5.00, '240p', 6, 8, 'Meus pêsames');
-
-INSERT INTO Conta_Assina_Plano VALUES ('Super Premium', 'leticia_rina');
-INSERT INTO Conta_Assina_Plano VALUES ('Só Premium Mesmo', 'jureg_monteiro');
-INSERT INTO Conta_Assina_Plano VALUES ('Plano Bom', 'mr_pinoquio');
-INSERT INTO Conta_Assina_Plano VALUES ('Como Você Sobrevive Com Essa Internet?', 'g_guimaraes');
-INSERT INTO Conta_Assina_Plano VALUES ('Sua Internet é Ruim, Né?', 'kawaiiro');
-
-INSERT INTO Assinatura VALUES ('10-NOV-2016', 'Super Premium', 'leticia_rina');
-INSERT INTO Assinatura VALUES ('10-DEZ-2016', 'Só Premium Mesmo', 'jureg_monteiro');
-INSERT INTO Assinatura VALUES ('10-JAN-2016', 'mr_pinoquio');
-INSERT INTO Assinatura VALUES ('10-OUT-2016', 'Como Você Sobrevive Com Essa Internet?', 'g_guimaraes');
-INSERT INTO Assinatura VALUES ('10-ABR-2016', 'Sua Internet é Ruim, Né?', 'kawaiiro');
-
-INSERT INTO Pagamento VALUES ('123', '10-NOV-2017', 'Super Premium', 'leticia_rina', 30.0, 30);
-INSERT INTO Pagamento VALUES ('456', '10-DEZ-2017', 'Só Premium Mesmo', 'jureg_monteiro', 20.0, 0);
-INSERT INTO Pagamento VALUES ('666', '10-JAN-2017', 'mr_pinoquio', 15.0, 330);
-INSERT INTO Pagamento VALUES ('323', '10-OUT-2017', 'Como Você Sobrevive Com Essa Internet?', 'g_guimaraes', 10.0, 60);
-INSERT INTO Pagamento VALUES ('171', '10-ABR-2017', 'Sua Internet é Ruim, Né?', 'kawaiiro', 5.0, 240);
-
-INSERT INTO Conta VALUES ('leticia_rina', 'P', 'batataDoce', 'João da Silva', 12345678901, 'jao@servidorx.com');
-INSERT INTO Conta VALUES ('jureg_monteiro', 'P', 'queroFeriasMeAjudaDeus', 'José da Silva', 43215678097, 'jose@servidorx.com');
-INSERT INTO Conta VALUES ('mr_pinoquio', 'P', 'nossaSenhoraDo5Bola', 'Maria da Silva', 67890854372, 'maria@servidorx.com');
-INSERT INTO Conta VALUES ('g_guimaraes', 'P', 'meLivraiDasDps', 'Enzo da Silva', 12348765012, 'enzo@servidorx.com');
-INSERT INTO Conta VALUES ('kawaiiro', 'P', 'olhaOsNaboVindo', 'Valentina da Silva', 10273849273, 'valentina@servidorx.com');
-
---Ver nomes
-
-INSERT INTO Deposito_Bancario VALUES ('P', NULL, NULL); 
-INSERT INTO Deposito_Bancario VALUES ('P', NULL, NULL); 
-INSERT INTO Deposito_Bancario VALUES ('P', NULL, NULL); 
-INSERT INTO Deposito_Bancario VALUES ('P', NULL, NULL); 
-INSERT INTO Deposito_Bancario VALUES ('P', NULL, NULL); 
-
-INSERT INTO Numero_Cartao_de_Credito VALUES ('P', NULL);
-INSERT INTO Numero_Cartao_de_Credito VALUES ('P', NULL);
-INSERT INTO Numero_Cartao_de_Credito VALUES ('P', NULL);
-INSERT INTO Numero_Cartao_de_Credito VALUES ('P', NULL);
-INSERT INTO Numero_Cartao_de_Credito VALUES ('P', NULL);
+-- INSERT INTO Numero_Cartao_de_Credito VALUES ('P', NULL);
+-- INSERT INTO Numero_Cartao_de_Credito VALUES ('P', NULL);
+-- INSERT INTO Numero_Cartao_de_Credito VALUES ('P', NULL);
+-- INSERT INTO Numero_Cartao_de_Credito VALUES ('P', NULL);
+-- INSERT INTO Numero_Cartao_de_Credito VALUES ('P', NULL);
 
 INSERT INTO Perfil_Prefere_Genero VALUES ('jureg_monteiro', 'juregmonteiro', 'Comédia');
 INSERT INTO Perfil_Prefere_Genero VALUES ('mr_pinoquio', 'mrpinoquio', 'Terror');
@@ -96,7 +63,7 @@ INSERT INTO Midia_Pertence_Temporada VALUES ('Friends E01', 1);
 INSERT INTO Midia_Pertence_Temporada VALUES ('How I Met Your Mother E01', 1);   
 INSERT INTO Midia_Pertence_Temporada VALUES ('Lost, E01', 1);   
 INSERT INTO Midia_Pertence_Temporada VALUES ('Stranger Things E01', 1);   
-INSERT INTO Midia_Pertence_Temporada VALUES ('How To Get Away With Muder E01', 1);   
+INSERT INTO Midia_Pertence_Temporada VALUES ('How To Get Away With Muder E01', 1);
 
 
 

@@ -97,7 +97,7 @@ INSERT INTO Temporada VALUES (5, 'Lost', 17);
 
 -- (Titulo da midia, nome da série, número da temporada que o ep pertence)
 INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
-	VALUES('Episodio 1 season 1', NULL, 1);
+	VALUES('E1S1', NULL, 1);
 INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
 	VALUES('E2S8', 'How I Met Your Mother', 8);
 INSERT INTO Temporada_Midia(Titulo_Midia, Nome_Serie_Temporada, Numero_Temporada) 
@@ -148,7 +148,6 @@ INSERT INTO Amizade_Recomenda_Midia VALUES (2, 'mrpinoquio', 'mr_pinoquio', 'jur
 INSERT INTO Amizade_Recomenda_Midia VALUES (3, 'kawaiiro', 'kawaiiro', 'gguimaraes', 'g_guimaraes');
 INSERT INTO Amizade_Recomenda_Midia VALUES (4, 'juregmonteiro', 'jureg_monteiro', 'kawaiiro', 'kawaiiro', 'How I Met Your Mother', 'Marshall homão da porra');
 INSERT INTO Amizade_Recomenda_Midia VALUES (5, 'gguimaraes', 'g_guimaraes', 'leticiarina', 'leticia_rina');
-
 
 INSERT INTO Midia_Pessoa VALUES ('Harry Potter and the Half-Blood Prince', 'Daniel Radcliffe', 0, 1);
 INSERT INTO Midia_Pessoa VALUES ('The Breakfast Club', 'John Hughes', 1, 0);
