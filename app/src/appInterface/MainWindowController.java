@@ -185,9 +185,7 @@ public class MainWindowController {
         prepareTableView();
         
         //gerar dados para as tabelas
-        getPersonMidia();
-
-        
+        getPersonMidia();   
     }
 }
 
