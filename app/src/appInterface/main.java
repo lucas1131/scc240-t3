@@ -46,11 +46,11 @@ public class main extends Application {
         DataHandler dh = new DataHandler();
         dh.getDBConnection();
                 
-        createPdf("reports/teste.pdf", "Teste doc.");
+        //createPdf("reports/teste.pdf", "Teste doc.");
         launch(args);
     }
 
-    public static void createPdf(String path, String text) throws Exception {
+ /*   public static void createPdf(String path, String text) throws Exception {
         
         PDDocument doc = new PDDocument();
         PDPage pg = new PDPage();
@@ -70,5 +70,5 @@ public class main extends Application {
 
         doc.save(path);
         doc.close();
-    }
+    }*/
 }

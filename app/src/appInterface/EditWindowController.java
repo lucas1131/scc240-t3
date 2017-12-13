@@ -82,6 +82,9 @@ public class EditWindowController implements Initializable {
     @FXML
     private Label midiaTitulo;
 
+    @FXML
+    private Label personRole;
+
 /* -- REVER ISSO, NAO SEI PARA QUE SERVE NO MOMENTO --    
 
     @FXML
@@ -225,7 +228,7 @@ public class EditWindowController implements Initializable {
 
         // A essa hora, eu sou incapaz de descobrir o que sao estas tres desgracas
         // (inclusive os dois de cima)
-        // personRole.setText(fk.get(i).getRecv());
+        //personRole.setText(fk.get(i).getRecv());
     }
 
     /**

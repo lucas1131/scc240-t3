@@ -34,9 +34,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER" prefHeight="152.0" prefWidth="545.0" style="-fx-background-color: #95a5a6;" text="ID do Diagnóstico" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Label alignment="CENTER" prefHeight="104.0" prefWidth="9999.0" style="-fx-background-color: #95a5a6;" text="Descrição do Diagnóstico" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Label alignment="CENTER" prefHeight="64.0" prefWidth="351.0" style="-fx-background-color: #95a5a6;" text="ID do Tratamento" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label alignment="CENTER" prefHeight="152.0" prefWidth="545.0" style="-fx-background-color: #95a5a6;" text="Título Mídia" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label alignment="CENTER" prefHeight="104.0" prefWidth="9999.0" style="-fx-background-color: #95a5a6;" text="Nome Pessoa" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label alignment="CENTER" prefHeight="64.0" prefWidth="351.0" style="-fx-background-color: #95a5a6;" text="Papel na Mídia" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <TextField fx:id="idTextBox" alignment="CENTER" GridPane.rowIndex="1" />
                   <TextField fx:id="descTextBox" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <ComboBox fx:id="comboFk" onAction="#updateTreatmentGridValues" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -64,12 +64,12 @@
                   <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label alignment="CENTER" prefHeight="152.0" prefWidth="545.0" style="-fx-background-color: #95a5a6;" text="ID do Tratamento" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label alignment="CENTER" prefHeight="152.0" prefWidth="545.0" style="-fx-background-color: #95a5a6;" text="Papel na Mídia" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Label alignment="CENTER" prefHeight="104.0" prefWidth="9999.0" style="-fx-background-color: #95a5a6;" text="Descriçao do Tratamento" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Label alignment="CENTER" prefHeight="64.0" prefWidth="351.0" style="-fx-background-color: #95a5a6;" text="Descriçao da Recuperaçao" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <TextFlow prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Text fx:id="treatmentDesc" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <Text fx:id="pessoaNome" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children>
                      <GridPane.margin>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
@@ -77,13 +77,13 @@
                   </TextFlow>
                   <TextFlow prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Text fx:id="recoveryDesc" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <Text fx:id="midiaTitulo" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children>
                      <GridPane.margin>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </GridPane.margin>
                   </TextFlow>
-                  <Label fx:id="treatmentId" alignment="CENTER" layoutX="150.0" layoutY="10.0" prefHeight="104.0" prefWidth="9999.0" wrapText="true" GridPane.rowIndex="1" />
+                  <Label fx:id="personRole" alignment="CENTER" layoutX="150.0" layoutY="10.0" prefHeight="104.0" prefWidth="9999.0" wrapText="true" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>

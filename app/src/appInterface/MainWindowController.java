@@ -80,8 +80,18 @@ public class MainWindowController {
         String role;
 
         try {
+            rset = dh.getPersonMidia();
+        } catch (SQLException ex) {
+            return;
+        }
+
+        try {
             while(rset.next()) {
-                observablePersonMidia.add(new PersonMidia(rset.getString("Titulo_Midia"), rset.getString("Nome_Pessoa"), rset.getBoolean("Ator"), rset.getBoolean("Diretor")));
+                observablePersonMidia.add(new PersonMidia(
+                    rset.getString("Titulo_Midia"), 
+                    rset.getString("Nome_Pessoa"), 
+                    rset.getBoolean("Ator"), 
+                    rset.getBoolean("Diretor")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
