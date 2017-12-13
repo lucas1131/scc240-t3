@@ -31,8 +31,8 @@ import java.util.logging.Logger;
 
 public class MainWindowController {
     
-    public List<Diagnostic> diagnostics = new ArrayList<>();
-    public ObservableList<Diagnostic> observableDiagnostics;
+    public List<PersonMidia> relations = new ArrayList<>();
+    public ObservableList<Midia> observablePersonMidia;
     private DataHandler dh;
     
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -42,16 +42,16 @@ public class MainWindowController {
     private URL location;
 
     @FXML
-    private TableView<Diagnostic> tableView;
+    private TableView<PersonMidia> tableView;
 
     @FXML
-    private TableColumn<Diagnostic, Integer> DiagnosticIdCol;
+    private TableColumn<PersonMidia, Integer> midiaTitleCol;
 
     @FXML
-    private TableColumn<Diagnostic, String> DiagnosticDescCol;
+    private TableColumn<PersonMidia, String> personNameCol;
 
     @FXML
-    private TableColumn<Diagnostic, Integer> TreatmentIdCol;
+    private TableColumn<PersonMidia, Integer> personRoleCol;
     
     @FXML
     private Button updateTableButton;
@@ -72,49 +72,50 @@ public class MainWindowController {
         tableView.refresh();
     }
     
-    public void getDiagnostics(){
+    public void getPersonMidia(){
         
         ResultSet rset = null;
         try {
-            rset = dh.getDiagnostics();
+            rset = dh.getPersonMidia();
         } catch (SQLException ex) {
             return;
         }
         
         try {
             while(rset.next()){
-                observableDiagnostics.add(new Diagnostic(rset.getInt("IDDiagnostico"),rset.getInt("MetodoTratamento"),rset.getString("DescricaoDiagnostico")));
+                observablePersonMidia.add(new Midia(rset.getString("Titulo"),rset.getString("Tipo"),rset.getString("Thumbnail"), rset.getData("Lancamento"), rset.getInt("Duracao"), rset.getString("Sinopse"), rset.getInt("Classificacao")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
     
+
+    // BUGUEI
     public void prepareTableView(){
         
-        observableDiagnostics = FXCollections.observableArrayList(diagnostics);
+        observablePersonMidia = FXCollections.observableArrayList(midia);
         
-        DiagnosticIdCol.setCellValueFactory(
-                new PropertyValueFactory<>("id")
+        midiaTitleCol.setCellValueFactory(
+                new PropertyValueFactory<>("title")
         );
         
-        DiagnosticDescCol.setCellValueFactory(
-                new PropertyValueFactory<>("desc")
+        personNameCol.setCellValueFactory(
+                new PropertyValueFactory<>("name")
         );
         
-        TreatmentIdCol.setCellValueFactory(
+        personRoleCol.setCellValueFactory(
                 new PropertyValueFactory<>("fk")
         );
         
-        tableView.setItems(observableDiagnostics);
+        tableView.setItems(observablePersonMidia);
     }
     
     @FXML
     void updateTable() {
-        observableDiagnostics.clear();
+        observablePersonMidia.clear();
         
-        getDiagnostics();
+        getPersonMidia();
         updateTableView();
     }
     
@@ -133,18 +134,18 @@ public class MainWindowController {
         stage.setScene(new Scene(root));
         
         EditWindowController editController = editLoader.<EditWindowController>getController();
-        editController.setValues(null, this, observableDiagnostics, dh);
+        editController.setValues(null, this, observablePersonMidia, dh);
         
         stage.show();
     }
     
     @FXML
     void removeTableSelection() throws SQLException{
-        Diagnostic current = tableView.getSelectionModel().getSelectedItem();
+        PersonMidia current = tableView.getSelectionModel().getSelectedItem();
         
-        dh.deleteDiagnostic(current.getId());
+        dh.deletePersonMidia(current.getTitle(), current.getName());
         
-        observableDiagnostics.remove(current);
+        observableRelations.remove(current);
     }
     
     @FXML
@@ -175,16 +176,16 @@ public class MainWindowController {
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() throws IOException, SQLException {
         
-        this.diagnostics = new ArrayList<>();
+        this.relations = new ArrayList<>();
         
         dh = new DataHandler();
         dh.getDBConnection();
         
-        //prepara a tabela para exibir os dados de observableDiagnostics
+        //prepara a tabela para exibir os dados de observableRelations
         prepareTableView();
         
         //gerar dados para as tabelas
-        getDiagnostics();
+        getPersonMidia();
 
         
     }

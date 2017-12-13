@@ -71,13 +71,22 @@ public class DataHandler{
             }
         }
     }
-    
-    public ResultSet getDiagnostics() throws SQLException{
+
+    public deletePersonMidia(String title, String name) {
         Statement stmt;
         
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         
-        return stmt.executeQuery("SELECT IDDiagnostico, descricaodiagnostico, metodotratamento FROM diagnostico d JOIN tratamento t ON d.IDDiagnostico = t.Diagnostico");
+        System.out.println("DELETE FROM Pessoa_Participa_Midia WHERE (Titulo_Midia, Nome_Pessoa) IN (" + title + ", " + name + ")");
+        stmt.execute("DELETE FROM Pessoa_Participa_Midia WHERE (Titulo_Midia, Nome_Pessoa) IN (" + title + ", " + name + ")");
+    }
+    
+    public ResultSet getPersonMidia() throws SQLException{
+        Statement stmt;
+        
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        
+        return stmt.executeQuery("SELECT Nome_Pessoa, Titulo_Midia, metodotratamento FROM diagnostico d JOIN tratamento t ON d.IDDiagnostico = t.Diagnostico");
     }
     
     public ResultSet getTreatments() throws SQLException{
