@@ -35,9 +35,10 @@ import model.Treatment;
 public class EditWindowController implements Initializable {
     
     boolean inserting;
-    private ArrayList<Treatment> fks;
-    private Diagnostic current;
-    private ObservableList<Diagnostic> diags;
+    private ArrayList<Person> fkp;
+    private ArrayList<Midia> fkm;
+    private PersonMidia current;
+    private ObservableList<PersonMidia> observableRelation;
     private DataHandler dh;
     MainWindowController mainWindow;
     
@@ -51,22 +52,36 @@ public class EditWindowController implements Initializable {
     private GridPane gridTable;
 
     @FXML
-    private TextField idTextBox;
+    private TextField titleTextBox;
 
     @FXML
-    private TextField descTextBox;
+    private TextField nameTextBox;
 
     @FXML
-    private TextField fkTextBox;
+    private TextField roleTextBox;
+
+    //@FXML
+    //private TextField fkTextBox;
 
     @FXML
     private Button saveChanges;
 
     @FXML
-    private Button discartChanges;
+    private Button discardChanges;
     
     @FXML
-    private ComboBox<String> comboFk;
+    private ComboBox<String> comboFkp;
+
+    @FXML
+    private ComboBox<String> comboFkm;
+
+    @FXML
+    private Label pessoaNome;
+
+    @FXML
+    private Label midiaTitulo;
+
+/* -- REVER ISSO, NAO SEI PARA QUE SERVE NO MOMENTO --    
 
     @FXML
     private Text treatmentDesc;
@@ -76,54 +91,79 @@ public class EditWindowController implements Initializable {
 
     @FXML
     private Label treatmentId;
+*/
     
-    public void getFks() throws SQLException{
+    public void getFkp() throws SQLException{
         
-        ResultSet rset = dh.getTreatments();
+        ResultSet rset = dh.getPerson();
         
-        fks = new ArrayList<>();
+        fkp = new ArrayList<>();
         
         int i = 0;
         while(rset.next()){
-            fks.add(new Treatment(rset.getInt("IdMetodo"), rset.getString("DescricaoMetodo"), rset.getString("DescricaoEfetividade")));
+            fkp.add(new Person(rset.getString("Nome")));
+        }
+    }
+
+    public void getFkm() throws SQLException{
+        
+        ResultSet rset = dh.getMidia();
+        
+        fkm = new ArrayList<>();
+        
+        int i = 0;
+        while(rset.next()){
+            fkm.add(new Midia(rset.getString("Titulo"), rset.getString("Tipo"), rset.getString("Thumbnail"), rset.getString("Sinopse"), rset.getInt("Duracao"), NULL, rset.getInt("Classificacao")));
         }
     }
     
-    public void setValues(Diagnostic d, MainWindowController m, ObservableList<Diagnostic> diagnostics, DataHandler dh) throws SQLException{
+    public void setValues(PersonMidia p, MainWindowController m, ObservableList<PersonMidia> pmidia, DataHandler dh) throws SQLException{
         this.dh = dh;
-        this.setValues(d,m,diagnostics);
+        this.setValues(p,m,pmidia);
     }
     
-    public void setValues(Diagnostic d, MainWindowController m, ObservableList<Diagnostic> diagnostics) throws SQLException{
-        this.diags = diagnostics;
-        this.setValues(d,m);
+    public void setValues(PersonMidia p, MainWindowController m, ObservableList<PersonMidia> pmidia) throws SQLException{
+        this.observableRelation = pmidia;
+        this.setValues(p,m);
     }
     
-    public void setValues(Diagnostic d, MainWindowController m) throws SQLException{
+    public void setValues(PersonMidia p, MainWindowController m) throws SQLException{
         
-        this.current = d;
+        this.current = p;
         if(this.current == null){
             inserting = true;
-            this.current = new Diagnostic(0,0,"");
+            this.current = new PersonMidia("","",false, false);
         } else {
             inserting = false;
         }
         this.mainWindow = m;
         
-        current.getId();
-        idTextBox.setText("" + current.getId());
-        descTextBox.setText(current.getDesc());
+        current.getTitle();
+        titleTextBox.setText("" + current.getTitle());
+        nameTextBox.setText(current.getName());
+        roleTextBox.setText(current.getRole());
         
-        getFks();
-        ArrayList<String> tmp = new ArrayList<>();
+        getFkp();
+        getFkm();
+        ArrayList<String> tmpp = new ArrayList<>();
+        ArrayList<String> tmpm = new ArrayList<>();
         
-        for(int i = 0; i < fks.size();  i++){
-            tmp.add(i,fks.get(i).toString());
+        for(int i = 0; i < fkp.size();  i++){
+            tmpp.add(i,fkp.get(i).toString());
+        }
+
+        for(int i = 0; i < fkm.size();  i++){
+            tmpm.add(i,fkm.get(i).toString());
         }
         
-        comboFk.getItems().addAll(tmp);
-        if(this.current.getDesc().length() > 0){
-            comboFk.getSelectionModel().selectFirst();
+        comboFkp.getItems().addAll(tmpp);
+        if(this.current.getName().length() > 0){
+            comboFkp.getSelectionModel().selectFirst();
+        }
+
+        comboFkm.getItems().addAll(tmpm);
+        if(this.current.getTitle().length() > 0){
+            comboFkm.getSelectionModel().selectFirst();
         }
     }
         
@@ -140,38 +180,48 @@ public class EditWindowController implements Initializable {
     }
 
     @FXML
-    public void save(ActionEvent event) throws SQLException {
+    public void save(ActionEvent event) throws SQLException {        
         
-        int oldId = Integer.parseInt(idTextBox.getText());
+        // VER SE NAO DEIXEI MAIS CURRENT.GETFK()
+        current.parseRole(roleTextBox.getText());
         
+        current.setName(comboFkp.getValue());
+        current.setTitle(comboFkm.getValue());
         
-        current.setId(Integer.parseInt(idTextBox.getText()));
-        current.setDesc(descTextBox.getText());
-        current.setFk(Integer.parseInt(comboFk.getValue()));
-        
-        if(inserting){
-            System.out.println("Inserting " + current.getId() + " " + current.getDesc());
-            dh.insertDiagnostic(current.getId(), current.getFk(), current.getDesc());
-        } else {
-            
+        if(inserting) {
+            System.out.println("Inserting " + current.getTitle() + " " + current.getName());
+            dh.insertPersonMidia(current.getTitle(), current.getName(), current.parseRole());
         }
-        
-        
-        
+
         closeWindow();
     }
     
     @FXML
     void updateTreatmentGridValues(ActionEvent event) {
-        int id = Integer.parseInt(comboFk.getValue());
+        String title = comboFkm.getValue();
+        String name = comboFkp.getValue();
         
         int i = 0;
-        for(i = 0; i < fks.size(); i++){
-            if(fks.get(i).getId() == id) break;
+
+        for(i = 0; i < fkm.size(); i++) {
+            if(fkm.get(i).getTitle() == title) break;
         }
-        treatmentId.setText(fks.get(i).toString());
-        treatmentDesc.setText(fks.get(i).getDesc());
-        recoveryDesc.setText(fks.get(i).getRecv());
+
+        mediaTitle.setText(fkm.get(i).getTitle());
+
+        for(i = 0; i < fkp.size(); i++) {
+            if(fkp.get(i).getName() == name) break;
+        }
+
+        // Namoral, eu nao tenho ideia do que ta contecendo aqui,
+        // muito menos do porque eu fiz isso, mas pareceu o mais certo
+        // pls, send halp
+
+        personName.setText(fkp.get(i).getName());
+
+        // A essa hora, eu sou incapaz de descobrir o que sao estas tres desgracas
+        // (inclusive os dois de cima)
+        // personRole.setText(fk.get(i).getRecv());
     }
 
     /**

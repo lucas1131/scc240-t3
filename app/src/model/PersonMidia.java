@@ -44,4 +44,28 @@ public class PersonMidia {
     public String getName(){ return name.get(); }
     public boolean getActor(){ return getActor.get(); }
     public boolean getDirector(){ return getDirector.get(); }
+    
+    public String getRole() {
+    	role = getActor() ? "T" : "F";
+        role += ", ";
+        role += getDirector() ? "T" : "F";
+
+        return role;
+    }
+
+    public void parseRole(String role) {
+    	String[] roles = role.split(",");
+
+    	if(roles[0].contains("T")) {
+    		setActor(true);
+    	} else {
+    		setActor(false);
+    	}
+
+    	if(roles[1].contains("T")) {
+    		setDirector(true);
+    	} else {
+    		setDirector(false);
+    	}
+    }
 }
