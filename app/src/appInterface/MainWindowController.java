@@ -190,3 +190,8 @@ public class MainWindowController {
         
     }
 }
+
+
+/*      String role = actor ? "T" : "F";
+        role += ", ";
+        role += director ? "T" : "F";*/
