@@ -92,18 +92,18 @@ public class MainWindowController {
     // BUGUEI
     public void prepareTableView(){
 
-        observablePersonMidia = FXCollections.observableArrayList("midia");
+        observablePersonMidia = FXCollections.observableArrayList(observableRelations);
 
         midiaTitleCol.setCellValueFactory(
-                new PropertyValueFactory<>("title")
+                new PropertyValueFactory<>("Title")
         );
         
         personNameCol.setCellValueFactory(
-                new PropertyValueFactory<>("name")
+                new PropertyValueFactory<>("Name")
         );
         
         personRoleCol.setCellValueFactory(
-                new PropertyValueFactory<>("role")
+                new PropertyValueFactory<>("Role")
         );
         
         tableView.setItems(observablePersonMidia);

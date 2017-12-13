@@ -192,7 +192,7 @@ public class EditWindowController implements Initializable {
         if(inserting) {
             System.out.println("Inserting " + current.getTitle() + " " + current.getName());
             // Precisa inserir dois booleanos no final, um para ator e um para diretor
-             dh.insertPersonMidia(current.getTitle(), current.getName(), current.parseRole());
+             dh.insertPersonMidia(current.getTitle(), current.getName(), current.getActor(), current.getDirector());
         }
 
         closeWindow();
