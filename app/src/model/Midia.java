@@ -37,15 +37,15 @@ public class Midia {
         this.sinopse = new SimpleStringProperty(sinopse);
         this.rating = new SimpleIntegerProperty(rating);
         this.duration = new SimpleIntegerProperty(duration);
-        this.launchDate = new SimpleStringProperty(date.ToString());
+        this.launchDate = new SimpleStringProperty(date.toString());
     }
 
     public void setTitle(String title) {this.title.set(title); }
     public void setType(String type) {this.type.set(type); }
     public void setThumbnail(String thumbnail) {this.thumbnail.set(thumbnail); }
     public void setSinopse(String sinopse) {this.sinopse.set(sinopse); }
-    public void setRating(String rating) {this.rating.set(rating); }
-    public void setDuration(String duration) {this.duration.set(duration); }
+    public void setRating(int rating) {this.rating.set(rating); }
+    public void setDuration(int duration) {this.duration.set(duration); }
 
     public String getTitle() {return title.get(); }
     public String getType() {return type.get(); }

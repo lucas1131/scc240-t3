@@ -84,7 +84,7 @@ public class DataHandler {
         
         Statement stmt;
         
-        nome = generateStringWithAspas(name);
+        name = generateStringWithAspas(name);
         title = generateStringWithAspas(title);
 
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -123,7 +123,7 @@ public class DataHandler {
         
         Statement stmt;
 
-        nome = generateStringWithAspas(name);
+        name = generateStringWithAspas(name);
         title = generateStringWithAspas(title); 
 
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -141,7 +141,7 @@ public class DataHandler {
         // thumbnail = generateStringWithAspas(thumbnail);
         // type = generateStringWithAspas(type);
         // String convertedDate = generateStringWithAspas(javaDateToSQLDate(date));
-        nome = generateStringWithAspas(name);
+        name = generateStringWithAspas(name);
 
         char a = actor ? 'T' : 'F';
         char d = director ? 'T' : 'F';
@@ -159,7 +159,7 @@ public class DataHandler {
         return true;
     }
 
-    public boolean insertMidia(String name, String type, String thumbnail, String sinopse, int duration, Date date, int rating) throws SQLException {
+    public boolean insertMidia(String title, String type, String thumbnail, String sinopse, int duration, Date date, int rating) throws SQLException {
         
         Statement stmt;
 
@@ -211,10 +211,11 @@ public class DataHandler {
     }
 
     // DEVE ESTAR CERTO
-    public void updateMidia(String sinopse, String thumbnail, String type, int rating, int duration, Date date) throws SQLException{
+    public void updateMidia(String title, String sinopse, String thumbnail, String type, int rating, int duration, Date date) throws SQLException{
         
         Statement stmt;
 
+        title = generateStringWithAspas(title);
         sinopse = generateStringWithAspas(sinopse);
         thumbnail = generateStringWithAspas(thumbnail);
         type = generateStringWithAspas(type);

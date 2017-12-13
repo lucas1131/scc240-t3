@@ -114,7 +114,7 @@ public class EditWindowController implements Initializable {
         
         int i = 0;
         while(rset.next()){
-            fkm.add(new Midia(rset.getString("Titulo"), rset.getString("Tipo"), rset.getString("Thumbnail"), rset.getString("Sinopse"), rset.getInt("Duracao"), NULL, rset.getInt("Classificacao")));
+            fkm.add(new Midia(rset.getString("Titulo"), rset.getString("Tipo"), rset.getString("Thumbnail"), rset.getString("Sinopse"), rset.getInt("Classificacao"), rset.getInt("Duracao"), rset.getDate("Lancamento")));
         }
     }
     
@@ -171,7 +171,7 @@ public class EditWindowController implements Initializable {
     
     public void closeWindow(){
         mainWindow.updateTable();
-        Stage stage = (Stage)discartChanges.getScene().getWindow();
+        Stage stage = (Stage)discardChanges.getScene().getWindow();
         stage.close();
     }
     
@@ -191,7 +191,8 @@ public class EditWindowController implements Initializable {
         
         if(inserting) {
             System.out.println("Inserting " + current.getTitle() + " " + current.getName());
-            dh.insertPersonMidia(current.getTitle(), current.getName(), current.parseRole());
+            // Precisa inserir dois booleanos no final, um para ator e um para diretor
+            // dh.insertPersonMidia(current.getTitle(), current.getName(), current.parseRole());
         }
 
         closeWindow();

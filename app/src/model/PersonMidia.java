@@ -35,10 +35,10 @@ public class PersonMidia {
         this.director = new SimpleBooleanProperty(director);
     }
 
-    public void setTitle(String title){ this.name.set(title); }
+    public void setTitle(String title){ this.title.set(title); }
     public void setName(String name){ this.name.set(name); }
-    public void setActor(String actor){ this.name.set(actor); }
-    public void setDirector(String director){ this.name.set(director); }
+    public void setActor(boolean actor){ this.actor.set(actor); }
+    public void setDirector(boolean director){ this.director.set(director); }
 
     public String getTitle(){ return title.get(); }
     public String getName(){ return name.get(); }

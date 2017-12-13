@@ -33,8 +33,8 @@ import java.util.logging.Logger;
 
 public class MainWindowController {
     
-    public List<PersonMidia> relations = new ArrayList<>();
-    public ObservableList<Midia> observablePersonMidia;
+    public List<PersonMidia> observableRelations = new ArrayList<>();
+    public ObservableList<PersonMidia> observablePersonMidia;
     private DataHandler dh;
     
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -80,18 +80,8 @@ public class MainWindowController {
         String role;
 
         try {
-            rset = dh.getPersonMidia();
-            
-            role = rset.get("Ator") ? "T" : "F";
-            role += ", ";
-            role += rset.get("Diretor") ? "T" : "F";
-        } catch (SQLException ex) {
-            return;
-        }
-        
-        try {
             while(rset.next()) {
-                observablePersonMidia.add(new PersonMidia(rset.getString("Titulo_Midia"), rset.getString("Nome_Pessoa"), role));
+                observablePersonMidia.add(new PersonMidia(rset.getString("Titulo_Midia"), rset.getString("Nome_Pessoa"), rset.getBoolean("Ator"), rset.getBoolean("Diretor")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,7 +92,7 @@ public class MainWindowController {
     // BUGUEI
     public void prepareTableView(){
         
-        observablePersonMidia = FXCollections.observableArrayList(midia);
+        observablePersonMidia = FXCollections.observableArrayList("midia");
         
         midiaTitleCol.setCellValueFactory(
                 new PropertyValueFactory<>("title")
@@ -184,7 +174,7 @@ public class MainWindowController {
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() throws IOException, SQLException {
         
-        this.relations = new ArrayList<>();
+        this.observableRelations = new ArrayList<>();
         
         dh = new DataHandler();
         dh.getDBConnection();
