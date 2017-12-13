@@ -10,25 +10,46 @@ import javafx.beans.property.SimpleStringProperty;
 
 /**
  *
- * @author jureg
+ * @author Giovanna
+ * @author Lucas
+ * @author mrPips
+ * @author Rina
+ * @credits Jureg
  */
-public class Diagnostic {
-        
-    public SimpleIntegerProperty id;
-    public SimpleIntegerProperty fk;
-    public SimpleStringProperty desc;
+public class Midia {
 
-    public Diagnostic(int id, int fkId, String desc){
-        this.id = new SimpleIntegerProperty(id);
-        this.fk = new SimpleIntegerProperty(fkId);
-        this.desc = new SimpleStringProperty(desc);
+    public SimpleStringProperty title;
+    public SimpleStringProperty type;
+    public SimpleStringProperty thumbnail;
+    public SimpleStringProperty sinopse;
+    public SimpleIntegerProperty rating;
+    public SimpleIntegerProperty duration;
+    public SimpleStringProperty launchDate;
+    public Date date;
+
+    public Midia(String title, String type, String thumbnail,
+                 String sinopse, int rating, int duration, Date date) {
+        
+        this.title = SimpleStringProperty(title);
+        this.type = SimpleStringProperty(type);
+        this.thumbnail = SimpleStringProperty(thumbnail);
+        this.sinopse = SimpleStringProperty(sinopse);
+        this.rating = SimpleIntegerProperty(rating);
+        this.duration = SimpleIntegerProperty(duration);
+        this.launchDate = SimpleStringProperty(date.ToString());
     }
 
-    public void setId(int id){ this.id.set(id) ;}
-    public void setFk(int fkId){ this.fk.set(fkId) ;}
-    public void setDesc(String desc){ this.desc.set(desc) ;}
+    public void setTitle(String title) {this.title.set(title); }
+    public void setType(String type) {this.type.set(type); }
+    public void setThumbnail(String thumbnail) {this.thumbnail.set(thumbnail); }
+    public void setSinopse(String sinopse) {this.sinopse.set(sinopse); }
+    public void setRating(String rating) {this.rating.set(rating); }
+    public void setDuration(String duration) {this.duration.set(duration); }
 
-    public int getId(){ return id.get() ;}
-    public int getFk(){ return fk.get() ;}
-    public String getDesc(){ return desc.get() ;}
+    public String getTitle() {return title.get(); }
+    public String getType() {return type.get(); }
+    public String getThumbnail() {return thumbnail.get(); }
+    public String getSinopse() {return sinopse.get(); }
+    public int getRating() {return rating.get(); }
+    public int getDuration() {return duration.get(); }
 }

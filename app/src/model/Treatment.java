@@ -10,30 +10,20 @@ import javafx.beans.property.SimpleStringProperty;
 
 /**
  *
- * @author jureg
+ * @author Giovanna
+ * @author Lucas
+ * @author mrPips
+ * @author Rina
+ * @credits Jureg
  */
-public class Treatment {
-    
-    public SimpleIntegerProperty id;
-    public SimpleStringProperty desc;
-    public SimpleStringProperty recv;
+public class Person {
 
-    public Treatment(int id, String desc, String recv){
-        this.id = new SimpleIntegerProperty(id);
-        this.desc = new SimpleStringProperty(desc);
-        this.recv = new SimpleStringProperty(recv);
+    public SimpleStringProperty name;
+
+    public Person(String name) {
+        this.name = new SimpleStringProperty(name);
     }
 
-    public void setId(int id){ this.id.set(id) ;}
-    public void setDesc(String desc){ this.desc.set(desc) ;}
-    public void setRecv(String recv){ this.recv.set(recv) ;}
-
-    public int getId(){ return id.get() ;}
-    public String getDesc(){ return desc.get() ;}
-    public String getRecv(){ return recv.get() ;}
-    
-    @Override
-    public String toString(){
-        return "" + getId();
-    }
+    public void setName(String name){ this.name.set(name); }
+    public String getRecv(){ return name.get(); }
 }
