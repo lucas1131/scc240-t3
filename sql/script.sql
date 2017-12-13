@@ -163,7 +163,7 @@ CREATE TABLE Temporada (
     Numero NUMBER CHECK (Numero >= 0),
 
     Nome_Serie VARCHAR(100),
-        FOREIGN KEY (Nome_Serie) REFERENCES Serie(Nome) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_Serie) REFERENCES Serie(Nome) ON DELETE CASCADE,
 
     Numero_de_episodios NUMBER CHECK (Numero_de_episodios >= 0),
         PRIMARY KEY (Numero, Nome_Serie)
@@ -177,9 +177,9 @@ CREATE TABLE Temporada_Midia (
     Numero_Temporada NUMBER CHECK (Numero_Temporada >= 0),
         PRIMARY KEY (Titulo_Midia, Numero_Temporada),
 
-        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE SET NULL,
+        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE CASCADE,
         FOREIGN KEY (Nome_Serie_Temporada, Numero_Temporada) 
-            REFERENCES Temporada(Nome_Serie, Numero) ON DELETE SET NULL
+            REFERENCES Temporada(Nome_Serie, Numero) ON DELETE CASCADE
 );
 
 
@@ -191,7 +191,7 @@ CREATE TABLE Conta (
         PRIMARY KEY (Nome_de_usuario),
     
     Forma_de_Pagamento CHAR NOT NULL,
-        FOREIGN KEY (Forma_de_Pagamento) REFERENCES Forma_de_Pagamento(Metodo) ON DELETE SET NULL,
+        FOREIGN KEY (Forma_de_Pagamento) REFERENCES Forma_de_Pagamento(Metodo) ON DELETE CASCADE,
     
     Senha VARCHAR2(20),
     Nome VARCHAR2(50),
@@ -210,11 +210,11 @@ CREATE TABLE Perfil (
     
     Nome_usuario_Conta VARCHAR2(20)
         CHECK (REGEXP_LIKE(Nome_usuario_Conta, '[a-zA-Z_[:digit:]]+')),
-        FOREIGN KEY (Nome_usuario_Conta) REFERENCES Conta(Nome_de_usuario) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_usuario_Conta) REFERENCES Conta(Nome_de_usuario) ON DELETE CASCADE,
     
     Idade_Faixa_Etaria NUMBER NOT NULL
         CHECK (Idade_Faixa_Etaria > 0),
-        FOREIGN KEY (Idade_Faixa_Etaria) REFERENCES Idade_Faixa_Etaria(Idade) ON DELETE SET NULL,
+        FOREIGN KEY (Idade_Faixa_Etaria) REFERENCES Idade_Faixa_Etaria(Idade) ON DELETE CASCADE,
     
     Preferencia_qualidade VARCHAR2(50),
     Preferencia_legenda VARCHAR2(50),
@@ -236,7 +236,7 @@ CREATE TABLE Amizade (
             REGEXP_LIKE(Nome_usuario_solicita_Perfil, '[a-zA-Z_[:digit:]]+')
         ),
         FOREIGN KEY (Alias_fez_solicitacao_Perfil, Nome_usuario_solicita_Perfil) 
-            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE SET NULL,
+            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE CASCADE,
 
     Alias_solicitado_Perfil VARCHAR(20) CHECK (
             REGEXP_LIKE(Alias_solicitado_Perfil, '[a-zA-Z[:digit:]]+')
@@ -246,7 +246,7 @@ CREATE TABLE Amizade (
             REGEXP_LIKE(Nome_usuario_solicitado_Perfil, '[a-zA-Z_[:digit:]]+')
         ),
         FOREIGN KEY (Alias_solicitado_Perfil, Nome_usuario_solicitado_Perfil) 
-            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE SET NULL,
+            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE CASCADE,
         
         PRIMARY KEY (Id, 
                     Alias_fez_solicitacao_Perfil, 
@@ -261,7 +261,7 @@ CREATE TABLE Acesso (
     Timestamp_Acesso TIMESTAMP,
 
     Id_Dispositivo NUMBER,
-        FOREIGN KEY (Id_Dispositivo) REFERENCES Dispositivo(Id) ON DELETE SET NULL,
+        FOREIGN KEY (Id_Dispositivo) REFERENCES Dispositivo(Id) ON DELETE CASCADE,
 
     Alias_Perfil VARCHAR(20) CHECK (
             REGEXP_LIKE(Alias_Perfil, '[a-zA-Z[:digit:]]+')
@@ -271,7 +271,7 @@ CREATE TABLE Acesso (
             REGEXP_LIKE(Nome_usuario_Perfil, '[a-zA-Z_[:digit:]]+')
         ),
         FOREIGN KEY (Alias_Perfil, Nome_usuario_Perfil) 
-            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE SET NULL,
+            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE CASCADE,
 
     Ip CHAR(15) CHECK (
         REGEXP_LIKE(Ip, '([[:digit:]]{1,3}\.){3}([[:digit:]]{1,3})')
@@ -289,13 +289,13 @@ CREATE TABLE Perfil_Assiste_Midia (
     Nome_de_usuario_Perfil VARCHAR(20) CHECK (
             REGEXP_LIKE(Nome_de_usuario_Perfil, '[a-zA-Z_[:digit:]]+')
         ),
-        FOREIGN KEY (Alias_Perfil, Nome_de_usuario_Perfil) REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE SET NULL,
+        FOREIGN KEY (Alias_Perfil, Nome_de_usuario_Perfil) REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE CASCADE,
 
     Titulo_Midia VARCHAR2(100),
-        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE SET NULL,
+        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE CASCADE,
 
     Id_Review NUMBER CHECK (Id_Review >= 0),
-        FOREIGN KEY (Id_Review) REFERENCES Review(Id) ON DELETE SET NULL,
+        FOREIGN KEY (Id_Review) REFERENCES Review(Id) ON DELETE CASCADE,
 
     Tempo NUMBER,
         
@@ -313,7 +313,7 @@ CREATE TABLE Perfil_Possui_Dispositivo (
             REGEXP_LIKE(Nome_de_usuario_Perfil, '[a-zA-Z_[:digit:]]+')
         ),
         FOREIGN KEY (Alias_Perfil, Nome_de_usuario_Perfil) 
-            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE SET NULL,
+            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE CASCADE,
         
         PRIMARY KEY (Nome_de_usuario_Perfil)
 );
@@ -322,7 +322,7 @@ CREATE TABLE Perfil_Possui_Dispositivo (
 CREATE TABLE Amizade_Recomenda_Midia (
 
     Id_Amizade NUMBER CHECK (Id_Amizade >= 0),
-        FOREIGN KEY (Id_Amizade) REFERENCES Amizade(Id) ON DELETE SET NULL,
+        FOREIGN KEY (Id_Amizade) REFERENCES Amizade(Id) ON DELETE CASCADE,
 
     Alias_solicita_Perfil VARCHAR(20) 
         CHECK (REGEXP_LIKE(Alias_solicita_Perfil, '[a-zA-Z[:digit:]]+')),
@@ -330,7 +330,7 @@ CREATE TABLE Amizade_Recomenda_Midia (
     Nome_usuario_solicita_Perfil VARCHAR(20) 
         CHECK (REGEXP_LIKE(Nome_usuario_solicita_Perfil, '[a-zA-Z_[:digit:]]+')),
         FOREIGN KEY (Alias_solicita_Perfil, Nome_usuario_solicita_Perfil) 
-            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE SET NULL,
+            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE CASCADE,
 
     Alias_solicitado_Perfil
         CHECK (REGEXP_LIKE(Alias_solicitado_Perfil, '[a-zA-Z[:digit:]]+')),
@@ -338,10 +338,10 @@ CREATE TABLE Amizade_Recomenda_Midia (
     Nome_usuario_solicitado_Perfil
         CHECK (REGEXP_LIKE(Nome_usuario_solicitado_Perfil, '[a-zA-Z_[:digit:]]+')),
         FOREIGN KEY (Alias_solicitado_Perfil, Nome_usuario_solicitado_Perfil) 
-            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE SET NULL,
+            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE CASCADE,
 
     Titulo_Midia,
-        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE SET NULL,
+        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE CASCADE,
 
     Comentario_de_recomendacao VARCHAR2(300),
         
@@ -356,9 +356,9 @@ CREATE TABLE Amizade_Recomenda_Midia (
 
 CREATE TABLE Serie_Pessoa (
     Nome_Serie VARCHAR2(100),
-        FOREIGN KEY (Nome_Serie) REFERENCES Serie(Nome) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_Serie) REFERENCES Serie(Nome) ON DELETE CASCADE,
     Nome_Pessoa VARCHAR(50),
-        FOREIGN KEY (Nome_Pessoa) REFERENCES Pessoa(Nome) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_Pessoa) REFERENCES Pessoa(Nome) ON DELETE CASCADE,
     Diretor VARCHAR(50),
     Ator VARCHAR2(50),
         PRIMARY KEY (Nome_Serie, Nome_Pessoa)
@@ -367,9 +367,9 @@ CREATE TABLE Serie_Pessoa (
 
 CREATE TABLE Pessoa_Participa_Midia (
     Titulo_Midia VARCHAR2(100),
-        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE SET NULL,
+        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE CASCADE,
     Nome_Pessoa VARCHAR2(50),
-        FOREIGN KEY (Nome_Pessoa) REFERENCES Pessoa(Nome) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_Pessoa) REFERENCES Pessoa(Nome) ON DELETE CASCADE,
     Diretor CHAR CHECK (Diretor IN ('T', 'F')),
     Ator CHAR CHECK (Ator IN ('T', 'F')),
         PRIMARY KEY (Titulo_Midia, Nome_Pessoa)
@@ -378,9 +378,9 @@ CREATE TABLE Pessoa_Participa_Midia (
 
 CREATE TABLE Pessoa_Participa_Serie (
     Nome_Serie VARCHAR2(100),
-        FOREIGN KEY (Nome_Serie) REFERENCES Serie(Nome) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_Serie) REFERENCES Serie(Nome) ON DELETE CASCADE,
     Nome_Pessoa VARCHAR2(50),
-        FOREIGN KEY (Nome_Pessoa) REFERENCES Pessoa(Nome) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_Pessoa) REFERENCES Pessoa(Nome) ON DELETE CASCADE,
     Diretor CHAR CHECK (Diretor IN ('T', 'F')),
     Ator CHAR CHECK (Ator IN ('T', 'F')),
         PRIMARY KEY (Nome_Serie, Nome_Pessoa)
@@ -390,7 +390,7 @@ CREATE TABLE Pessoa_Participa_Serie (
 CREATE TABLE Conta_Deposito_Bancario (
     
     Forma_de_Pagamento CHAR CHECK (Forma_de_Pagamento IN ('P','C','D')),
-        FOREIGN KEY (Forma_de_Pagamento) REFERENCES Forma_de_Pagamento(Metodo) ON DELETE SET NULL,
+        FOREIGN KEY (Forma_de_Pagamento) REFERENCES Forma_de_Pagamento(Metodo) ON DELETE CASCADE,
     
     Conta NUMBER(6),
     Agencia NUMBER(5),
@@ -410,14 +410,14 @@ CREATE TABLE Deposito_Bancario (
     Conta_Deposito_Bancario NUMBER(6),
     Agencia_Deposito_Bancario NUMBER(5),
         FOREIGN KEY (Forma_de_Pagamento, Conta_Deposito_Bancario, Agencia_Deposito_Bancario) 
-            REFERENCES Conta_Deposito_Bancario(Forma_de_Pagamento, Conta, Agencia) ON DELETE SET NULL
+            REFERENCES Conta_Deposito_Bancario(Forma_de_Pagamento, Conta, Agencia) ON DELETE CASCADE
 );
 
 
 CREATE TABLE Cartao_de_Credito (
     Numero_do_cartao NUMBER,
     Forma_de_Pagamento CHAR,
-        FOREIGN KEY (Forma_de_Pagamento) REFERENCES Forma_de_Pagamento(Metodo) ON DELETE SET NULL,
+        FOREIGN KEY (Forma_de_Pagamento) REFERENCES Forma_de_Pagamento(Metodo) ON DELETE CASCADE,
     Bandeira VARCHAR(15),
     Codigo_de_seguranca NUMBER,
     Vencimento_do_cartao DATE,
@@ -431,7 +431,7 @@ CREATE TABLE Numero_Cartao_de_Credito (
         PRIMARY KEY (Numero_do_cartao, Forma_de_Pagamento),
     Numero_do_cartao NUMBER(16),
         FOREIGN KEY (Numero_do_cartao, Forma_de_Pagamento) 
-            REFERENCES Cartao_de_Credito(Numero_do_cartao, Forma_de_Pagamento) ON DELETE SET NULL
+            REFERENCES Cartao_de_Credito(Numero_do_cartao, Forma_de_Pagamento) ON DELETE CASCADE
 );
 
 
@@ -446,10 +446,10 @@ CREATE TABLE Perfil_Prefere_Genero (
             REGEXP_LIKE(Nome_de_usuario_Perfil, '[a-zA-Z_[:digit:]]+')
         ),
         FOREIGN KEY (Alias_Perfil, Nome_de_usuario_Perfil) 
-            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE SET NULL,
+            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE CASCADE,
     
     Nome_Genero VARCHAR2(30),
-        FOREIGN KEY (Nome_Genero) REFERENCES Genero(Nome) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_Genero) REFERENCES Genero(Nome) ON DELETE CASCADE,
     
     Nota NUMBER CHECK (Nota >= 0 AND Nota <= 10),
         PRIMARY KEY (Alias_Perfil, Nome_de_usuario_Perfil, Nome_Genero)
@@ -465,7 +465,7 @@ CREATE TABLE Perfil_Solicita_Amizade (
             REGEXP_LIKE(Nome_usuario_solicita_Perfil, '[a-zA-Z_[:digit:]]+')
         ),
         FOREIGN KEY (Alias_solicita_Perfil, Nome_usuario_solicita_Perfil) 
-            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE SET NULL,
+            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE CASCADE,
 
     Alias_solicitado_Perfil VARCHAR2(20) CHECK (
             REGEXP_LIKE(Alias_solicitado_Perfil, '[a-zA-Z[:digit:]]+')
@@ -475,7 +475,7 @@ CREATE TABLE Perfil_Solicita_Amizade (
             REGEXP_LIKE(Nome_usuario_solicitado_Perfil, '[a-zA-Z_[:digit:]]+')
         ),
         FOREIGN KEY (Alias_solicitado_Perfil, Nome_usuario_solicitado_Perfil) 
-            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE SET NULL,
+            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE CASCADE,
     
     Aceitou CHAR(1) CHECK (
         Aceitou IN ('T', 'F')
@@ -499,7 +499,7 @@ CREATE TABLE Gerencia (
             REGEXP_LIKE(Usuario_gerencia_Perfil, '[a-zA-Z_[:digit:]]+')
         ),
         FOREIGN KEY (Alias_gerencia_Perfil, Usuario_gerencia_Perfil) 
-            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE SET NULL,
+            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE CASCADE,
 
     Alias_kids_gerenciado_Perfil VARCHAR2(20) CHECK (
             REGEXP_LIKE(Alias_kids_gerenciado_Perfil, '[a-zA-Z[:digit:]]+')
@@ -509,7 +509,7 @@ CREATE TABLE Gerencia (
             REGEXP_LIKE(Usuario_kids_gerenciado_Perfil, '[a-zA-Z_[:digit:]]+')
         ),
         FOREIGN KEY (Alias_kids_gerenciado_Perfil, Usuario_kids_gerenciado_Perfil) 
-            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE SET NULL,
+            REFERENCES Perfil(AliasP, Nome_usuario_Conta) ON DELETE CASCADE,
 
         PRIMARY KEY (Alias_kids_gerenciado_Perfil, Usuario_kids_gerenciado_Perfil)
 );
@@ -518,7 +518,7 @@ CREATE TABLE Gerencia (
 CREATE TABLE Audio_Midia (
     Audio VARCHAR2(200),
     Titulo VARCHAR2(100),
-        FOREIGN KEY (Titulo) REFERENCES Midia(Titulo) ON DELETE SET NULL,
+        FOREIGN KEY (Titulo) REFERENCES Midia(Titulo) ON DELETE CASCADE,
         
         PRIMARY KEY (Audio, Titulo)
 );
@@ -527,7 +527,7 @@ CREATE TABLE Audio_Midia (
 CREATE TABLE Legenda_Midia (
     Legenda VARCHAR2(200),
     Titulo VARCHAR2(100),
-        FOREIGN KEY (Titulo) REFERENCES Midia(Titulo) ON DELETE SET NULL,
+        FOREIGN KEY (Titulo) REFERENCES Midia(Titulo) ON DELETE CASCADE,
     
         PRIMARY KEY (Legenda, Titulo)
 );
@@ -535,9 +535,9 @@ CREATE TABLE Legenda_Midia (
 
 CREATE TABLE Midia_Pertence_Genero (
     Titulo_Midia VARCHAR2(100),
-        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE SET NULL,
+        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE CASCADE,
     Nome_Genero VARCHAR2(30),
-        FOREIGN KEY (Nome_Genero) REFERENCES Genero(Nome) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_Genero) REFERENCES Genero(Nome) ON DELETE CASCADE,
 
         PRIMARY KEY (Titulo_Midia, Nome_Genero)
 );
@@ -545,10 +545,10 @@ CREATE TABLE Midia_Pertence_Genero (
 
 CREATE TABLE Midia_Pertence_Temporada (
     Titulo_Midia VARCHAR2(100),
-        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE SET NULL,
+        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE CASCADE,
     Nome_Serie_Temporada VARCHAR2(100),
     Numero_Temporada NUMBER CHECK (Numero_Temporada >= 0),
-        FOREIGN KEY (Nome_Serie_Temporada, Numero_Temporada) REFERENCES Temporada(Nome_Serie, Numero) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_Serie_Temporada, Numero_Temporada) REFERENCES Temporada(Nome_Serie, Numero) ON DELETE CASCADE,
 
         PRIMARY KEY (Titulo_Midia, Numero_Temporada)
 );
@@ -556,7 +556,7 @@ CREATE TABLE Midia_Pertence_Temporada (
 
 CREATE TABLE Paypal (
     Forma_de_Pagamento CHAR,
-        FOREIGN KEY (Forma_de_Pagamento) REFERENCES Forma_de_Pagamento(Metodo) ON DELETE SET NULL,
+        FOREIGN KEY (Forma_de_Pagamento) REFERENCES Forma_de_Pagamento(Metodo) ON DELETE CASCADE,
     Senha VARCHAR2(20),
     Email_paypal VARCHAR(50),
         PRIMARY KEY (Forma_de_Pagamento, Email_paypal)
@@ -565,10 +565,10 @@ CREATE TABLE Paypal (
 
 CREATE TABLE Conta_Assina_Plano ( 
     Nome_Plano VARCHAR2(50),
-        FOREIGN KEY (Nome_Plano) REFERENCES Plano(Nome) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_Plano) REFERENCES Plano(Nome) ON DELETE CASCADE,
     Nome_usuario_Conta VARCHAR2(50) 
         CHECK(REGEXP_LIKE(Nome_usuario_Conta, '[a-zA-Z_[:digit:]]+')),
-        FOREIGN KEY (Nome_usuario_Conta) REFERENCES Conta(Nome_de_usuario) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_usuario_Conta) REFERENCES Conta(Nome_de_usuario) ON DELETE CASCADE,
         
         PRIMARY KEY (Nome_Plano, Nome_usuario_Conta)
 );
@@ -580,8 +580,8 @@ CREATE TABLE Assinatura (
     Nome_usuario_Conta VARCHAR2(50)
         CHECK(REGEXP_LIKE(Nome_usuario_Conta, '[a-zA-Z_[:digit:]]+')),
 
-        FOREIGN KEY (Nome_Plano) REFERENCES Plano(Nome) ON DELETE SET NULL,
-        FOREIGN KEY (Nome_usuario_Conta) REFERENCES Conta(Nome_de_usuario) ON DELETE SET NULL,
+        FOREIGN KEY (Nome_Plano) REFERENCES Plano(Nome) ON DELETE CASCADE,
+        FOREIGN KEY (Nome_usuario_Conta) REFERENCES Conta(Nome_de_usuario) ON DELETE CASCADE,
         PRIMARY KEY (Data_vigor, Nome_Plano, Nome_usuario_Conta)
 
 );
