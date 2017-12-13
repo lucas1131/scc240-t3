@@ -1,7 +1,3 @@
-Cartao_de_Credito;
-Conta_Deposito_Bancario;
-Deposito_Bancario;
-Midia;
 Midia_Pertence_Genero;
 Midia_Pertence_Temporada;
 Numero_Cartao_de_Credito;

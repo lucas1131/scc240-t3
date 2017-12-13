@@ -8,23 +8,17 @@ INSERT INTO Forma_de_Pagamento VALUES ('P');
 INSERT INTO Forma_de_Pagamento VALUES ('C');
 INSERT INTO Forma_de_Pagamento VALUES ('D');
 
-INSERT INTO Publica VALUES (0, 10, '10-DEZ-2017', 'Muito bom, 10/10', '10-DEZ-2017-2017');
-INSERT INTO Publica VALUES (1, 10, '10-DEZ-2017', 'Muito bom, 10/10', '10-DEZ-2017-2017');
-INSERT INTO Publica VALUES (2, 10, '10-DEZ-2017', 'Muito bom, 10/10', '10-DEZ-2017-2017');
-INSERT INTO Publica VALUES (3, 10, '10-DEZ-2017', 'Muito bom, 10/10', '10-DEZ-2017-2017');
-INSERT INTO Publica VALUES (4, 10, '10-DEZ-2017', 'Muito bom, 10/10', '10-DEZ-2017-2017');
-
 INSERT INTO Genero VALUES ('Comédia');
 INSERT INTO Genero VALUES ('Terror');
 INSERT INTO Genero VALUES ('Romance');
 INSERT INTO Genero VALUES ('Ficção Científica');
 INSERT INTO Genero VALUES ('Suspense');
 
-INSERT INTO Numero_Cartao_de_Credito VALUES ('C',1111111111111111);
-INSERT INTO Numero_Cartao_de_Credito VALUES ('C',2222222222222222);
-INSERT INTO Numero_Cartao_de_Credito VALUES ('C',3333333333333333);
-INSERT INTO Numero_Cartao_de_Credito VALUES ('C',4444444444444444);
-INSERT INTO Numero_Cartao_de_Credito VALUES ('C',5555555555555555);
+INSERT INTO Numero_Cartao_de_Credito VALUES ('C', 1111111111111111);
+INSERT INTO Numero_Cartao_de_Credito VALUES ('C', 2222222222222222);
+INSERT INTO Numero_Cartao_de_Credito VALUES ('C', 3333333333333333);
+INSERT INTO Numero_Cartao_de_Credito VALUES ('C', 4444444444444444);
+INSERT INTO Numero_Cartao_de_Credito VALUES ('C', 5555555555555555);
 
 INSERT INTO Conta_do_Deposito_Bancario VALUES (354670, 12345, 'Banco do Brasil', 'Victor', 'Luis Forbes', 0051314517);
 INSERT INTO Conta_do_Deposito_Bancario VALUES (684540, 35467, 'Bradesco', 'José Augusto', 'Noronha', 05880216527);
@@ -65,6 +59,17 @@ INSERT INTO Review VALUES (2, 5, '13-DEC-2013', 'Melhor que já vi!', '16-DEC-20
 INSERT INTO Review VALUES (3, 8, '05-APR-2005', 'Atores de primeira!', '20-MAY-2004');
 INSERT INTO Review VALUES (4, 10, '18-JUN-2001', 'Roteiros muito bem escritos.', '19-JUN-2001');
 INSERT INTO Review VALUES (5, 7, '22-APR-1996', 'Fraca. Esperava mais.', '22-MAY-1997');
+
+INSERT INTO Midia VALUES ('Harry Potter and the Half-Blood Prince', 'Filme', 'hp6.png', '10-DEC-2017', 125, 'Heroi mata bandido', 18);
+INSERT INTO Midia VALUES ('The Breakfast Club', 'Filme', 'breakfastclub.png', '10-DEC-2017', 62, 'Heroi mata bandido', 18);
+INSERT INTO Midia VALUES ('Clube da Luta', 'Filme', 'fightclub.png', '10-DEC-2017', 70, 'Heroi mata bandido', 16);
+INSERT INTO Midia VALUES ('Titanic', 'Filme', 'titanic.png', '10-DEC-2017', 84, 'Heroi mata bandido', 10);
+INSERT INTO Midia VALUES ('Moonlight', 'Filme', 'moonlight.png', '10-DEC-2017', 56, 'Heroi mata bandido', 10);
+INSERT INTO Midia VALUES ('E1S1', 'Episódio', 'friends.png', '10-DEC-2017', 60, 'Heroi mata bandido', 18);
+INSERT INTO Midia VALUES ('E2S8', 'Episódio', 'howimet.png', '10-DEC-2017', 77, 'Heroi mata bandido', 16);
+INSERT INTO Midia VALUES ('E3S1', 'Episódio', 'lost.png', '10-DEC-2017', 89, 'Heroi mata bandido', 16);
+INSERT INTO Midia VALUES ('E1E4', 'Episódio', 'strangerthings.png', '10-DEC-2017', 57, 'Heroi mata bandido', 10);
+INSERT INTO Midia VALUES ('E1S5', 'Episódio', 'howtogetaway.png', '10-DEC-2017', 94, 'Heroi mata bandido', 10);
 
 INSERT INTO Temporada VALUES (1, 'Friends', 24);
 INSERT INTO Temporada VALUES (2, 'Friends', 24);
@@ -166,23 +171,23 @@ INSERT INTO Pessoa_Participa_Serie VALUES ('Stranger Things', 'Cindy Holland', 1
 INSERT INTO Pessoa_Participa_Serie VALUES ('How to Get Away with Murder', 'Katie Findlay', 0, 1);
 INSERT INTO Pessoa_Participa_Serie VALUES ('Lost', 'J. J. Abrams', 1, 0);
 
-INSERT INTO Conta_Deposito_Bancario VALUES ('D',111111,12345,'Banco do Brasil','José Augusto','Noronha',05880216527);
-INSERT INTO Conta_Deposito_Bancario VALUES ('D',222222,67890,'Bradesco','Letícia','Rina Sakurai',00023116522);
-INSERT INTO Conta_Deposito_Bancario VALUES ('D',333333,23456,'Santander','Lucas','Alexandre Soares',00666645287);
-INSERT INTO Conta_Deposito_Bancario VALUES ('D',444444,34567,'Caixa Econômica','Giovanna','Guimarães Rosa',02123665984);
-INSERT INTO Conta_Deposito_Bancario VALUES ('D',555555,45678,'Banco do Brasil','Rafael','Monteiro',01145485877);
+INSERT INTO Conta_Deposito_Bancario VALUES ('D', 111111, 12345, 'Banco do Brasil', 'José Augusto', 'Noronha', 05880216527);
+INSERT INTO Conta_Deposito_Bancario VALUES ('D', 222222, 67890, 'Bradesco', 'Letícia', 'Rina Sakurai', 00023116522);
+INSERT INTO Conta_Deposito_Bancario VALUES ('D', 333333, 23456, 'Santander', 'Lucas', 'Alexandre Soares', 00666645287);
+INSERT INTO Conta_Deposito_Bancario VALUES ('D', 444444, 34567, 'Caixa Econômica', 'Giovanna', 'Guimarães Rosa', 02123665984);
+INSERT INTO Conta_Deposito_Bancario VALUES ('D', 555555, 45678, 'Banco do Brasil', 'Rafael', 'Monteiro', 01145485877);
 
 INSERT INTO Cartao_de_Credito VALUES (1111111111111111, 'ELO', 123, '11-SEP-2001', 'Gebariel Nacismento');
 INSERT INTO Cartao_de_Credito VALUES (2222222222222222, 'CIELO', 456, '29-APR-1994', 'José Otávio Edmilson');
 INSERT INTO Cartao_de_Credito VALUES (3333333333333333, 'VISAPAY', 789, '24-DEC-2017', 'Letícia Tina Sakurai');
 INSERT INTO Cartao_de_Credito VALUES (4444444444444444, 'MASTERCARD', 345, '15-DEC-2017', 'Otávio Luis Aguiar');
-INSERT INTO Cartao_de_Credito VALUES (5555555555555555, 'SODEXO', 666, '30-JAN-2018', 'Airo Soares');
+INSERT INTO Cartao_de_Credito VALUES (5555555555555555, 'SOSEXO', 666, '30-JAN-2018', 'Airo Soares');
 
-INSERT INTO Numero_Cartao_de_Credito VALUES ('C',1111111111111111);
-INSERT INTO Numero_Cartao_de_Credito VALUES ('C',2222222222222222);
-INSERT INTO Numero_Cartao_de_Credito VALUES ('C',3333333333333333);
-INSERT INTO Numero_Cartao_de_Credito VALUES ('C',4444444444444444);
-INSERT INTO Numero_Cartao_de_Credito VALUES ('C',5555555555555555);
+INSERT INTO Numero_Cartao_de_Credito VALUES ('C', 1111111111111111);
+INSERT INTO Numero_Cartao_de_Credito VALUES ('C', 2222222222222222);
+INSERT INTO Numero_Cartao_de_Credito VALUES ('C', 3333333333333333);
+INSERT INTO Numero_Cartao_de_Credito VALUES ('C', 4444444444444444);
+INSERT INTO Numero_Cartao_de_Credito VALUES ('C', 5555555555555555);
 
 INSERT INTO Perfil_Prefere_Genero VALUES ('jureg_monteiro', 'juregmonteiro', 'Comédia');
 INSERT INTO Perfil_Prefere_Genero VALUES ('mr_pinoquio', 'mrpinoquio', 'Terror');
@@ -226,11 +231,11 @@ INSERT INTO Midia_Pertence_Temporada VALUES ('Lost, E01', 1);
 INSERT INTO Midia_Pertence_Temporada VALUES ('Stranger Things E01', 1);   
 INSERT INTO Midia_Pertence_Temporada VALUES ('How To Get Away With Muder E01', 1);   
 
-INSERT INTO Paypal VALUES ('P','zikadorole','xovana@gmail.com');
-INSERT INTO Paypal VALUES ('P','airoboylindo','airomello@hotmail.com');
-INSERT INTO Paypal VALUES ('P','tinabinarina','ahmano@bol.com.br');
-INSERT INTO Paypal VALUES ('P','pipidourado','pipizones@gmail.com');
-INSERT INTO Paypal VALUES ('P','lolzinfoda','ritogomes@gmail.com');
+INSERT INTO Paypal VALUES ('P', 'zikadorole', 'xovana@gmail.com');
+INSERT INTO Paypal VALUES ('P', 'airoboylindo', 'airomello@hotmail.com');
+INSERT INTO Paypal VALUES ('P', 'tinabinarina', 'ahmano@bol.com.br');
+INSERT INTO Paypal VALUES ('P', 'pipidourado', 'pipizones@gmail.com');
+INSERT INTO Paypal VALUES ('P', 'lolzinfoda', 'ritogomes@gmail.com');
 
 INSERT INTO Conta_Assina_Plano VALUES ('Super Premium', 'José Otávio Edmilson');
 INSERT INTO Conta_Assina_Plano VALUES ('Só Premium Mesmo', 'Otávio Luis Aguiar');
