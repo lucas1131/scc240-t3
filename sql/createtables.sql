@@ -478,19 +478,21 @@ CREATE TABLE Gerencia (
 
 CREATE TABLE Audio_Midia (
     Audio VARCHAR2(200),
+    Idioma VARCHAR2(200),
     Titulo VARCHAR2(100),
         FOREIGN KEY (Titulo) REFERENCES Midia(Titulo) ON DELETE SET NULL,
         
-        PRIMARY KEY (Audio, Titulo)
+        PRIMARY KEY (Audio, Idioma, Titulo)
 );
 
 
 CREATE TABLE Legenda_Midia (
     Legenda VARCHAR2(200),
+    Idioma VARCHAR2(200),
     Titulo VARCHAR2(100),
         FOREIGN KEY (Titulo) REFERENCES Midia(Titulo) ON DELETE SET NULL,
     
-        PRIMARY KEY (Legenda, Titulo)
+        PRIMARY KEY (Legenda, Idioma, Titulo)
 );
 
 
