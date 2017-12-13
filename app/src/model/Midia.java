@@ -7,6 +7,7 @@ package model;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import java.util.Date;
 
 /**
  *
@@ -30,13 +31,13 @@ public class Midia {
     public Midia(String title, String type, String thumbnail,
                  String sinopse, int rating, int duration, Date date) {
         
-        this.title = SimpleStringProperty(title);
-        this.type = SimpleStringProperty(type);
-        this.thumbnail = SimpleStringProperty(thumbnail);
-        this.sinopse = SimpleStringProperty(sinopse);
-        this.rating = SimpleIntegerProperty(rating);
-        this.duration = SimpleIntegerProperty(duration);
-        this.launchDate = SimpleStringProperty(date.ToString());
+        this.title = new SimpleStringProperty(title);
+        this.type = new SimpleStringProperty(type);
+        this.thumbnail = new SimpleStringProperty(thumbnail);
+        this.sinopse = new SimpleStringProperty(sinopse);
+        this.rating = new SimpleIntegerProperty(rating);
+        this.duration = new SimpleIntegerProperty(duration);
+        this.launchDate = new SimpleStringProperty(date.ToString());
     }
 
     public void setTitle(String title) {this.title.set(title); }

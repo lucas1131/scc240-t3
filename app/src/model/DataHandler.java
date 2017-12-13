@@ -5,20 +5,24 @@
  */
 package model;
 
+import oracle.jdbc.pool.OracleDataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import oracle.jdbc.pool.OracleDataSource;
 import java.util.Date;
 
 /**
  *
- * @author jureg
+ * @author Giovanna
+ * @author Lucas
+ * @author mrPips
+ * @author Rina
+ * @credits Jureg
  */
-public class DataHandler{
+public class DataHandler {
 
     private final static String JDBCURL = "jdbc:oracle:thin:9293693/shugochara1!@grad.icmc.usp.br:15215:orcl";
     // private final static String JDBCURL = "jdbc:oracle:@grad.icmc.usp.br:15215:orcl";
@@ -82,7 +86,7 @@ public class DataHandler{
 
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         
-        try{
+        try {
             System.out.println("DELETE FROM Pessoa_Participa_Midia WHERE Titulo_Midia = " + title + " AND Nome_Pessoa = " + name + ");");
             stmt.execute("DELETE FROM Pessoa_Participa_Midia WHERE Titulo_Midia = " + title + " AND Nome_Pessoa = " + name + ");");
         } catch(SQLException ex) {
@@ -124,24 +128,6 @@ public class DataHandler{
         stmt.execute("UPDATE Pessoa_Participa_Midia SET Diretor = " + director + ", Ator = " + actor + " WHERE Titulo_Midia = " + title + " AND Nome_Pessoa = " + name + ");");
     }
 
-    public void deletePerson(String name) throws SQLException{
-        Statement stmt;
-        
-        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        
-        System.out.println("DELETE FROM Pesssoa WHERE Nome = " + name);
-        stmt.execute("DELETE FROM Pesssoa WHERE Nome = " + name);
-    }
-
-    public void insertPerson(String name) throws SQLException{
-        Statement stmt;
-        
-        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        
-        System.out.println("INSERT INTO Pesssoa WHERE Nome = " + name);
-        stmt.execute("INSERT INTO Pesssoa WHERE Nome = " + name);
-    }
-    
     public boolean insertPersonMidia(String title, String name, boolean actor, boolean director) throws SQLException{
         
         Statement stmt;
@@ -183,8 +169,8 @@ public class DataHandler{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         
         try {
-            System.out.println("INSERT INTO Midia VALUES (" + title + ", " + type + ", " + thumbnail ", " + convertedDate + ", " + duration + ", " + sinopse + ", " + rating + ");");
-            stmt.execute("INSERT INTO Midia VALUES (" + title + ", " + type + ", " + thumbnail ", " + convertedDate + ", " + duration + ", " + sinopse + ", " + rating + ");");
+            System.out.println("INSERT INTO Midia VALUES (" + title + ", " + type + ", " + thumbnail + ", " + convertedDate + ", " + duration + ", " + sinopse + ", " + rating + ");");
+            stmt.execute("INSERT INTO Midia VALUES (" + title + ", " + type + ", " + thumbnail + ", " + convertedDate + ", " + duration + ", " + sinopse + ", " + rating + ");");
         } catch (SQLException ex) {
             System.out.println("Deu ruim!");
             return false;
