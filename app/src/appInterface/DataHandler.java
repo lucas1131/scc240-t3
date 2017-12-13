@@ -35,7 +35,7 @@ public class DataHandler{
         ds.setURL(JDBCURL);
 
         try {
-            System.out.println("Attempting cnnection!");
+            System.out.println("Attempting connection!");
             this.conn = ds.getConnection(USER, PASSWORD);
         } catch (SQLException e) {
             
