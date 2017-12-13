@@ -96,24 +96,25 @@ public class DataHandler{
         stmt.execute("UPDATE " + "");
     }
     
-    public void deleteDiagnostic(int id) throws SQLException{
+    public void delete(MidiaString title) throws SQLException{
         Statement stmt;
         
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         
-        System.out.println("DELETE FROM diagnostico WHERE iddiagnostico = " + id);
-        stmt.execute("DELETE FROM diagnostico WHERE iddiagnostico = " + id);
+        System.out.println("DELETE FROM Midia WHERE Titulo = " + title);
+        stmt.execute("DELETE FROM Midia WHERE Titulo = " + title);
     }
     
-    public boolean insertDiagnostic(int newId, int fk, String desc) throws SQLException{
+    public boolean insertDiagnostic(String title, String sinopse, String thumbnail, String type,
+                                        int rating, int duration, Date date) throws SQLException{
         
         Statement stmt;
         
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         
         try {
-            System.out.println("INSERT INTO Diagnostico VALUES (" + newId + ", '" + desc + "')");
-            stmt.execute("INSERT INTO Diagnostico VALUES (" + newId + ", '" + desc + "')");
+            System.out.println("INSERT INTO Diagnostico VALUES (" + title + ", '" + type + ", '" + thumbnail + ", '" + date + ", '" + duration + ", '" + sinopse + ", '" + rating + "')");
+            stmt.execute("INSERT INTO Diagnostico VALUES (" + title + ", '" + type + ", '" + thumbnail + date + duration + ", '" + sinopse + ", '" + rating + "')");
             
             System.out.println("INSERT INTO Diagnostico VALUES (" + newId + ", '" + desc + "')");
             stmt.execute("INSERT INTO Tratamento VALUES (" + newId + ", '" + fk + "')");
