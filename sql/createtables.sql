@@ -315,17 +315,6 @@ CREATE TABLE Amizade_Recomenda_Midia (
 );
 
 
-CREATE TABLE Midia_Pessoa (
-    Titulo_Midia VARCHAR2(100),
-        FOREIGN KEY (Titulo_Midia) REFERENCES Midia(Titulo) ON DELETE SET NULL,
-    Nome_Pessoa VARCHAR2(50),
-        FOREIGN KEY (Nome_Pessoa) REFERENCES Pessoa(Nome) ON DELETE SET NULL,
-    Diretor VARCHAR2(50),
-    Ator VARCHAR2(50),
-        PRIMARY KEY (Titulo_Midia, Nome_Pessoa)
-);
-
-
 CREATE TABLE Serie_Pessoa (
     Nome_Serie VARCHAR2(100),
         FOREIGN KEY (Nome_Serie) REFERENCES Serie(Nome) ON DELETE SET NULL,

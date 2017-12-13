@@ -1,9 +1,6 @@
-Audio_Midia;
 Cartao_de_Credito;
 Conta_Deposito_Bancario;
 Deposito_Bancario;
-Gerencia;
-Legenda_Midia;
 Midia;
 Midia_Pertence_Genero;
 Midia_Pertence_Temporada;

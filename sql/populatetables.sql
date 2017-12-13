@@ -10,11 +10,6 @@ INSERT INTO Genero VALUES('Ficção Científica');
 INSERT INTO Genero VALUES('Suspense');
 
 -- Pessoas que participam de séries ou filmes
-INSERT INTO Pessoa VALUES ('Daniel Radcliffe');
-INSERT INTO Pessoa VALUES ('John Hughes');
-INSERT INTO Pessoa VALUES ('Brad Pitt');
-INSERT INTO Pessoa VALUES ('Leonardo DiCaprio');
-INSERT INTO Pessoa VALUES ('Barry Jenkins');
 INSERT INTO Pessoa VALUES ('Jennifer Aniston');
 INSERT INTO Pessoa VALUES ('Josh Radnor');
 INSERT INTO Pessoa VALUES ('The Duffer Brothers');
@@ -123,7 +118,6 @@ INSERT INTO Temporada VALUES (3, 'Lost', 17);
 INSERT INTO Temporada VALUES (4, 'Lost', 17);
 INSERT INTO Temporada VALUES (5, 'Lost', 17);
 
-
 INSERT INTO Pagamento VALUES (123, '10-NOV-2016', 'Super Premium', 'leticia_rina', 30.0, 30);
 INSERT INTO Pagamento VALUES (456, '10-DEC-2016', 'Só Premium Mesmo', 'mr_pinoquio', 20.0, 0);
 INSERT INTO Pagamento VALUES (666, '10-JAN-2016', 'Plano Bom', 'jureg_monteiro', 15.0, 330);
@@ -133,8 +127,19 @@ INSERT INTO Pagamento VALUES (171, '10-APR-2016', 'Sua Internet é Ruim, Né?', 
 INSERT INTO Perfil VALUES ('leticiarina', 'leticia_rina', 18, 'Full HD', 'Chinês', 'Koreano');
 INSERT INTO Perfil VALUES ('mrpinoquio', 'mr_pinoquio', 18, 'HD', 'Português', 'Inglês');
 INSERT INTO Perfil VALUES ('juregmonteiro', 'jureg_monteiro', 18, 'HD', 'Inglês', 'Português');
-INSERT INTO Perfil VALUES ('kawaiiro', 'kawaiiro', 20, 'Low quality', 'Inglês', 'Espanhol');
-INSERT INTO Perfil VALUES ('gguimaraes', 'g_guimaraes', 18, 'Normal', 'Japonês', 'Inglês');
+INSERT INTO Perfil VALUES ('kawaiiro', 'kawaiiro', 21, 'Low quality', 'Inglês', 'Inglês');
+INSERT INTO Perfil VALUES ('gguimaraes', 'g_guimaraes', 18, 'Normal', 'Japonês', 'Weebês');
+INSERT INTO Perfil VALUES ('Enzo1', 'leticia_rina', 7, NULL, NULL, NULL);
+INSERT INTO Perfil VALUES ('Enzo2', 'mr_pinoquio', 7, NULL, NULL, NULL);
+INSERT INTO Perfil VALUES ('Enzo3', 'jureg_monteiro', 7, NULL, NULL, NULL);
+INSERT INTO Perfil VALUES ('Enzo4', 'kawaiiro', 7, NULL, NULL, NULL);
+INSERT INTO Perfil VALUES ('Enzo5', 'g_guimaraes', 7, NULL, NULL, NULL);
+
+INSERT INTO Gerencia VALUES ('juregmonteiro', 'jureg_monteiro', 'Enzo1', 'jureg_monteiro');
+INSERT INTO Gerencia VALUES ('mrpinoquio', 'mr_pinoquio', 'Enzo2', 'mr_pinoquio');
+INSERT INTO Gerencia VALUES ('leticiarina', 'leticia_rina', 'Enzo3', 'leticia_rina');
+INSERT INTO Gerencia VALUES ('gguimaraes', 'g_guimaraes', 'Enzo4', 'g_guimaraes');
+INSERT INTO Gerencia VALUES ('kawaiiro', 'kawaiiro', 'Enzo5', 'kawaiiro');
 
 INSERT INTO Acesso VALUES ('25-JUN-2015 09:23:50', 1, 'leticiarina', 'leticia_rina', '192.168.1.2');
 INSERT INTO Acesso VALUES ('10-SEP-2016 01:19:23', 2, 'mrpinoquio',	'mr_pinoquio', '127.183.4.5');
@@ -159,12 +164,6 @@ INSERT INTO Amizade_Recomenda_Midia VALUES (2, 'mrpinoquio', 'mr_pinoquio', 'jur
 INSERT INTO Amizade_Recomenda_Midia VALUES (3, 'kawaiiro', 'kawaiiro', 'gguimaraes', 'g_guimaraes');
 INSERT INTO Amizade_Recomenda_Midia VALUES (4, 'juregmonteiro', 'jureg_monteiro', 'kawaiiro', 'kawaiiro', 'How I Met Your Mother', 'Marshall homão da porra');
 INSERT INTO Amizade_Recomenda_Midia VALUES (5, 'gguimaraes', 'g_guimaraes', 'leticiarina', 'leticia_rina');
-
-INSERT INTO Midia_Pessoa VALUES ('Harry Potter and the Half-Blood Prince', 'Daniel Radcliffe', 'F', 'T');
-INSERT INTO Midia_Pessoa VALUES ('The Breakfast Club', 'John Hughes', 'T', 'F');
-INSERT INTO Midia_Pessoa VALUES ('Clube da Luta', 'Brad Pitt', 'F', 'T');
-INSERT INTO Midia_Pessoa VALUES ('Titanic', 'Leonardo DiCaprio', 'F', 'T');
-INSERT INTO Midia_Pessoa VALUES ('Moonlight', 'Barry Jenkins', 'T', 'F');
 
 INSERT INTO Pessoa_Participa_Midia VALUES ('Harry Potter and the Half-Blood Prince', 'Bonnie Wright', 'F', 'T');
 INSERT INTO Pessoa_Participa_Midia VALUES ('The Breakfast Club', 'Carl Reed', 'F', 'T');
@@ -192,18 +191,29 @@ INSERT INTO Perfil_Assiste_Midia VALUES('juregmonteiro', 'jureg_monteiro', 'Club
 INSERT INTO Perfil_Assiste_Midia VALUES('kawaiiro', 'kawaiiro', 'Titanic', 4, 1233);
 INSERT INTO Perfil_Assiste_Midia VALUES('gguimaraes', 'g_guimaraes', 'Moonlight', 5, 1822);
 
-
 INSERT INTO Midia_Pertence_Genero VALUES ('Friends', 'Comédia'); 
 INSERT INTO Midia_Pertence_Genero VALUES ('How I Met Your Mother', 'Comédia'); 
 INSERT INTO Midia_Pertence_Genero VALUES ('Lost', 'Suspense'); 
 INSERT INTO Midia_Pertence_Genero VALUES ('Stranger Things', 'Suspense'); 
 INSERT INTO Midia_Pertence_Genero VALUES ('How To Get Away With Muder', 'Suspense'); 
 
-INSERT INTO Numero_Cartao_de_Credito VALUES('C',1111111111111111);
-INSERT INTO Numero_Cartao_de_Credito VALUES('C',2222222222222222);
-INSERT INTO Numero_Cartao_de_Credito VALUES('C',3333333333333333);
-INSERT INTO Numero_Cartao_de_Credito VALUES('C',4444444444444444);
-INSERT INTO Numero_Cartao_de_Credito VALUES('C',5555555555555555);
+INSERT INTO Audio_Midia VALUES ('/var/oracle/Audio/Friends', 'Friends E01');
+INSERT INTO Audio_Midia VALUES ('/var/oracle/Audio/HIMYM', 'How I Met Your Mother E01');
+INSERT INTO Audio_Midia VALUES ('/var/oracle/Audio/StrangerThings', 'Stranger Things E01');
+INSERT INTO Audio_Midia VALUES ('/var/oracle/Audio/Lost', 'Lost E01');
+INSERT INTO Audio_Midia VALUES ('/var/oracle/Audio/HTGAWM', 'How To Get Away With Muder E01');
+
+INSERT INTO Legenda_Midia VALUES ('/var/oracle/Subtitle/Friends', 'Friends E01');
+INSERT INTO Legenda_Midia VALUES ('/var/oracle/Subtitle/HIMYM', 'How I Met Your Mother E01');
+INSERT INTO Legenda_Midia VALUES ('/var/oracle/Subtitle/StrangerThings', 'Stranger Things E01');
+INSERT INTO Legenda_Midia VALUES ('/var/oracle/Subtitle/Lost', 'Lost E01');
+INSERT INTO Legenda_Midia VALUES ('/var/oracle/Subtitle/HTGAWM', 'How To Get Away With Muder E01');
+
+INSERT INTO Numero_Cartao_de_Credito VALUES('C', 1111111111111111);
+INSERT INTO Numero_Cartao_de_Credito VALUES('C', 2222222222222222);
+INSERT INTO Numero_Cartao_de_Credito VALUES('C', 3333333333333333);
+INSERT INTO Numero_Cartao_de_Credito VALUES('C', 4444444444444444);
+INSERT INTO Numero_Cartao_de_Credito VALUES('C', 5555555555555555);
 
 INSERT INTO Paypal VALUES('P','zikadorole','xovana@gmail.com');
 INSERT INTO Paypal VALUES('P','airoboylindo','airomello@hotmail.com');
