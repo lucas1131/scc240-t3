@@ -25,5 +25,6 @@ public class Person {
     }
 
     public void setName(String name){ this.name.set(name); }
+    public String getName(){ return this.name.toString(); }
     public String getRecv(){ return name.get(); }
 }

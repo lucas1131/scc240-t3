@@ -87,9 +87,9 @@ public class DataHandler {
         name = generateStringWithAspas(name);
         title = generateStringWithAspas(title);
 
-        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         
         try {
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             System.out.println("DELETE FROM Pessoa_Participa_Midia WHERE Titulo_Midia = " + title + " AND Nome_Pessoa = " + name + ");");
             stmt.execute("DELETE FROM Pessoa_Participa_Midia WHERE Titulo_Midia = " + title + " AND Nome_Pessoa = " + name + ");");
         } catch(SQLException ex) {

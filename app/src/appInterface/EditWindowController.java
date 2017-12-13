@@ -192,7 +192,7 @@ public class EditWindowController implements Initializable {
         if(inserting) {
             System.out.println("Inserting " + current.getTitle() + " " + current.getName());
             // Precisa inserir dois booleanos no final, um para ator e um para diretor
-            // dh.insertPersonMidia(current.getTitle(), current.getName(), current.parseRole());
+             dh.insertPersonMidia(current.getTitle(), current.getName(), current.parseRole());
         }
 
         closeWindow();
@@ -206,20 +206,22 @@ public class EditWindowController implements Initializable {
         int i = 0;
 
         for(i = 0; i < fkm.size(); i++) {
-            if(fkm.get(i).getTitle() == title) break;
+            if(fkm.get(i).getTitle().equals(title)) break;
         }
 
-        mediaTitle.setText(fkm.get(i).getTitle());
+
+        //mediaTitle.setText(fkm.get(i).getTitle());
+        midiaTitulo.setText(fkm.get(i).getTitle());
 
         for(i = 0; i < fkp.size(); i++) {
-            if(fkp.get(i).getName() == name) break;
+            if(fkp.get(i).getName().equals(name)) break;
         }
 
         // Namoral, eu nao tenho ideia do que ta contecendo aqui,
         // muito menos do porque eu fiz isso, mas pareceu o mais certo
         // pls, send halp
 
-        personName.setText(fkp.get(i).getName());
+        pessoaNome.setText(fkp.get(i).getName());
 
         // A essa hora, eu sou incapaz de descobrir o que sao estas tres desgracas
         // (inclusive os dois de cima)

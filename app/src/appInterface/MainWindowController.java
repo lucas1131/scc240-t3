@@ -91,9 +91,9 @@ public class MainWindowController {
 
     // BUGUEI
     public void prepareTableView(){
-        
+
         observablePersonMidia = FXCollections.observableArrayList("midia");
-        
+
         midiaTitleCol.setCellValueFactory(
                 new PropertyValueFactory<>("title")
         );
