@@ -114,6 +114,24 @@ public class DataHandler{
         System.out.println("DELETE FROM Pesssoa_Participa_Midia WHERE (Titulo_Midia, Nome_Pessoa) IN (" + title + ", " + name + ")");
         stmt.execute("DELETE FROM Pesssoa_Participa_Midia WHERE (Titulo_Midia, Nome_Pessoa) IN (" + title + ", " + name + ")");
     }
+
+    public void deletePerson(String name) throws SQLException{
+        Statement stmt;
+        
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        
+        System.out.println("DELETE FROM Pesssoa WHERE Nome = " + name);
+        stmt.execute("DELETE FROM Pesssoa WHERE Nome = " + name);
+    }
+
+    public void insertPerson(String name) throws SQLException{
+        Statement stmt;
+        
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        
+        System.out.println("INSERT INTO Pesssoa WHERE Nome = " + name);
+        stmt.execute("INSERT INTO Pesssoa WHERE Nome = " + name);
+    }
     
     public boolean insertPersonMidia(String title, String name, boolean actor, boolean director) throws SQLException{
         
