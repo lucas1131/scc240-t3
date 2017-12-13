@@ -27,10 +27,10 @@ import model.PersonMidia;
  */
 public class DataHandler {
 
-    private final static String JDBCURL = "jdbc:oracle:thin:9293693/shugochara1!@grad.icmc.usp.br:15215:orcl";
+    private final static String JDBCURL = "jdbc:oracle:thin:9293693/a@grad.icmc.usp.br:15215:orcl";
     // private final static String JDBCURL = "jdbc:oracle:@grad.icmc.usp.br:15215:orcl";
     private final static String USER = "9293693";
-    private final static String PASSWORD = "shugochara1!";
+    private final static String PASSWORD = "a";
     Connection conn;
 
     public DataHandler(){
