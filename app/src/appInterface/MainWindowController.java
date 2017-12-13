@@ -23,7 +23,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Diagnostic;
+import model.Person;
+import model.Midia;
+import model.PersonMidia;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -75,15 +77,21 @@ public class MainWindowController {
     public void getPersonMidia(){
         
         ResultSet rset = null;
+        String role;
+
         try {
             rset = dh.getPersonMidia();
+            
+            role = rset.get("Ator"); ? "T" : "F";
+            role += ", ";
+            role += rset.get("Diretor"); ? "T" : "F";
         } catch (SQLException ex) {
             return;
         }
         
         try {
-            while(rset.next()){
-                observablePersonMidia.add(new Midia(rset.getString("Titulo"),rset.getString("Tipo"),rset.getString("Thumbnail"), rset.getData("Lancamento"), rset.getInt("Duracao"), rset.getString("Sinopse"), rset.getInt("Classificacao")));
+            while(rset.next()) {
+                observablePersonMidia.add(new PersonMidia(rset.getString("Titulo_Midia"),rset.getString("Nome_Pessoa"), role);
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,7 +113,7 @@ public class MainWindowController {
         );
         
         personRoleCol.setCellValueFactory(
-                new PropertyValueFactory<>("fk")
+                new PropertyValueFactory<>("role")
         );
         
         tableView.setItems(observablePersonMidia);
@@ -149,9 +157,9 @@ public class MainWindowController {
     }
     
     @FXML
-    void editSelectedRow() throws IOException, SQLException{
+    void editSelectedRow() throws IOException, SQLException {
         
-        Diagnostic current = tableView.getSelectionModel().getSelectedItem();
+        PersonMidia current = tableView.getSelectionModel().getSelectedItem();
         
         if(current == null) return;
         
@@ -168,7 +176,7 @@ public class MainWindowController {
 
         
         EditWindowController editController = editLoader.<EditWindowController>getController();
-        editController.setValues(current, this, null,  dh);
+        editController.setValues(current, this, null, dh);
         
         stage.show();
     }
@@ -188,8 +196,3 @@ public class MainWindowController {
         getPersonMidia();   
     }
 }
-
-
-/*      String role = actor ? "T" : "F";
-        role += ", ";
-        role += director ? "T" : "F";*/

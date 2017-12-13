@@ -13,6 +13,9 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
+import model.Person;
+import model.Midia;
+import model.PersonMidia;
 
 /**
  *
@@ -238,6 +241,15 @@ public class DataHandler {
         
         System.out.println("INSERT INTO Pesssoa WHERE Nome = " + name);
         stmt.execute("INSERT INTO Pesssoa WHERE Nome = " + name);
+    }
+
+        public ResultSet getPerson() throws SQLException {
+        
+        Statement stmt;
+        
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        
+        return stmt.executeQuery("SELECT * FROM Pessoa");
     }
 
     public String generateStringWithAspas(String str){
