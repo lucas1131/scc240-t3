@@ -5,6 +5,16 @@ INSERT INTO Plano VALUES ('Sua Internet é Ruim, Né?', 10.00, '480p', 6, 8, 'Me
 INSERT INTO Plano VALUES ('Como Você Sobrevive Com Essa Internet?', 5.00, '240p', 6, 8, 'Meus pêsames');
 
 --falta midia
+INSERT INTO Midia VALUES('Harry Potter and the Half-Blood Prince','Filme','hp6.png','10-DEZ-2017-2017',125,'Heroi mata bandido',18);
+INSERT INTO Midia VALUES('The Breakfast Club','Filme','breakfastclub.png','10-DEZ-2017-2017',62,'Heroi mata bandido',18);
+INSERT INTO Midia VALUES('Clube da Luta','Filme','fightclub.png','10-DEZ-2017-2017',70,'Heroi mata bandido',16);
+INSERT INTO Midia VALUES('Titanic','Filme','titanic.png','10-DEZ-2017-2017',84,'Heroi mata bandido',10);
+INSERT INTO Midia VALUES('Moonlight','Filme','moonlight.png','10-DEZ-2017-2017',56,'Heroi mata bandido',10);
+INSERT INTO Midia VALUES('Friends E1S1','Episódio','friends.png','10-DEZ-2017-2017',60,'Heroi mata bandido',18);
+INSERT INTO Midia VALUES('How I Met Your Mother E2S8','Episódio','howimet.png','10-DEZ-2017-2017',77,'Heroi mata bandido',16);
+INSERT INTO Midia VALUES('Lost E3S1','Episódio','lost.png','10-DEZ-2017-2017',89,'Heroi mata bandido',16);
+INSERT INTO Midia VALUES('Stranger Things E1E4','Episódio','strangerthings.png','10-DEZ-2017-2017',57,'Heroi mata bandido',10);
+INSERT INTO Midia VALUES('How To Get Away With Murder E1S5','Episódio','howtogetaway.png','10-DEZ-2017-2017',94,'Heroi mata bandido',10);
 
 INSERT INTO Forma_de_Pagamento VALUES ('P');
 INSERT INTO Forma_de_Pagamento VALUES ('C');
